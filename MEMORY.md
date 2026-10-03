@@ -8,6 +8,9 @@ sesiones.
 - Mejor racha (🏆) en la tarjeta de la racha, como línea pequeña bajo la racha actual.
 - Total de minutos de la semana (📚, lunes a domingo) en la tarjeta de la racha, bajo la 🏆.
 - Datos en localStorage.
+- `README.md` en español (funcionalidades, uso, estructura, formato de datos, ayuda y
+contribuciones).
+- No hay `LICENSE` ni `CONTRIBUTING.md`: el README no los enlaza y remite a `AGENTS.md`.
 
 ## Decisiones (y por qué)
 - Sin backend ni dependencias: cualquiera debe poder abrirlo con doble clic.

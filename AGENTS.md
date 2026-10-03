@@ -40,6 +40,7 @@ de las sesiones y no se guardan; las fechas futuras no suman.
 ## Límites
 - ✅ Siempre: respetar las reglas de fechas y racha, mantener los textos en español.
 - ✅ Siempre: actualizar `MEMORY.md` al terminar cada tarea. 
+- ✅ Siempre: actualizar `README.md` si cambian las funcionalidades, el formato de datos o la forma de usar el proyecto.
 - ⚠️ Pregunta antes: crear archivos nuevos, cambiar el formato de los datos guardados.
 - 🚫 Nunca: añadir dependencias, frameworks o un paso de build.
 
