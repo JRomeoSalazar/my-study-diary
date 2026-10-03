@@ -15,8 +15,9 @@ programar.
 - Diseño limpio y responsive; cualquier pantalla nueva debe verse bien en el móvil.
 
 ## Datos
-- localStorage, clave `diario-estudio-sesiones`: array de `{ date: "AAAA-MM-DD", topic,
-minutes }`.
+- localStorage, clave `diario-estudio-sesiones`: array de `{ id: Date.now(), fecha:
+"AAAA-MM-DD", tema, minutos }` (minutos: entero > 0). `id` desempata el orden de
+sesiones del mismo día.
 - Si cambias la forma de los datos, mantén compatibilidad con lo ya guardado o el usuario
 perderá sus sesiones.
 
