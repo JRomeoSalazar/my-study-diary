@@ -6,6 +6,7 @@ aporte.
 - v1 funcionando: registrar sesiones (fecha, tema, minutos), racha actual y lista de
 sesiones.
 - Mejor racha (🏆) en la tarjeta de la racha, como línea pequeña bajo la racha actual.
+- Total de minutos de la semana (📚, lunes a domingo) en la tarjeta de la racha, bajo la 🏆.
 - Datos en localStorage.
 
 ## Decisiones (y por qué)
@@ -17,6 +18,8 @@ sesiones.
 apuntan días pasados que unen rachas.
 - Mejor racha oculta si es 0 (un récord de 0 no motiva). Sin mensaje de récord ni fechas
 del tramo: el usuario no los quiso.
+- Total semanal calculado, no guardado. Se muestra aunque sea 0 ("0 min"). Formato: < 60 →
+"45 min"; ≥ 60 → "1 h 45 min"; horas exactas → "2 h" (sin "0 min").
 
 ## Aprendizajes y errores a evitar
 - Los campos guardados están en español (`fecha`, `tema`, `minutos`); `AGENTS.md` llegó a

@@ -10,6 +10,7 @@ const textoError = document.getElementById("error");
 const rachaDias = document.getElementById("racha-dias");
 const rachaTexto = document.getElementById("racha-texto");
 const mejorRacha = document.getElementById("mejor-racha");
+const minutosSemana = document.getElementById("minutos-semana");
 const lista = document.getElementById("lista");
 const mensajeVacio = document.getElementById("vacio");
 
@@ -40,6 +41,14 @@ function hoyTexto() {
 // Devuelve el día anterior a una fecha (objeto Date)
 function diaAnterior(fecha) {
   return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() - 1);
+}
+
+// Devuelve el lunes de la semana de una fecha (objeto Date).
+// getDay() da 0 para el domingo, 1 para el lunes... así que calculamos
+// cuántos días hay que retroceder para llegar al lunes.
+function inicioDeSemana(fecha) {
+  const diasDesdeLunes = (fecha.getDay() + 6) % 7;
+  return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() - diasDesdeLunes);
 }
 
 // Muestra una fecha bonita, por ejemplo: "sábado, 3 de octubre de 2026"
@@ -124,6 +133,38 @@ function calcularMejorRacha() {
   return mejor;
 }
 
+// ---------- Semana ----------
+
+// Minutos estudiados desde el lunes de esta semana hasta hoy (las fechas futuras no suman)
+function calcularMinutosSemana() {
+  const lunes = fechaATexto(inicioDeSemana(new Date()));
+  const hoy = hoyTexto();
+
+  let total = 0;
+  sesiones.forEach((sesion) => {
+    if (sesion.fecha >= lunes && sesion.fecha <= hoy) {
+      total += sesion.minutos;
+    }
+  });
+
+  return total;
+}
+
+// Convierte minutos en texto: "45 min", "1 h 45 min" o "2 h"
+function formatearMinutos(totalMinutos) {
+  if (totalMinutos < 60) {
+    return totalMinutos + " min";
+  }
+
+  const horas = Math.floor(totalMinutos / 60);
+  const minutos = totalMinutos % 60;
+
+  if (minutos === 0) {
+    return horas + " h";
+  }
+  return horas + " h " + minutos + " min";
+}
+
 // ---------- Pintar la página ----------
 
 function mostrarRacha() {
@@ -135,6 +176,10 @@ function mostrarRacha() {
   const mejor = calcularMejorRacha();
   mejorRacha.hidden = mejor === 0;
   mejorRacha.textContent = "🏆 Mejor racha: " + mejor + (mejor === 1 ? " día" : " días");
+}
+
+function mostrarSemana() {
+  minutosSemana.textContent = "📚 Esta semana: " + formatearMinutos(calcularMinutosSemana());
 }
 
 function mostrarLista() {
@@ -187,6 +232,7 @@ function prepararFormulario() {
 
 function mostrarTodo() {
   mostrarRacha();
+  mostrarSemana();
   mostrarLista();
 }
 

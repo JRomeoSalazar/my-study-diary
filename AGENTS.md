@@ -29,6 +29,8 @@ pero ayer sí, la racha sigue viva y se cuenta desde ayer.
 - Varias sesiones el mismo día cuentan como un solo día. Las fechas futuras no suman.
 - Mejor racha = tramo más largo de días consecutivos con sesión en todo el historial (mismas
 reglas). Se calcula siempre a partir de las sesiones; no se guarda.
+- Semana = lunes a domingo según la fecha local. Los totales semanales se calculan a partir
+de las sesiones y no se guardan; las fechas futuras no suman.
 
 ## Forma de trabajar
 - Haz solo lo que se pide: no añadas funcionalidades por tu cuenta.

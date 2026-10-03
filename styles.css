@@ -69,6 +69,22 @@ h2 {
   color: #9a3412;
 }
 
+.racha-semana {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #fed7aa;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #9a3412;
+}
+
+/* Si la mejor racha está visible, la línea de la semana va justo debajo, sin otra raya */
+.racha-mejor:not([hidden]) + .racha-semana {
+  margin-top: 4px;
+  padding-top: 0;
+  border-top: none;
+}
+
 /* Formulario */
 form {
   display: flex;
