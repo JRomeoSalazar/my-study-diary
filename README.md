@@ -28,6 +28,7 @@ Es además un **proyecto didáctico**: el código está escrito para que pueda e
 - 🔥 **Racha actual**: días consecutivos con al menos una sesión.
 - 🏆 **Mejor racha**: el tramo más largo de días seguidos de todo tu historial.
 - 📚 **Total de la semana**: minutos estudiados de lunes a domingo (por ejemplo, `1 h 45 min`).
+- 📅 **Días de este mes**: cuántos días distintos has estudiado desde el día 1 del mes hasta hoy.
 - 🗂️ **Lista de sesiones** ordenada de la más reciente a la más antigua.
 - 📅 **Días pasados**: puedes apuntar sesiones de días anteriores (nunca futuras).
 - 📱 **Diseño responsive**, pensado también para el móvil.
@@ -90,6 +91,7 @@ Racha actual
 días seguidos
 🏆 Mejor racha: 12 días
 📚 Esta semana: 3 h 20 min
+📅 Este mes: 9 días
 ```
 
 ### Reglas de la racha
@@ -115,7 +117,7 @@ localStorage.removeItem("diario-estudio-sesiones");
 .
 ├── index.html   # Estructura de la página
 ├── styles.css   # Estilos (responsive)
-├── app.js       # Lógica: fechas, racha, semana, formulario y localStorage
+├── app.js       # Lógica: fechas, racha, semana, mes, formulario y localStorage
 ├── AGENTS.md    # Normas del proyecto (convenciones, reglas de fechas y racha)
 └── MEMORY.md    # Estado actual y decisiones tomadas
 ```
@@ -137,7 +139,7 @@ Las sesiones se guardan en `localStorage` bajo la clave `diario-estudio-sesiones
 | `tema` | texto | Lo que has estudiado |
 | `minutos` | entero | Duración de la sesión (mayor que 0) |
 
-La racha, la mejor racha y el total semanal **no se guardan**: se calculan siempre a partir de las sesiones.
+La racha, la mejor racha, el total semanal y los días del mes **no se guardan**: se calculan siempre a partir de las sesiones.
 
 Las fechas se manejan siempre en hora local con funciones propias (`fechaATexto` y `textoAFecha` en `app.js`). Se evitan a propósito `toISOString()` y `new Date("AAAA-MM-DD")`, porque trabajan en UTC y pueden desplazar el día.
 

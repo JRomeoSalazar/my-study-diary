@@ -85,6 +85,14 @@ h2 {
   border-top: none;
 }
 
+/* Los días del mes van siempre justo debajo de la semana, sin otra raya */
+.racha-mes {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #9a3412;
+}
+
 /* Formulario */
 form {
   display: flex;

@@ -11,6 +11,7 @@ const rachaDias = document.getElementById("racha-dias");
 const rachaTexto = document.getElementById("racha-texto");
 const mejorRacha = document.getElementById("mejor-racha");
 const minutosSemana = document.getElementById("minutos-semana");
+const diasMes = document.getElementById("dias-mes");
 const lista = document.getElementById("lista");
 const mensajeVacio = document.getElementById("vacio");
 
@@ -165,6 +166,24 @@ function formatearMinutos(totalMinutos) {
   return horas + " h " + minutos + " min";
 }
 
+// ---------- Mes ----------
+
+// Días distintos con al menos una sesión en el mes actual (las fechas futuras no suman).
+// Como las fechas son "AAAA-MM-DD", basta con comparar el principio "AAAA-MM".
+function calcularDiasMes() {
+  const hoy = hoyTexto();
+  const mesActual = hoy.slice(0, 7);
+  const dias = new Set();
+
+  sesiones.forEach((sesion) => {
+    if (sesion.fecha.startsWith(mesActual) && sesion.fecha <= hoy) {
+      dias.add(sesion.fecha);
+    }
+  });
+
+  return dias.size;
+}
+
 // ---------- Pintar la página ----------
 
 function mostrarRacha() {
@@ -180,6 +199,11 @@ function mostrarRacha() {
 
 function mostrarSemana() {
   minutosSemana.textContent = "📚 Esta semana: " + formatearMinutos(calcularMinutosSemana());
+}
+
+function mostrarMes() {
+  const dias = calcularDiasMes();
+  diasMes.textContent = "📅 Este mes: " + dias + (dias === 1 ? " día" : " días");
 }
 
 function mostrarLista() {
@@ -233,6 +257,7 @@ function prepararFormulario() {
 function mostrarTodo() {
   mostrarRacha();
   mostrarSemana();
+  mostrarMes();
   mostrarLista();
 }
 

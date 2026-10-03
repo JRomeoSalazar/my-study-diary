@@ -31,6 +31,9 @@ pero ayer sí, la racha sigue viva y se cuenta desde ayer.
 reglas). Se calcula siempre a partir de las sesiones; no se guarda.
 - Semana = lunes a domingo según la fecha local. Los totales semanales se calculan a partir
 de las sesiones y no se guardan; las fechas futuras no suman.
+- Mes = mes natural según la fecha local (del día 1 a hoy). Días del mes = días distintos
+con al menos una sesión; se calculan a partir de las sesiones y no se guardan; las fechas
+futuras no suman.
 
 ## Forma de trabajar
 - Haz solo lo que se pide: no añadas funcionalidades por tu cuenta.
