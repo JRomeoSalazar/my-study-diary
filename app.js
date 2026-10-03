@@ -9,6 +9,7 @@ const inputMinutos = document.getElementById("minutos");
 const textoError = document.getElementById("error");
 const rachaDias = document.getElementById("racha-dias");
 const rachaTexto = document.getElementById("racha-texto");
+const mejorRacha = document.getElementById("mejor-racha");
 const lista = document.getElementById("lista");
 const mensajeVacio = document.getElementById("vacio");
 
@@ -90,12 +91,50 @@ function calcularRacha() {
   return racha;
 }
 
+// La racha más larga de todo el historial
+function calcularMejorRacha() {
+  const hoy = hoyTexto();
+
+  // Días únicos con sesión, sin fechas futuras, de más antiguo a más reciente.
+  // Las fechas "AAAA-MM-DD" se pueden ordenar como texto.
+  const dias = [...new Set(sesiones.map((sesion) => sesion.fecha))]
+    .filter((fecha) => fecha <= hoy)
+    .sort();
+
+  let mejor = 0;
+  let actual = 0;
+  let diaPrevio = "";
+
+  dias.forEach((dia) => {
+    const ayerDeEseDia = fechaATexto(diaAnterior(textoAFecha(dia)));
+
+    // Si el día anterior también tenía sesión, la racha continúa; si no, empieza otra
+    if (ayerDeEseDia === diaPrevio) {
+      actual++;
+    } else {
+      actual = 1;
+    }
+
+    if (actual > mejor) {
+      mejor = actual;
+    }
+    diaPrevio = dia;
+  });
+
+  return mejor;
+}
+
 // ---------- Pintar la página ----------
 
 function mostrarRacha() {
   const racha = calcularRacha();
   rachaDias.textContent = racha;
   rachaTexto.textContent = racha === 1 ? "día seguido" : "días seguidos";
+
+  // La mejor racha solo se muestra cuando hay al menos un día que cuente
+  const mejor = calcularMejorRacha();
+  mejorRacha.hidden = mejor === 0;
+  mejorRacha.textContent = "🏆 Mejor racha: " + mejor + (mejor === 1 ? " día" : " días");
 }
 
 function mostrarLista() {

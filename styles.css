@@ -60,6 +60,15 @@ h2 {
   color: #7c2d12;
 }
 
+.racha-mejor {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #fed7aa;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #9a3412;
+}
+
 /* Formulario */
 form {
   display: flex;

@@ -27,6 +27,8 @@ Date("AAAA-MM-DD")`: se interpretan en UTC y desplazan el día.
 - Racha = días consecutivos con al menos 1 sesión que terminan hoy. Si hoy no hay sesión
 pero ayer sí, la racha sigue viva y se cuenta desde ayer.
 - Varias sesiones el mismo día cuentan como un solo día. Las fechas futuras no suman.
+- Mejor racha = tramo más largo de días consecutivos con sesión en todo el historial (mismas
+reglas). Se calcula siempre a partir de las sesiones; no se guarda.
 
 ## Forma de trabajar
 - Haz solo lo que se pide: no añadas funcionalidades por tu cuenta.
