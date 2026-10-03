@@ -5,6 +5,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![Dependencias: 0](https://img.shields.io/badge/dependencias-0-brightgreen)
 ![Sin build](https://img.shields.io/badge/build-no%20necesario-blue)
+[![Built with OpenCode](https://img.shields.io/badge/Built%20with-OpenCode-000000?logo=opencode&logoColor=white)](https://opencode.ai/)
 
 Web estática para **registrar tus sesiones de estudio** y motivarte viendo tu **racha de días seguidos**. Sin instalaciones, sin servidor y sin cuentas: abres `index.html` y empiezas a apuntar.
 
