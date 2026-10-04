@@ -23,3 +23,6 @@ porqué) y errores a evitar.
 - Si algo se convierte en una regla permanente, propón moverlo a `AGENTS.md` en lugar de
 dejarlo en la memoria.
 - No guardes nunca datos sensibles (claves, tokens, datos personales).
+
+# Límites
+- ✅ Siempre: actualizar `MEMORY.md` al terminar cada tarea. 
