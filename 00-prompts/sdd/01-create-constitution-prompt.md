@@ -1,4 +1,4 @@
-# SDD - Paso 1 - Constitución
+# SDD - Paso 1 - Constitución - docs/constitution.md
 
 Vamos a crear la constitución del Diario de Estudio. Es un proyecto que ya existe: lee AGENTS.md, MEMORY.md y el código antes de proponer nada. Es un proyecto educativo que debe poder mantener alguien que empieza a programar.
 

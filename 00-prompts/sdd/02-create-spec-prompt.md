@@ -1,4 +1,4 @@
-# SDD - Paso 2 - Especificación
+# SDD - Paso 2 - Especificación - specs/NNN-spec-name/spec.md
 
 NO escribas código en ningún momento. Vamos a redactar la especificación de una nueva funcionalidad del Diario de Estudio. Lee docs/constitution.md.
 
