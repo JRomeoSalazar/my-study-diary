@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pruebas — Diario de Estudio</title>
+  <style>
+    body { font-family: sans-serif; max-width: 52rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.4; }
+    #resumen { font-size: 1.4rem; font-weight: bold; padding: 0.6rem 0.8rem; border-radius: 6px; }
+    #resumen.bien { background: #d8f3dc; color: #1b4332; }
+    #resumen.mal { background: #ffd6d6; color: #8b0000; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 0.3rem 0; border-bottom: 1px solid #ddd; }
+    .ok { color: #1b4332; font-weight: bold; }
+    .fallo { color: #8b0000; font-weight: bold; }
+    pre { margin: 0.2rem 0 0 1rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Pruebas</h1>
+  <p id="resumen">Ejecutando pruebas…</p>
+  <ul id="resultados"></ul>
+
+  <script src="logica.js"></script>
+  <script>
+    // ---------- Comprobador ----------
+
+    const resultados = [];
+
+    // Ejecuta una prueba. Si salta un error (por ejemplo, de igual), cuenta como fallo.
+    function prueba(nombre, funcion) {
+      try {
+        funcion();
+        resultados.push({ nombre: nombre, paso: true });
+      } catch (error) {
+        resultados.push({ nombre: nombre, paso: false, detalle: error.message });
+        console.error("FALLO: " + nombre + "\n" + error.message);
+      }
+    }
+
+    // Comprueba que dos valores son iguales (se comparan como JSON)
+    function igual(obtenido, esperado) {
+      const textoObtenido = JSON.stringify(obtenido);
+      const textoEsperado = JSON.stringify(esperado);
+      if (textoObtenido !== textoEsperado) {
+        throw new Error("Obtenido: " + textoObtenido + "\nEsperado: " + textoEsperado);
+      }
+    }
+
+    // Pinta el resumen y la lista de pruebas
+    function mostrarResultados() {
+      const superadas = resultados.filter((r) => r.paso).length;
+      const resumen = document.getElementById("resumen");
+      resumen.textContent = superadas + " de " + resultados.length + " pruebas superadas";
+      resumen.className = superadas === resultados.length ? "bien" : "mal";
+
+      const lista = document.getElementById("resultados");
+      resultados.forEach((r) => {
+        const elemento = document.createElement("li");
+
+        const estado = document.createElement("span");
+        estado.className = r.paso ? "ok" : "fallo";
+        estado.textContent = r.paso ? "OK" : "FALLO";
+        elemento.appendChild(estado);
+        elemento.appendChild(document.createTextNode(" " + r.nombre));
+
+        if (!r.paso) {
+          const detalle = document.createElement("pre");
+          detalle.textContent = r.detalle;
+          elemento.appendChild(detalle);
+        }
+        lista.appendChild(elemento);
+      });
+    }
+
+    // ---------- formatearMinutos (CA-5.3) ----------
+
+    prueba("CA-5.3: 0 min → \"0 min\"", () => igual(formatearMinutos(0), "0 min"));
+    prueba("CA-5.3: 45 min → \"45 min\"", () => igual(formatearMinutos(45), "45 min"));
+    prueba("CA-5.3: 60 min → \"1 h\"", () => igual(formatearMinutos(60), "1 h"));
+    prueba("CA-5.3: 105 min → \"1 h 45 min\"", () => igual(formatearMinutos(105), "1 h 45 min"));
+    prueba("CA-5.3: 120 min → \"2 h\"", () => igual(formatearMinutos(120), "2 h"));
+    prueba("CA-5.3: 1 000 000 min → \"16666 h 40 min\"", () =>
+      igual(formatearMinutos(1000000), "16666 h 40 min"));
+
+    // ---------- fechaATexto y textoAFecha ----------
+
+    prueba("fechaATexto: new Date(2026, 7, 3) → \"2026-08-03\"", () =>
+      igual(fechaATexto(new Date(2026, 7, 3)), "2026-08-03"));
+    prueba("fechaATexto: pone ceros en mes y día (\"2026-01-05\")", () =>
+      igual(fechaATexto(new Date(2026, 0, 5)), "2026-01-05"));
+    prueba("textoAFecha: \"2026-08-03\" → año, mes y día locales", () => {
+      const fecha = textoAFecha("2026-08-03");
+      igual([fecha.getFullYear(), fecha.getMonth(), fecha.getDate()], [2026, 7, 3]);
+    });
+    prueba("textoAFecha: es medianoche local (no se desplaza por UTC)", () => {
+      const fecha = textoAFecha("2026-10-05");
+      igual([fecha.getHours(), fecha.getMinutes()], [0, 0]);
+    });
+    prueba("fechaATexto(textoAFecha(x)) devuelve x (incluido el 29-02-2028)", () => {
+      ["2026-10-04", "2026-01-01", "2026-12-31", "2028-02-29"].forEach((texto) => {
+        igual(fechaATexto(textoAFecha(texto)), texto);
+      });
+    });
+
+    // ---------- diaAnterior ----------
+
+    prueba("diaAnterior: \"2026-10-05\" → \"2026-10-04\"", () =>
+      igual(fechaATexto(diaAnterior(textoAFecha("2026-10-05"))), "2026-10-04"));
+    prueba("diaAnterior: cruza mes (\"2026-10-01\" → \"2026-09-30\")", () =>
+      igual(fechaATexto(diaAnterior(textoAFecha("2026-10-01"))), "2026-09-30"));
+    prueba("diaAnterior: cruza año (\"2027-01-01\" → \"2026-12-31\")", () =>
+      igual(fechaATexto(diaAnterior(textoAFecha("2027-01-01"))), "2026-12-31"));
+    prueba("diaAnterior: año bisiesto (\"2028-03-01\" → \"2028-02-29\")", () =>
+      igual(fechaATexto(diaAnterior(textoAFecha("2028-03-01"))), "2028-02-29"));
+    prueba("diaAnterior: cambio de hora (\"2026-03-30\" → \"2026-03-29\" y \"2026-10-26\" → \"2026-10-25\")", () => {
+      igual(fechaATexto(diaAnterior(textoAFecha("2026-03-30"))), "2026-03-29");
+      igual(fechaATexto(diaAnterior(textoAFecha("2026-10-26"))), "2026-10-25");
+    });
+
+    // ---------- inicioDeSemana ----------
+
+    prueba("inicioDeSemana: un lunes es su propio lunes (\"2026-10-05\")", () =>
+      igual(fechaATexto(inicioDeSemana(textoAFecha("2026-10-05"))), "2026-10-05"));
+    prueba("inicioDeSemana: un domingo pertenece a la semana anterior (\"2026-10-04\" → \"2026-09-28\")", () =>
+      igual(fechaATexto(inicioDeSemana(textoAFecha("2026-10-04"))), "2026-09-28"));
+    prueba("inicioDeSemana: mitad de semana (miércoles \"2026-09-30\" → \"2026-09-28\")", () =>
+      igual(fechaATexto(inicioDeSemana(textoAFecha("2026-09-30"))), "2026-09-28"));
+    prueba("inicioDeSemana: cruza mes (jueves \"2026-10-01\" → \"2026-09-28\")", () =>
+      igual(fechaATexto(inicioDeSemana(textoAFecha("2026-10-01"))), "2026-09-28"));
+    prueba("inicioDeSemana: cruza año (viernes \"2027-01-01\" → \"2026-12-28\")", () =>
+      igual(fechaATexto(inicioDeSemana(textoAFecha("2027-01-01"))), "2026-12-28"));
+
+    mostrarResultados();
+  </script>
+</body>
+</html>

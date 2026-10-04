@@ -19,7 +19,7 @@ Reglas que valen para todas las tareas:
 
 ## Fase 1 — Base: `logica.js` y `tests.html`
 
-- [ ] **T1. Crear `logica.js` con las 5 funciones movidas** (~20 min)
+- [x] **T1. Crear `logica.js` con las 5 funciones movidas** (~20 min)
   Mover sin cambios `fechaATexto`, `textoAFecha`, `diaAnterior`, `inicioDeSemana` y
   `formatearMinutos` de `app.js` a `logica.js` (D-2). Cargar `logica.js` antes de `app.js` en
   `index.html`, como script clásico. `hoyTexto()` se queda en `app.js`.
@@ -29,7 +29,7 @@ Reglas que valen para todas las tareas:
   la semana, el mes y la lista muestran los mismos valores que antes (R-5) y la consola
   está limpia.
 
-- [ ] **T2. Crear `tests.html` con el comprobador y las pruebas de lo movido** (~25 min)
+- [x] **T2. Crear `tests.html` con el comprobador y las pruebas de lo movido** (~25 min)
   Página con `prueba(nombre, función)` e `igual(obtenido, esperado)` (compara con
   `JSON.stringify`), resumen "X de Y pruebas superadas" en verde o rojo, lista de pruebas con
   "OK"/"FALLO" (con obtenido y esperado, y `console.error`). Añadir las pruebas de

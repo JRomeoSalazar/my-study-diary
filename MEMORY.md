@@ -12,6 +12,12 @@ racha / Esta semana / Este mes (JS solo escribe la cifra).
 `sesiones` global y `new Date()`, y no existe `tests.html`.
 - Mapa de calor: spec y plan APROBADOS en `specs/001-heat-map/`, sin código todavía.
 `tasks.md` creado (28 tareas, T1–T28, con RF y "Hecho cuando:"); seguir ese orden.
+- T1 hecha: existe `logica.js` (script clásico cargado antes de `app.js`) con `fechaATexto`,
+`textoAFecha`, `diaAnterior`, `inicioDeSemana` y `formatearMinutos`, movidas sin cambios.
+`hoyTexto()` sigue en `app.js`. Racha, semana, mes y lista dan lo mismo que antes.
+- T2 hecha: `tests.html` con `prueba(nombre, función)` e `igual(obtenido, esperado)`, resumen
+"X de Y pruebas superadas" y 21 pruebas de las 5 funciones movidas (todas OK). Las pruebas
+nuevas se añaden en el `<script>` de `tests.html`, antes de `mostrarResultados()`.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
@@ -31,11 +37,13 @@ renombrar). Criterios marcados [auto], [manual] o [auto + manual] (este último,
 - Si cambia la fuente, revisar los % del degradado de `.fosforito`.
 - En móvil, "3 h 10 min" se partía: `.racha-datos dd` lleva `nowrap` y letra menor.
 - En móvil (360 px) el contenido útil mide 310 px; el mapa planificado ocupa 308.
+- No usar `node --test` (prohibido en `AGENTS.md`; las pruebas irán en `tests.html`). Para
+refactors sin tests aún: sembrar sesiones relativas a hoy en `localStorage` (contexto
+aislado), recargar y comparar las cifras del DOM antes y después.
 - Capturas: `google-chrome --headless=new --virtual-time-budget=3000 --screenshot=...`
 (sin el time-budget la animación no se ve).
 
 ## Próximos pasos
-- Implementar el mapa siguiendo `specs/001-heat-map/tasks.md` (empieza en T1: crear
-`logica.js`, ya autorizado).
-Con `tests.html`, actualizar "Verificación" en `AGENTS.md`.
+- Implementar el mapa siguiendo `specs/001-heat-map/tasks.md` (siguiente: T3,
+constantes de texto). Con `tests.html`, actualizar "Verificación" en `AGENTS.md`.
 - Después, en otra tarea: pasar racha, semana y mes a funciones puras (principio 3).
