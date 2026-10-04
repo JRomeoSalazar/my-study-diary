@@ -43,7 +43,9 @@ Notación EARS: *El sistema deberá…* (siempre), *Cuando…* (evento), *Mientr
 
 Cada criterio lleva una etiqueta de cómo se comprueba (ver RNF-6):
 **[auto]** = prueba automática en el navegador; **[manual]** = verificación manual en el
-navegador (aspecto visual o interacción física).
+navegador (aspecto visual o interacción física); **[auto + manual]** = la lógica de la que
+depende tiene prueba automática y su conexión con la página se verifica a mano (la página de
+pruebas, abierta con doble clic, no puede cargar la aplicación).
 
 ### RF-1. Periodo mostrado
 
@@ -126,19 +128,19 @@ visible y de una sola línea de texto (puede partirse en dos si no cabe).
 - **CA-5.3.** [auto] El sistema deberá escribir los minutos así: menos de 60 → "45 min";
   60 o más → "1 h 45 min"; horas exactas → "2 h"; 0 → "0 min". Sin límite superior
   (p. ej. 1 000 000 → "16666 h 40 min").
-- **CA-5.4.** [auto] Mientras no haya ningún día seleccionado, el sistema deberá mostrar en
+- **CA-5.4.** [auto + manual] Mientras no haya ningún día seleccionado, el sistema deberá mostrar en
   la línea de detalle el texto "Pasa el ratón o toca un día para ver sus minutos.".
 - **CA-5.5.** [manual] Cuando el puntero del ratón entre en un día, el sistema deberá
   mostrar el detalle de ese día en la línea de detalle.
 - **CA-5.6.** [manual] Cuando el puntero del ratón salga del mapa, el sistema deberá volver
   a mostrar el detalle del día seleccionado o, si no hay ninguno, el texto de CA-5.4.
-- **CA-5.7.** [auto] Cuando el usuario haga clic o toque un día, el sistema deberá
+- **CA-5.7.** [auto + manual] Cuando el usuario haga clic o toque un día, el sistema deberá
   seleccionar ese día, marcarlo visualmente y mostrar su detalle. Solo puede haber un día
   seleccionado; seleccionar otro sustituye al anterior. Tocar el mismo día o fuera del
   mapa no cambia la selección.
 - **CA-5.8.** [auto] Cuando el usuario seleccione un día, el sistema deberá dejar intactas
   las sesiones guardadas y la lista de sesiones tal como estaba.
-- **CA-5.9.** [auto] Cuando el mapa se vuelva a dibujar (al guardar una sesión o recargar),
+- **CA-5.9.** [auto + manual] Cuando el mapa se vuelva a dibujar (al guardar una sesión o recargar),
   el sistema deberá quitar la selección y mostrar el texto de CA-5.4.
 
 ### RF-6. Título, posición, leyenda y etiquetas
@@ -155,7 +157,7 @@ visible y de una sola línea de texto (puede partirse en dos si no cabe).
   tampoco, entonces el sistema deberá mostrar sobre la primera columna el mes de su lunes.
 - **CA-6.5.** [manual] El sistema deberá permitir que una etiqueta de mes ocupe más ancho
   que su columna, por encima de las columnas siguientes sin etiqueta.
-- **CA-6.6.** [auto] El sistema deberá mostrar debajo del mapa una leyenda con el texto
+- **CA-6.6.** [auto + manual] El sistema deberá mostrar debajo del mapa una leyenda con el texto
   "Menos", los 5 colores de nivel en orden de 0 a 4 y el texto "Más".
 - **CA-6.7.** [auto] El sistema deberá ofrecer para cada color de la leyenda su tramo
   ("0 min", "1–29 min", "30–59 min", "60–119 min", "120 min o más") al pasar el ratón por
@@ -164,9 +166,9 @@ visible y de una sola línea de texto (puede partirse en dos si no cabe).
 
 ### RF-7. Actualización
 
-- **CA-7.1.** [auto] Cuando se cargue la página, el sistema deberá mostrar el mapa con las
+- **CA-7.1.** [auto + manual] Cuando se cargue la página, el sistema deberá mostrar el mapa con las
   sesiones guardadas.
-- **CA-7.2.** [auto] Cuando el usuario guarde una sesión nueva, el sistema deberá volver a
+- **CA-7.2.** [auto + manual] Cuando el usuario guarde una sesión nueva, el sistema deberá volver a
   dibujar el mapa sin recargar la página.
 - **CA-7.3.** [auto] Cuando se cargue la página o el usuario guarde una sesión, el sistema
   deberá calcular el periodo del mapa con la fecha de hoy de ese momento.
@@ -186,13 +188,13 @@ visible y de una sola línea de texto (puede partirse en dos si no cabe).
 
 ### RF-9. Teclado y lectores de pantalla
 
-- **CA-9.1.** [auto] El sistema deberá hacer que el mapa sea una sola parada del
+- **CA-9.1.** [auto + manual] El sistema deberá hacer que el mapa sea una sola parada del
   tabulador: al llegar con Tab, el foco va al día seleccionado o, si no hay ninguno, a hoy.
 - **CA-9.2.** [auto] Mientras el foco esté en el mapa, cuando el usuario pulse una flecha,
   el sistema deberá mover el foco al día de al lado en esa dirección (arriba/abajo = día
   anterior/siguiente; izquierda/derecha = misma fila en la semana anterior/siguiente). Si
   en esa dirección no hay día (borde o hueco), el foco no se mueve.
-- **CA-9.3.** [auto] Cuando un día reciba el foco, el sistema deberá seleccionarlo como en
+- **CA-9.3.** [auto + manual] Cuando un día reciba el foco, el sistema deberá seleccionarlo como en
   CA-5.7.
 - **CA-9.4.** [auto] El sistema deberá anunciar a los lectores de pantalla el título del
   mapa y, para cada día, el mismo texto que su detalle (CA-5.1).
@@ -294,10 +296,10 @@ visible y de una sola línea de texto (puede partirse en dos si no cabe).
 ## 8. Criterios de finalización
 
 - [ ] Se cumplen todos los criterios de aceptación de RF-1 a RF-9.
-- [ ] Cada criterio [auto] tiene al menos una prueba automática y todas pasan en el
-      navegador, incluidos los casos límite de la sección 6 que se puedan calcular.
-- [ ] Cada criterio [manual] está verificado en el navegador: en escritorio, en el móvil a
-      360 px, con teclado y con zoom al 200 %.
+- [ ] Cada criterio [auto] y [auto + manual] tiene al menos una prueba automática y todas
+      pasan en el navegador, incluidos los casos límite de la sección 6 que se puedan calcular.
+- [ ] Cada criterio [manual] y [auto + manual] está verificado en el navegador: en
+      escritorio, en el móvil a 360 px, con teclado y con zoom al 200 %.
 - [ ] La consola no muestra errores de la aplicación.
 - [ ] Las sesiones guardadas antes del cambio siguen intactas y se ven en el mapa.
 - [x] Todas las dudas marcadas como [NECESITA ACLARACIÓN] están resueltas y la spec
@@ -321,5 +323,6 @@ Decisiones tomadas en la revisión QA, delegadas por el usuario (2026-10-04):
 - Teclado con una sola parada del tabulador y flechas.
 - Definición estricta de sesión válida (los minutos en texto no valen).
 - Etiquetas de mes según CA-6.3 y CA-6.4.
-- Separación entre criterios [auto] y [manual].
+- Separación entre criterios [auto], [manual] y [auto + manual] (esta última aprobada por
+  el usuario al revisar el plan).
 - Umbrales de contraste, de espacio entre días y de rendimiento.

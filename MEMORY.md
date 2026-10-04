@@ -59,8 +59,11 @@ lun–dom, 5 niveles fijos (0 / 1–29 / 30–59 / 60–119 / ≥120 min), días
 detalle al pasar/tocar + leyenda, sin datos → todo nivel 0, sesiones inválidas ignoradas.
 Dudas resueltas y revisión QA aplicada (detalle en línea fija bajo el mapa, teclado con
 flechas, sesión válida estricta, criterios [auto]/[manual]). Carpeta `001-heat-map` en
-inglés por decisión del usuario: no renombrar. Siguiente: plan (pedir permiso para la
-página de pruebas).
+inglés por decisión del usuario: no renombrar. Plan en `specs/001-heat-map/plan.md`
+APROBADO: crear `logica.js` (moviendo sin cambios fechaATexto, textoAFecha, diaAnterior,
+inicioDeSemana, formatearMinutos) y `tests.html`. Etiquetas [auto + manual] ya en la spec.
+Aún sin código: siguiente paso, implementar según §9 del plan. Tests:
+`tests.html`, confirmado de nuevo (no `node --test`). En móvil el mapa cabe con 2 px de sobra.
 - Adaptar el código a la constitución (pedir permiso antes: crea archivos): funciones puras
 con la fecha de hoy como parámetro, `tests.html` y specs en `specs/`.
 - Cuando exista `tests.html`, cambiar "No hay tests automáticos" en Verificación de `AGENTS.md`.
