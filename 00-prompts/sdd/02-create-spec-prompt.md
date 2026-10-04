@@ -1,3 +1,5 @@
+# SDD - Paso 2 - Especificación
+
 NO escribas código en ningún momento. Vamos a redactar la especificación de una nueva funcionalidad del Diario de Estudio. Lee docs/constitution.md.
 
 Idea inicial: un mapa de calor tipo GitHub que muestre los días estudiados de las últimas semanas, donde cuantos más minutos estudiados, más intenso es el color del día.
