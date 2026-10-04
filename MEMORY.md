@@ -57,8 +57,10 @@ MCP al abrir `file://`, no la app (no sale al abrir Chrome normal). Ignorarlo.
 - Spec `specs/001-heat-map/spec.md` (mapa de calor) en borrador, sin código: 12 semanas
 lun–dom, 5 niveles fijos (0 / 1–29 / 30–59 / 60–119 / ≥120 min), días futuros como hueco,
 detalle al pasar/tocar + leyenda, sin datos → todo nivel 0, sesiones inválidas ignoradas.
-Dudas resueltas (título "Últimas 12 semanas", bajo la fila de datos, fecha "lun 3 ago
-2026", 0 → "0 min", 7 etiquetas de día, sin avance automático a medianoche). Siguiente: plan.
+Dudas resueltas y revisión QA aplicada (detalle en línea fija bajo el mapa, teclado con
+flechas, sesión válida estricta, criterios [auto]/[manual]). Carpeta `001-heat-map` en
+inglés por decisión del usuario: no renombrar. Siguiente: plan (pedir permiso para la
+página de pruebas).
 - Adaptar el código a la constitución (pedir permiso antes: crea archivos): funciones puras
 con la fecha de hoy como parámetro, `tests.html` y specs en `specs/`.
 - Cuando exista `tests.html`, cambiar "No hay tests automáticos" en Verificación de `AGENTS.md`.
