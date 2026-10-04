@@ -48,7 +48,7 @@ futuras no suman.
 - 🚫 Nunca: añadir dependencias, frameworks o un paso de build.
 
 ## Verificación
-- No hay tests ni lint. Probar abriendo `index.html` en el navegador.
+- No hay tests automáticos. Después de cada cambio, verifica con el MCP de Chrome DevTools: abre `index.html`, prueba la funcionalidad, revisa la consola y comprueba la vista móvil.
 - Para empezar de cero: DevTools → Application → Local Storage → borrar la clave
 `diario-estudio-sesiones`.
 

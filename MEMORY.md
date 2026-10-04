@@ -48,6 +48,11 @@ revisar los % del degradado de `.fosforito`.
 - En móvil, "3 h 10 min" se partía: `.racha-datos dd` lleva `nowrap` y letra menor.
 - Capturas para revisar: `google-chrome --headless=new --virtual-time-budget=3000
 --screenshot=...` (sin el time-budget la animación no se ve).
+- Pruebas con el MCP de Chrome DevTools: abrir con `isolatedContext` para no tocar las
+sesiones reales. El error de consola "Unsafe attempt to load URL file://..." lo provoca el
+MCP al abrir `file://`, no la app (no sale al abrir Chrome normal). Ignorarlo.
+- Última prueba (4-oct-2026): hoy/ayer/anteayer → racha 3, mejor racha 3, sin errores ni
+desbordes a 375 px.
 
 ## Próximos pasos
 - (vacío por ahora)
