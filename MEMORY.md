@@ -11,6 +11,7 @@ racha / Esta semana / Este mes (JS solo escribe la cifra).
 - El código aún no cumple los principios 3 y 4 de la constitución: las `calcular*` usan
 `sesiones` global y `new Date()`, y no existe `tests.html`.
 - Mapa de calor: spec y plan APROBADOS en `specs/001-heat-map/`, sin código todavía.
+`tasks.md` creado (28 tareas, T1–T28, con RF y "Hecho cuando:"); seguir ese orden.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
@@ -34,6 +35,7 @@ renombrar). Criterios marcados [auto], [manual] o [auto + manual] (este último,
 (sin el time-budget la animación no se ve).
 
 ## Próximos pasos
-- Implementar el mapa según el §9 del plan (empieza creando `logica.js`, ya autorizado).
+- Implementar el mapa siguiendo `specs/001-heat-map/tasks.md` (empieza en T1: crear
+`logica.js`, ya autorizado).
 Con `tests.html`, actualizar "Verificación" en `AGENTS.md`.
 - Después, en otra tarea: pasar racha, semana y mes a funciones puras (principio 3).
