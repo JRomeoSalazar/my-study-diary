@@ -8,16 +8,16 @@ sesiones.
 - Bajo la racha, fila `<dl class="racha-datos">` con Mejor racha / Esta semana / Este mes
 (etiqueta + cifra). JS solo escribe el valor ("4 días", "3 h 10 min"); la mejor racha
 oculta su `div#mejor-racha` y escribe en `#mejor-racha-valor`.
-- Datos en localStorage.
 - Diseño "cuaderno de cuadros": fondo cuadriculado (CSS), margen rojo a la izquierda,
 tinta azul. Fuentes de Google Fonts: Literata (títulos y cifras) y Atkinson Hyperlegible
 (texto), con fuentes del sistema de respaldo. La racha es lo único llamativo: número
 grande con trazo de fosforito animado una vez al cargar (desactivado con
 `prefers-reduced-motion`). Colores en variables `:root`. Sin emojis en la interfaz.
 - Las secciones usan la clase `.seccion` (ya no hay tarjetas).
-- `README.md` en español (funcionalidades, uso, estructura, formato de datos, ayuda y
-contribuciones).
-- No hay `LICENSE` ni `CONTRIBUTING.md`: el README no los enlaza y remite a `AGENTS.md`.
+- `README.md` en español. No hay `LICENSE` ni `CONTRIBUTING.md`: el README remite a `AGENTS.md`.
+- `docs/constitution.md`: 6 principios innegociables (stack, spec, lógica/interfaz, tests,
+datos, español). El código aún no cumple el 3 (las `calcular*` usan `sesiones` global y
+`new Date()`) ni el 4 (no hay `tests.html` ni `specs/`).
 
 ## Decisiones (y por qué)
 - Sin backend ni dependencias: cualquiera debe poder abrirlo con doble clic.
@@ -35,12 +35,13 @@ del tramo: el usuario no los quiso.
 - Google Fonts permitido por el usuario (excepción a "sin dependencias"): es un `<link>`,
 funciona con `file://` y sin conexión cae a las fuentes del sistema.
 - Emojis quitados a petición del usuario: el fosforito es el único acento visual.
+- Tests en `tests.html` (navegador), no con `node --test`: el usuario lo descartó por no
+encajar con el proyecto. Specs en `specs/NNN-*/` en la raíz, no en `docs/`.
 
 ## Aprendizajes y errores a evitar
 - Los campos guardados están en español (`fecha`, `tema`, `minutos`); `AGENTS.md` llegó a
 decir `date/topic/minutes`. Contrastar siempre la documentación con `app.js`.
-- Para filtrar por mes basta comparar el prefijo "AAAA-MM" del texto de la fecha; no hace
-falta crear objetos `Date` (y así no hay riesgo de UTC ni de cambio de hora).
+- Para filtrar por mes basta comparar el prefijo "AAAA-MM" de la fecha (sin `Date`, sin UTC).
 - Algunas serif (Georgia) usan cifras "de estilo antiguo": forzar `font-variant-numeric:
 lining-nums` en cifras serif.
 - El trazo de fosforito depende de las proporciones de la fuente: si cambia la fuente,
@@ -51,8 +52,8 @@ revisar los % del degradado de `.fosforito`.
 - Pruebas con el MCP de Chrome DevTools: abrir con `isolatedContext` para no tocar las
 sesiones reales. El error de consola "Unsafe attempt to load URL file://..." lo provoca el
 MCP al abrir `file://`, no la app (no sale al abrir Chrome normal). Ignorarlo.
-- Última prueba (4-oct-2026): hoy/ayer/anteayer → racha 3, mejor racha 3, sin errores ni
-desbordes a 375 px.
 
 ## Próximos pasos
-- (vacío por ahora)
+- Adaptar el código a la constitución (pedir permiso antes: crea archivos): funciones puras
+con la fecha de hoy como parámetro, `tests.html` y specs en `specs/`.
+- Cuando exista `tests.html`, cambiar "No hay tests automáticos" en Verificación de `AGENTS.md`.

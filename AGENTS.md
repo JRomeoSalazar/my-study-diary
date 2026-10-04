@@ -64,3 +64,6 @@ porqué) y errores a evitar.
 - Si algo se convierte en una regla permanente, propón moverlo a `AGENTS.md` en lugar de
 dejarlo en la memoria.
 - No guardes nunca datos sensibles (claves, tokens, datos personales).
+
+## Reglas
+- Lee `docs/constitution.md` y la spec activa (`specs/NNN-*/`) antes de tocar código. 
