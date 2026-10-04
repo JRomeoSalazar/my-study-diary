@@ -1,96 +1,150 @@
+/* Colores y letras del "cuaderno de cuadros" */
+:root {
+  --papel: #fbfcfe;
+  --cuadricula: #dce6f2;
+  --tinta: #1d3b8f;
+  --tinta-oscura: #152c6b;
+  --grafito: #262b3a;
+  --grafito-suave: #5b6275;
+  --margen: #c93a3a;
+  --fosforito: #f4ea4f;
+
+  /* Fuentes de Google Fonts; si no hay conexión se usan las del sistema */
+  --letra-titulos: Literata, Charter, "Bitstream Charter", Cambria, Georgia, serif;
+  --letra-texto: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
 * {
   box-sizing: border-box;
 }
 
+/* El fondo es una hoja cuadriculada: dos degradados finos forman las líneas */
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: #f3f4f6;
-  color: #1f2937;
+  font-family: var(--letra-texto);
   line-height: 1.5;
+  color: var(--grafito);
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(var(--cuadricula) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
+/* La línea roja de la izquierda es el margen del cuaderno */
 .contenedor {
-  max-width: 560px;
+  max-width: 600px;
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 40px 24px 64px 32px;
+  border-left: 2px solid var(--margen);
+}
+
+h1,
+h2 {
+  font-family: var(--letra-titulos);
+  color: var(--tinta);
+  line-height: 1.2;
+  font-variant-numeric: lining-nums;
 }
 
 h1 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin: 0 0 20px;
+  font-size: 2.25rem;
+  margin: 0 0 40px;
 }
 
 h2 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0 0 16px;
 }
 
-.tarjeta {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+.seccion {
+  margin-bottom: 48px;
 }
 
-/* Racha */
-.racha {
-  text-align: center;
-  background: linear-gradient(135deg, #fff7ed, #ffedd5);
-}
-
+/* Racha: lo único llamativo de la página */
 .racha-titulo {
   margin: 0;
   font-weight: 600;
-  color: #9a3412;
+  color: var(--grafito-suave);
+}
+
+.racha-cifra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 12px;
 }
 
 .racha-numero {
-  margin: 4px 0;
-  font-size: 4rem;
-  font-weight: 800;
+  margin: 0;
+  font-family: var(--letra-titulos);
+  font-size: 5.5rem;
+  font-weight: 700;
   line-height: 1.1;
-  color: #ea580c;
+  color: var(--tinta);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Trazo de fosforito bajo el número; se "pinta" una vez al cargar la página */
+.fosforito {
+  padding: 0 0.12em;
+  background-image: linear-gradient(
+    176deg,
+    transparent 50%,
+    var(--fosforito) 52%,
+    var(--fosforito) 76%,
+    transparent 78%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation: pintar-fosforito 0.7s ease-out 0.2s both;
+}
+
+@keyframes pintar-fosforito {
+  from {
+    background-size: 0% 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fosforito {
+    animation: none;
+  }
 }
 
 .racha-texto {
   margin: 0;
-  color: #7c2d12;
+  font-family: var(--letra-titulos);
+  font-size: 1.4rem;
+  color: var(--tinta);
 }
 
-.racha-mejor {
-  margin: 14px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid #fed7aa;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #9a3412;
+/* Mejor racha, semana y mes: etiqueta pequeña con la cifra debajo */
+.racha-datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 16px;
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid #c5d3e6;
 }
 
-.racha-semana {
-  margin: 14px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid #fed7aa;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #9a3412;
+.racha-datos dt {
+  font-size: 0.9rem;
+  color: var(--grafito-suave);
 }
 
-/* Si la mejor racha está visible, la línea de la semana va justo debajo, sin otra raya */
-.racha-mejor:not([hidden]) + .racha-semana {
-  margin-top: 4px;
-  padding-top: 0;
-  border-top: none;
-}
-
-/* Los días del mes van siempre justo debajo de la semana, sin otra raya */
-.racha-mes {
-  margin: 4px 0 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #9a3412;
+.racha-datos dd {
+  margin: 0;
+  font-family: var(--letra-titulos);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--tinta);
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* Formulario */
@@ -101,52 +155,58 @@ form {
 
 label {
   font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 input {
   font: inherit;
-  padding: 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  margin-bottom: 16px;
+  color: var(--grafito);
+  padding: 10px 12px;
+  border: 1px solid #aab3c5;
+  border-radius: 4px;
+  margin-bottom: 20px;
   background: #ffffff;
   width: 100%;
 }
 
-input:focus {
-  outline: none;
-  border-color: #ea580c;
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+input:focus-visible {
+  outline: 3px solid var(--fosforito);
+  outline-offset: 0;
+  border-color: var(--tinta);
 }
 
 button {
   font: inherit;
   font-weight: 600;
-  padding: 12px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 10px;
-  background: #ea580c;
+  border-radius: 4px;
+  background: var(--tinta);
   color: #ffffff;
   cursor: pointer;
+  align-self: flex-start;
 }
 
 button:hover {
-  background: #c2410c;
+  background: var(--tinta-oscura);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--fosforito);
+  outline-offset: 2px;
 }
 
 .error {
-  color: #b91c1c;
-  margin: 0 0 12px;
-  min-height: 1em;
+  color: var(--margen);
+  font-weight: 600;
+  margin: 0 0 16px;
 }
 
 .error:empty {
   display: none;
 }
 
-/* Lista de sesiones */
+/* Lista de sesiones: como apuntes en el cuaderno */
 .lista {
   list-style: none;
   margin: 0;
@@ -156,14 +216,14 @@ button:hover {
 .sesion {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  align-items: baseline;
+  gap: 16px;
   padding: 12px 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #c5d3e6;
 }
 
-.sesion:last-child {
-  border-bottom: none;
+.sesion:first-child {
+  border-top: 1px solid #c5d3e6;
 }
 
 .sesion-tema {
@@ -175,20 +235,50 @@ button:hover {
 .sesion-fecha {
   margin: 0;
   font-size: 0.9rem;
-  color: #6b7280;
+  color: var(--grafito-suave);
 }
 
 .sesion-minutos {
   flex-shrink: 0;
-  font-weight: 600;
-  color: #9a3412;
-  background: #ffedd5;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.9rem;
+  font-family: var(--letra-titulos);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--tinta);
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .vacio {
   margin: 0;
-  color: #6b7280;
+  color: var(--grafito-suave);
+}
+
+/* Móvil: margen más estrecho y botón a todo el ancho */
+@media (max-width: 480px) {
+  .contenedor {
+    margin-left: 12px;
+    padding: 28px 16px 48px 20px;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    margin-bottom: 32px;
+  }
+
+  .racha-numero {
+    font-size: 4.5rem;
+  }
+
+  .racha-datos {
+    grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+    gap: 12px;
+  }
+
+  .racha-datos dd {
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+
+  button {
+    align-self: stretch;
+  }
 }

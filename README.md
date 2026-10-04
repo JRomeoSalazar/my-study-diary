@@ -36,7 +36,7 @@ Es además un **proyecto didáctico**: el código está escrito para que pueda e
 ## Por qué usarlo
 
 - **Cero configuración**: HTML, CSS y JavaScript puros. Sin frameworks, sin npm y sin paso de build.
-- **Funciona sin conexión** y directamente desde el disco (`file://`).
+- **Funciona sin conexión** y directamente desde el disco (`file://`). Las fuentes (Literata y Atkinson Hyperlegible) se cargan de Google Fonts; sin internet se usan las del sistema y todo sigue funcionando.
 - **Tus datos se quedan en tu navegador** (`localStorage`); no se envían a ningún sitio.
 - **Fechas fiables**: todo se calcula con tu fecha local, sin desfases por zonas horarias.
 - **Código fácil de leer**: ideal para aprender o para usarlo como base de tus propios proyectos.
@@ -83,15 +83,14 @@ python3 -m http.server 8000
 
 1. En **Registrar sesión**, elige la fecha (por defecto, hoy), escribe el tema y los minutos.
 2. Pulsa **Guardar sesión**.
-3. La tarjeta superior se actualiza al momento:
+3. El bloque de la racha, arriba del todo, se actualiza al momento:
 
 ```text
 Racha actual
-🔥 5
-días seguidos
-🏆 Mejor racha: 12 días
-📚 Esta semana: 3 h 20 min
-📅 Este mes: 9 días
+5 días seguidos
+
+Mejor racha    Esta semana    Este mes
+12 días        3 h 20 min     9 días
 ```
 
 ### Reglas de la racha

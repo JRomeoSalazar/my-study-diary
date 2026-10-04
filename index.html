@@ -4,22 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diario de Estudio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,400;7..72,700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="contenedor">
     <h1>Diario de Estudio</h1>
 
-    <section class="tarjeta racha">
+    <section class="seccion racha">
       <p class="racha-titulo">Racha actual</p>
-      <p class="racha-numero">🔥 <span id="racha-dias">0</span></p>
-      <p class="racha-texto" id="racha-texto">días seguidos</p>
-      <p class="racha-mejor" id="mejor-racha" hidden></p>
-      <p class="racha-semana" id="minutos-semana"></p>
-      <p class="racha-mes" id="dias-mes"></p>
+      <div class="racha-cifra">
+        <p class="racha-numero"><span class="fosforito" id="racha-dias">0</span></p>
+        <p class="racha-texto" id="racha-texto">días seguidos</p>
+      </div>
+      <dl class="racha-datos">
+        <div id="mejor-racha" hidden>
+          <dt>Mejor racha</dt>
+          <dd id="mejor-racha-valor"></dd>
+        </div>
+        <div>
+          <dt>Esta semana</dt>
+          <dd id="minutos-semana"></dd>
+        </div>
+        <div>
+          <dt>Este mes</dt>
+          <dd id="dias-mes"></dd>
+        </div>
+      </dl>
     </section>
 
-    <section class="tarjeta">
+    <section class="seccion">
       <h2>Registrar sesión</h2>
       <form id="formulario">
         <label for="fecha">Fecha</label>
@@ -37,7 +53,7 @@
       </form>
     </section>
 
-    <section class="tarjeta">
+    <section class="seccion">
       <h2>Sesiones</h2>
       <p class="vacio" id="vacio">Todavía no has registrado ninguna sesión.</p>
       <ul class="lista" id="lista"></ul>

@@ -10,6 +10,7 @@ const textoError = document.getElementById("error");
 const rachaDias = document.getElementById("racha-dias");
 const rachaTexto = document.getElementById("racha-texto");
 const mejorRacha = document.getElementById("mejor-racha");
+const mejorRachaValor = document.getElementById("mejor-racha-valor");
 const minutosSemana = document.getElementById("minutos-semana");
 const diasMes = document.getElementById("dias-mes");
 const lista = document.getElementById("lista");
@@ -194,16 +195,16 @@ function mostrarRacha() {
   // La mejor racha solo se muestra cuando hay al menos un día que cuente
   const mejor = calcularMejorRacha();
   mejorRacha.hidden = mejor === 0;
-  mejorRacha.textContent = "🏆 Mejor racha: " + mejor + (mejor === 1 ? " día" : " días");
+  mejorRachaValor.textContent = mejor + (mejor === 1 ? " día" : " días");
 }
 
 function mostrarSemana() {
-  minutosSemana.textContent = "📚 Esta semana: " + formatearMinutos(calcularMinutosSemana());
+  minutosSemana.textContent = formatearMinutos(calcularMinutosSemana());
 }
 
 function mostrarMes() {
   const dias = calcularDiasMes();
-  diasMes.textContent = "📅 Este mes: " + dias + (dias === 1 ? " día" : " días");
+  diasMes.textContent = dias + (dias === 1 ? " día" : " días");
 }
 
 function mostrarLista() {

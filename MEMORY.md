@@ -5,10 +5,16 @@ aporte.
 ## Estado actual
 - v1 funcionando: registrar sesiones (fecha, tema, minutos), racha actual y lista de
 sesiones.
-- Mejor racha (🏆) en la tarjeta de la racha, como línea pequeña bajo la racha actual.
-- Total de minutos de la semana (📚, lunes a domingo) en la tarjeta de la racha, bajo la 🏆.
-- Días estudiados este mes (📅, "📅 Este mes: 5 días") en la tarjeta de la racha, bajo 📚.
+- Bajo la racha, fila `<dl class="racha-datos">` con Mejor racha / Esta semana / Este mes
+(etiqueta + cifra). JS solo escribe el valor ("4 días", "3 h 10 min"); la mejor racha
+oculta su `div#mejor-racha` y escribe en `#mejor-racha-valor`.
 - Datos en localStorage.
+- Diseño "cuaderno de cuadros": fondo cuadriculado (CSS), margen rojo a la izquierda,
+tinta azul. Fuentes de Google Fonts: Literata (títulos y cifras) y Atkinson Hyperlegible
+(texto), con fuentes del sistema de respaldo. La racha es lo único llamativo: número
+grande con trazo de fosforito animado una vez al cargar (desactivado con
+`prefers-reduced-motion`). Colores en variables `:root`. Sin emojis en la interfaz.
+- Las secciones usan la clase `.seccion` (ya no hay tarjetas).
 - `README.md` en español (funcionalidades, uso, estructura, formato de datos, ayuda y
 contribuciones).
 - No hay `LICENSE` ni `CONTRIBUTING.md`: el README no los enlaza y remite a `AGENTS.md`.
@@ -26,12 +32,22 @@ del tramo: el usuario no los quiso.
 "45 min"; ≥ 60 → "1 h 45 min"; horas exactas → "2 h" (sin "0 min").
 - Días del mes: mes natural (día 1 a hoy), no "últimos 30 días". Se muestra aunque sea 0
 ("0 días"), como la semana: es un dato del periodo, no un récord. Sin "X de N días".
+- Google Fonts permitido por el usuario (excepción a "sin dependencias"): es un `<link>`,
+funciona con `file://` y sin conexión cae a las fuentes del sistema.
+- Emojis quitados a petición del usuario: el fosforito es el único acento visual.
 
 ## Aprendizajes y errores a evitar
 - Los campos guardados están en español (`fecha`, `tema`, `minutos`); `AGENTS.md` llegó a
 decir `date/topic/minutes`. Contrastar siempre la documentación con `app.js`.
 - Para filtrar por mes basta comparar el prefijo "AAAA-MM" del texto de la fecha; no hace
 falta crear objetos `Date` (y así no hay riesgo de UTC ni de cambio de hora).
+- Algunas serif (Georgia) usan cifras "de estilo antiguo": forzar `font-variant-numeric:
+lining-nums` en cifras serif.
+- El trazo de fosforito depende de las proporciones de la fuente: si cambia la fuente,
+revisar los % del degradado de `.fosforito`.
+- En móvil, "3 h 10 min" se partía: `.racha-datos dd` lleva `nowrap` y letra menor.
+- Capturas para revisar: `google-chrome --headless=new --virtual-time-budget=3000
+--screenshot=...` (sin el time-budget la animación no se ve).
 
 ## Próximos pasos
 - (vacío por ahora)
