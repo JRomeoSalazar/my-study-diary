@@ -1,4 +1,4 @@
-# SDD - Paso 2 - Clarificación
+# SDD - Paso 3 - Clarificación
 
 Revisa specs/001-heat-map/spec.md como si fueras un QA muy profesional.
 Lista: (1) ambigüedades restantes, (2) contradicciones entre requisitos,

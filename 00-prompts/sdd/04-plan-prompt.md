@@ -1,0 +1,3 @@
+# SDD - Paso 4 - Planificación - specs/NNN-spec-name/plan.md
+
+Lee docs/constitution.md y specs/001-heat-map/spec.md. NO escribas código. Genera specs/001-heat-map/plan.md con: qué archivos se crean o modifican y qué responsabilidad tiene cada uno, qué funciones puras de lógica se necesitan (con "hoy" como parámetro), algoritmo del mapa en pseudocódigo, cómo se pinta en la interfaz, decisiones técnicas justificadas (y su alternativa descartada) y estrategia de tests con node --test. Todo debe respetar la constitución y cubrir todos los RF. Marca qué RF cubre cada parte.
