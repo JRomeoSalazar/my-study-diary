@@ -24,6 +24,9 @@ perderá sus sesiones.
 ## Fechas y racha (fácil equivocarse)
 - Trabaja siempre con la fecha local del usuario. Nunca uses `toISOString()` ni `new
 Date("AAAA-MM-DD")`: se interpretan en UTC y desplazan el día.
+- Maneja las fechas como texto "AAAA-MM-DD": se comparan y ordenan directamente (para el
+mes basta el prefijo "AAAA-MM"). Para sumar días usa `new Date(año, mes - 1, día + n)`,
+nunca milisegundos: el día del cambio de hora no dura 24 h.
 - Racha = días consecutivos con al menos 1 sesión que terminan hoy. Si hoy no hay sesión
 pero ayer sí, la racha sigue viva y se cuenta desde ayer.
 - Varias sesiones el mismo día cuentan como un solo día. Las fechas futuras no suman.
@@ -39,6 +42,8 @@ futuras no suman.
 - Haz solo lo que se pide: no añadas funcionalidades por tu cuenta.
 - Cambios pequeños y enfocados; no reescribas lo que ya funciona.
 - Al terminar, resume qué has cambiado y cualquier decisión que deba revisar.
+- Contrasta siempre la documentación con el código antes de fiarte de ella (por ejemplo,
+los campos guardados son `fecha`, `tema` y `minutos`, no `date/topic/minutes`).
 
 ## Límites
 - ✅ Siempre: respetar las reglas de fechas y racha, mantener los textos en español.
@@ -46,11 +51,17 @@ futuras no suman.
 - ✅ Siempre: actualizar `README.md` si cambian las funcionalidades, el formato de datos o la forma de usar el proyecto.
 - ⚠️ Pregunta antes: crear archivos nuevos, cambiar el formato de los datos guardados.
 - 🚫 Nunca: añadir dependencias, frameworks o un paso de build.
+- 🚫 Nunca: usar `node --test` ni otro ejecutor de tests; las pruebas van solo en
+`tests.html` (el usuario lo ha descartado dos veces).
 
 ## Verificación
 - No hay tests automáticos. Después de cada cambio, verifica con el MCP de Chrome DevTools: abre `index.html`, prueba la funcionalidad, revisa la consola y comprueba la vista móvil.
 - Para empezar de cero: DevTools → Application → Local Storage → borrar la clave
 `diario-estudio-sesiones`.
+- Abre las páginas con el MCP en un contexto aislado (`isolatedContext`) para no tocar las
+sesiones reales del usuario.
+- Ignora el error de consola "Unsafe attempt to load URL file://...": lo provoca el MCP al
+abrir `file://`, no la app (no sale al abrir Chrome normal).
 
 ## Entorno
 - El Firefox del usuario es snap: al abrir `index.html` desde `/var/www` con doble clic no carga CSS ni JS (solo recibe el HTML vía portal). No es un bug del código; probar en Chrome.
