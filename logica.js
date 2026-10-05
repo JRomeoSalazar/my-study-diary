@@ -169,6 +169,29 @@ function fechaConParadaTab(mapa, fechaSeleccionada, hoy) {
   return posicionDeFecha(mapa, fechaSeleccionada) !== null ? fechaSeleccionada : hoy;
 }
 
+// Calcula a qué día se mueve el foco al pulsar una flecha desde una posición { semana, dia }.
+// Arriba/abajo cambian de día; izquierda/derecha cambian de semana (misma fila).
+// Si en esa dirección no hay día (borde del mapa, hueco) o la tecla no es una flecha,
+// devuelve la misma posición. No modifica nada de lo que recibe.
+function moverPosicion(mapa, posicion, tecla) {
+  let semana = posicion.semana;
+  let dia = posicion.dia;
+  if (tecla === "ArrowUp") {
+    dia = dia - 1;
+  } else if (tecla === "ArrowDown") {
+    dia = dia + 1;
+  } else if (tecla === "ArrowLeft") {
+    semana = semana - 1;
+  } else if (tecla === "ArrowRight") {
+    semana = semana + 1;
+  } else {
+    return posicion;
+  }
+  // Los huecos no existen en la lista, así que "no hay día" es "fuera de la lista"
+  const hayDia = semana >= 0 && semana < mapa.semanas.length && dia >= 0 && dia < mapa.semanas[semana].length;
+  return hayDia ? { semana: semana, dia: dia } : posicion;
+}
+
 // ---------- Nivel de color de cada día ----------
 
 // Devuelve el nivel de color (0 a 4) que corresponde a los minutos de un día

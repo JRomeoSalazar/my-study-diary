@@ -41,6 +41,8 @@ Siguiente: T11.
 `tests.html` 107 de 107 OK; `logica.js` sin cambios. Siguiente: T14.
 - T14 hecha: `posicionDeFecha`, `textoLineaDetalle` y `fechaConParadaTab` en `logica.js` con 12 pruebas;
 `tests.html` 119 de 119 OK. Las funciones reciben el mapa de `calcularMapa`. Siguiente: T15.
+- T15 hecha: `moverPosicion` en `logica.js` con 11 pruebas; `tests.html` 130 de 130 OK. Cuando no hay
+movimiento devuelve la misma posición recibida. Siguiente: T16 (empieza la interfaz).
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.

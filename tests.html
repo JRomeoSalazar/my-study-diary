@@ -723,6 +723,52 @@
       igual(JSON.stringify(MAPA_LUNES), antes);
     });
 
+    // ---------- moverPosicion ----------
+
+    // Mapa con hoy miércoles 2026-10-07: la última columna (11) tiene 3 días (lun, mar, mié)
+    // y sus posiciones 3–6 son huecos
+    const MAPA_MIERCOLES = calcularMapa([], "2026-10-07");
+
+    prueba("CA-9.2: las cuatro flechas en una celda central se mueven en su dirección", () => {
+      const centro = { semana: 5, dia: 3 };
+      igual(moverPosicion(MAPA_MIERCOLES, centro, "ArrowUp"), { semana: 5, dia: 2 });
+      igual(moverPosicion(MAPA_MIERCOLES, centro, "ArrowDown"), { semana: 5, dia: 4 });
+      igual(moverPosicion(MAPA_MIERCOLES, centro, "ArrowLeft"), { semana: 4, dia: 3 });
+      igual(moverPosicion(MAPA_MIERCOLES, centro, "ArrowRight"), { semana: 6, dia: 3 });
+    });
+    prueba("CA-9.2: arriba desde el lunes → misma posición", () =>
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 5, dia: 0 }, "ArrowUp"), { semana: 5, dia: 0 }));
+    prueba("CA-9.2: abajo desde el domingo → misma posición", () =>
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 5, dia: 6 }, "ArrowDown"), { semana: 5, dia: 6 }));
+    prueba("CA-9.2: izquierda en la columna 0 → misma posición", () =>
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 0, dia: 2 }, "ArrowLeft"), { semana: 0, dia: 2 }));
+    prueba("CA-9.2: derecha en la columna 11 → misma posición", () =>
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 11, dia: 1 }, "ArrowRight"), { semana: 11, dia: 1 }));
+    prueba("CA-9.2: abajo hacia un hueco → misma posición (hoy es miércoles, el jueves es un hueco)", () =>
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 11, dia: 2 }, "ArrowDown"), { semana: 11, dia: 2 }));
+    prueba("CA-9.2: derecha hacia un hueco → misma posición (el jueves de la columna 11 no existe)", () =>
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 10, dia: 3 }, "ArrowRight"), { semana: 10, dia: 3 }));
+    prueba("CA-9.2: desde la última columna se puede subir y moverse a la izquierda", () => {
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 11, dia: 2 }, "ArrowUp"), { semana: 11, dia: 1 });
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 11, dia: 2 }, "ArrowLeft"), { semana: 10, dia: 2 });
+    });
+    prueba("CA-9.2: con hoy domingo se puede bajar hasta el domingo de la última columna y no más", () => {
+      const mapaDomingo = calcularMapa([], "2026-10-04");
+      igual(moverPosicion(mapaDomingo, { semana: 11, dia: 5 }, "ArrowDown"), { semana: 11, dia: 6 });
+      igual(moverPosicion(mapaDomingo, { semana: 11, dia: 6 }, "ArrowDown"), { semana: 11, dia: 6 });
+    });
+    prueba("CA-9.2: una tecla que no es una flecha → misma posición", () => {
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 5, dia: 3 }, "Enter"), { semana: 5, dia: 3 });
+      igual(moverPosicion(MAPA_MIERCOLES, { semana: 5, dia: 3 }, "a"), { semana: 5, dia: 3 });
+    });
+    prueba("CA-9.2: la entrada no se modifica (ni la posición ni el mapa)", () => {
+      const posicion = { semana: 5, dia: 3 };
+      const mapaAntes = JSON.stringify(MAPA_MIERCOLES);
+      ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].forEach((tecla) => moverPosicion(MAPA_MIERCOLES, posicion, tecla));
+      igual(posicion, { semana: 5, dia: 3 });
+      igual(JSON.stringify(MAPA_MIERCOLES), mapaAntes);
+    });
+
     mostrarResultados();
   </script>
 </body>
