@@ -33,6 +33,8 @@ Siguiente: T10.
 - T10 hecha: `calcularEtiquetasMes` en `logica.js` con 7 pruebas; `tests.html` 74 de 74 OK. Las semanas
 son columnas = listas de días `{ fecha }` sin huecos (los huecos son días que no existen).
 Siguiente: T11.
+- T11 hecha: `calcularMapa(sesiones, hoy)` en `logica.js` → `{ semanas, etiquetasMes }` con 11 pruebas;
+`tests.html` 85 de 85 OK. Aún no se usa desde `app.js`/`index.html`. Siguiente: T12.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.

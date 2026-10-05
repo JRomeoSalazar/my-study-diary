@@ -109,7 +109,7 @@ Reglas que valen para todas las tareas:
   "jun"), `2027-01-01` (columna 11 "ene"), `2027-03-10` (columna 0 vacía, columna 1 "ene") y
   `2027-02-25` (columna 0 "dic").
 
-- [ ] **T11. `calcularMapa`** (~25 min)
+- [x] **T11. `calcularMapa`** (~25 min)
   Modelo `{ semanas, etiquetasMes }` según plan §3.1: 12 columnas × 7 filas, hueco = sin
   elemento para días posteriores a hoy, cada día con `{ fecha, minutos, nivel, texto }`.
   **Cubre:** RF-1 (CA-1.1, CA-1.2, CA-1.3, CA-1.5) · RF-2 (CA-2.2) · RF-3 · RF-4 (CA-4.1) ·

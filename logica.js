@@ -101,6 +101,40 @@ function calcularEtiquetasMes(semanas) {
   return etiquetas;
 }
 
+// ---------- Modelo completo del mapa ----------
+
+// Construye el mapa a partir de las sesiones guardadas y de la fecha de hoy.
+// Devuelve { semanas, etiquetasMes }:
+// - semanas: 12 columnas (de la más antigua a la actual), cada una con sus días de lunes a
+//   domingo como { fecha, minutos, nivel, texto }. Los días posteriores a hoy son huecos:
+//   no existen en la lista, así que la última columna puede tener menos de 7 elementos.
+// - etiquetasMes: 12 textos con el mes que se escribe sobre cada columna ("" si no hay).
+function calcularMapa(sesiones, hoy) {
+  const lista = comoLista(sesiones);
+  const primerDia = sumarDias(lunesDeLaSemana(hoy), -(SEMANAS_MAPA - 1) * 7);
+  const minutosPorDia = calcularMinutosPorDia(lista, primerDia, hoy);
+
+  const semanas = [];
+  for (let semana = 0; semana < SEMANAS_MAPA; semana++) {
+    const columna = [];
+    for (let dia = 0; dia < 7; dia++) {
+      const fecha = sumarDias(primerDia, semana * 7 + dia);
+      if (fecha <= hoy) {
+        const minutos = minutosPorDia[fecha] || 0;
+        columna.push({
+          fecha: fecha,
+          minutos: minutos,
+          nivel: calcularNivel(minutos),
+          texto: textoDetalle(fecha, minutos)
+        });
+      }
+    }
+    semanas.push(columna);
+  }
+
+  return { semanas: semanas, etiquetasMes: calcularEtiquetasMes(semanas) };
+}
+
 // ---------- Nivel de color de cada día ----------
 
 // Devuelve el nivel de color (0 a 4) que corresponde a los minutos de un día
