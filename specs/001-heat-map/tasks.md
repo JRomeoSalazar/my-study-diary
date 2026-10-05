@@ -85,7 +85,7 @@ Reglas que valen para todas las tareas:
   domingo anterior al primer lunes y otra posterior a "hasta" no aparecen; la lista de
   entrada es igual antes y después.
 
-- [ ] **T8. `calcularNivel`** (~10 min)
+- [x] **T8. `calcularNivel`** (~10 min)
   **Cubre:** RF-3 (CA-3.1).
   **Hecho cuando:** pasan las pruebas 0 → 0; 1 → 1; 29 → 1; 30 → 2; 59 → 2; 60 → 3; 119 → 3;
   120 → 4; 900 → 4; 1 000 000 → 4.

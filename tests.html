@@ -296,6 +296,27 @@
       igual(JSON.stringify(lista), antes);
     });
 
+    // ---------- calcularNivel ----------
+
+    prueba("CA-3.1: nivel 0 con 0 minutos", () => igual(calcularNivel(0), 0));
+    prueba("CA-3.1: nivel 1 de 1 a 29 minutos", () => {
+      igual(calcularNivel(1), 1);
+      igual(calcularNivel(29), 1);
+    });
+    prueba("CA-3.1: nivel 2 de 30 a 59 minutos", () => {
+      igual(calcularNivel(30), 2);
+      igual(calcularNivel(59), 2);
+    });
+    prueba("CA-3.1: nivel 3 de 60 a 119 minutos", () => {
+      igual(calcularNivel(60), 3);
+      igual(calcularNivel(119), 3);
+    });
+    prueba("CA-3.1: nivel 4 con 120 minutos o más (120, 900, 1 000 000)", () => {
+      igual(calcularNivel(120), 4);
+      igual(calcularNivel(900), 4);
+      igual(calcularNivel(1000000), 4);
+    });
+
     mostrarResultados();
   </script>
 </body>
