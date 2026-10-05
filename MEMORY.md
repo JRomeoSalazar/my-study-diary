@@ -27,6 +27,7 @@ Siguiente: T6.
 - T6 hecha: `sumarDias` y `lunesDeLaSemana` en `logica.js` con 9 pruebas; `tests.html` 49 de 49 OK
 (también con TZ=Europe/Madrid). Siguiente: T7.
 - T7 hecha: `calcularMinutosPorDia` en `logica.js` con 7 pruebas; `tests.html` 56 de 56 OK. Siguiente: T8.
+- T8 hecha: `calcularNivel` en `logica.js` con 5 pruebas; `tests.html` 61 de 61 OK. Siguiente: T9.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.

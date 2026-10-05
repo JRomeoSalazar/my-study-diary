@@ -61,6 +61,25 @@ function lunesDeLaSemana(texto) {
   return fechaATexto(inicioDeSemana(textoAFecha(texto)));
 }
 
+// ---------- Nivel de color de cada día ----------
+
+// Devuelve el nivel de color (0 a 4) que corresponde a los minutos de un día
+function calcularNivel(minutos) {
+  if (minutos >= 120) {
+    return 4;
+  }
+  if (minutos >= 60) {
+    return 3;
+  }
+  if (minutos >= 30) {
+    return 2;
+  }
+  if (minutos >= 1) {
+    return 1;
+  }
+  return 0;
+}
+
 // ---------- Sesiones guardadas ----------
 
 // Comprueba que un elemento guardado sirve para el mapa: es un objeto, tiene una
