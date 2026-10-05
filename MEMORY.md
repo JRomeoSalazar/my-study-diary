@@ -37,6 +37,8 @@ Siguiente: T11.
 `tests.html` 85 de 85 OK. Aún no se usa desde `app.js`/`index.html`. Siguiente: T12.
 - T12 hecha: solo pruebas (12) del modelo: periodo, huecos y fechas especiales con 10 "hoy" de referencia;
 `tests.html` 97 de 97 OK en 4 zonas horarias; `logica.js` sin cambios. Siguiente: T13.
+- T13 hecha: solo pruebas (10) del modelo: datos, niveles, texto y rendimiento (5 000 sesiones ≈ 5-7 ms);
+`tests.html` 107 de 107 OK; `logica.js` sin cambios. Siguiente: T14.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.

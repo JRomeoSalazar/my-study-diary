@@ -130,7 +130,7 @@ Reglas que valen para todas las tareas:
   de la última columna son huecos, con hoy domingo no hay ninguno, y una sesión de mañana no
   rellena su hueco; los periodos de `2026-10-04` y `2026-10-05` son distintos.
 
-- [ ] **T13. Pruebas del modelo: datos, niveles, texto y rendimiento** (~25 min)
+- [x] **T13. Pruebas del modelo: datos, niveles, texto y rendimiento** (~25 min)
   Solo pruebas en `tests.html`.
   **Cubre:** RF-2 (CA-2.1 a CA-2.3) · RF-3 (CA-3.1) · RF-5 (CA-5.8) · RF-8 (CA-8.1 a CA-8.4) ·
   RF-9 (CA-9.4) · RNF-8.
