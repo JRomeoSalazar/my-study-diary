@@ -141,7 +141,7 @@ Reglas que valen para todas las tareas:
   y 30 → nivel 2 en el modelo; una prueba informativa mide con `performance.now()` que
   `calcularMapa` con 5 000 sesiones tarda menos de 100 ms.
 
-- [ ] **T14. `posicionDeFecha`, `textoLineaDetalle` y `fechaConParadaTab`** (~25 min)
+- [x] **T14. `posicionDeFecha`, `textoLineaDetalle` y `fechaConParadaTab`** (~25 min)
   **Cubre:** RF-5 (CA-5.4, CA-5.5, CA-5.6, parte automática de CA-5.7 y CA-5.9) ·
   RF-9 (CA-9.1).
   **Hecho cuando:** pasan las pruebas: `posicionDeFecha` devuelve `{ semana, dia }` para una
