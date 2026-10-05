@@ -24,6 +24,8 @@ nuevas se añaden en el `<script>` de `tests.html`, antes de `mostrarResultados(
 31 de 31 OK. Siguiente: T5.
 - T5 hecha: `esSesionValida` y `comoLista` en `logica.js` con 9 pruebas; `tests.html` 40 de 40 OK.
 Siguiente: T6.
+- T6 hecha: `sumarDias` y `lunesDeLaSemana` en `logica.js` con 9 pruebas; `tests.html` 49 de 49 OK
+(también con TZ=Europe/Madrid). Siguiente: T7.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
