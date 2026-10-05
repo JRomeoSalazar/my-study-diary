@@ -408,6 +408,86 @@
       igual(JSON.stringify(semanas), antes);
     });
 
+    // ---------- calcularMapa ----------
+
+    // Todos los días del mapa, en orden (columna a columna, de lunes a domingo)
+    function diasDelMapa(mapa) {
+      return [].concat(...mapa.semanas);
+    }
+
+    prueba("CA-1.1/1.3: calcularMapa([], \"2026-10-04\") → 12 columnas de 7 días, de 2026-07-13 a 2026-10-04", () => {
+      const mapa = calcularMapa([], "2026-10-04");
+      const dias = diasDelMapa(mapa);
+      igual(mapa.semanas.length, 12);
+      igual(mapa.semanas.map((columna) => columna.length), [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]);
+      igual(dias[0].fecha, "2026-07-13");
+      igual(dias[dias.length - 1].fecha, "2026-10-04");
+    });
+    prueba("CA-8.1: sin sesiones, todos los días tienen nivel 0 y \"0 min\"", () => {
+      const dias = diasDelMapa(calcularMapa([], "2026-10-04"));
+      igual(dias.every((dia) => dia.minutos === 0 && dia.nivel === 0), true);
+      igual(dias.every((dia) => dia.texto.endsWith(": 0 min")), true);
+      igual(dias[0].texto, "lun 13 jul 2026: 0 min");
+    });
+    prueba("CA-8.3: null, {}, \"texto\" y 42 dan lo mismo que []", () => {
+      const esperado = JSON.stringify(calcularMapa([], "2026-10-04"));
+      [null, undefined, {}, "texto", 42].forEach((valor) => {
+        igual(JSON.stringify(calcularMapa(valor, "2026-10-04")), esperado);
+      });
+    });
+    prueba("CA-1.3: con hoy \"2026-10-05\" (lunes) el primer día es 2026-07-20", () => {
+      const dias = diasDelMapa(calcularMapa([], "2026-10-05"));
+      igual(dias[0].fecha, "2026-07-20");
+      igual(dias[dias.length - 1].fecha, "2026-10-05");
+    });
+    prueba("CA-4.1: con hoy lunes, la última columna tiene 1 día y 6 huecos (sin elementos)", () => {
+      const mapa = calcularMapa([], "2026-10-05");
+      igual(mapa.semanas[11].length, 1);
+      igual(mapa.semanas[10].length, 7);
+    });
+    prueba("CA-1.2: cada columna va de lunes (arriba) a domingo (abajo)", () => {
+      const mapa = calcularMapa([], "2026-10-04");
+      mapa.semanas.forEach((columna) => {
+        igual(columna.map((dia) => formatearFechaCorta(dia.fecha).slice(0, 3)),
+          ["lun", "mar", "mié", "jue", "vie", "sáb", "dom"]);
+      });
+    });
+    prueba("CA-2.1/3.1: minutos, nivel y texto de un día con sesiones (20 + 15 + 40 = 75 → nivel 3)", () => {
+      const sesiones = [
+        { id: 1, fecha: "2026-08-03", tema: "a", minutos: 20 },
+        { id: 2, fecha: "2026-08-03", tema: "b", minutos: 15 },
+        { id: 3, fecha: "2026-08-03", tema: "c", minutos: 40 }
+      ];
+      const dia = diasDelMapa(calcularMapa(sesiones, "2026-10-04")).find((d) => d.fecha === "2026-08-03");
+      igual(dia, { fecha: "2026-08-03", minutos: 75, nivel: 3, texto: "lun 3 ago 2026: 1 h 15 min" });
+    });
+    prueba("CA-2.3/8.2: ignora sesiones fuera del periodo, futuras y no válidas", () => {
+      const sesiones = [
+        { fecha: "2026-07-12", minutos: 30 },
+        { fecha: "2026-10-05", minutos: 30 },
+        { fecha: "2026-09-01", minutos: "45" },
+        { fecha: "2026-09-02", minutos: 10 }
+      ];
+      const dias = diasDelMapa(calcularMapa(sesiones, "2026-10-04"));
+      igual(dias.filter((dia) => dia.minutos > 0).map((dia) => dia.fecha), ["2026-09-02"]);
+    });
+    prueba("CA-4.1: una sesión de mañana no rellena su hueco", () => {
+      const mapa = calcularMapa([{ fecha: "2026-10-06", minutos: 60 }], "2026-10-05");
+      igual(mapa.semanas[11].length, 1);
+      igual(mapa.semanas[11][0].minutos, 0);
+    });
+    prueba("CA-2.2/8.4: calcularMapa no modifica la lista de sesiones", () => {
+      const sesiones = [{ id: 1, fecha: "2026-08-03", tema: "a", minutos: 20 }, null, { fecha: "mal", minutos: 5 }];
+      const antes = JSON.stringify(sesiones);
+      calcularMapa(sesiones, "2026-10-04");
+      igual(JSON.stringify(sesiones), antes);
+    });
+    prueba("CA-6.3: el modelo incluye las 12 etiquetas de mes", () => {
+      const mapa = calcularMapa([], "2026-10-04");
+      igual(mapa.etiquetasMes, calcularEtiquetasMes(mapa.semanas));
+      igual(mapa.etiquetasMes.length, 12);
+    });
+
     mostrarResultados();
   </script>
 </body>
