@@ -581,6 +581,92 @@
       igual(JSON.stringify(domingo) === JSON.stringify(lunes), false);
     });
 
+    // ---------- Modelo del mapa: datos, niveles, texto y rendimiento ----------
+
+    prueba("RNF-8/CA-5.8: llamar dos veces a calcularMapa con la misma entrada da lo mismo y la lista no cambia", () => {
+      const sesiones = [
+        { id: 1, fecha: "2026-08-03", tema: "a", minutos: 20 },
+        { id: 2, fecha: "2026-08-03", tema: "b", minutos: 15 },
+        { id: 3, fecha: "2026-09-15", tema: "c", minutos: 130 }
+      ];
+      const antes = JSON.stringify(sesiones);
+      const primero = calcularMapa(sesiones, "2026-10-04");
+      const segundo = calcularMapa(sesiones, "2026-10-04");
+      igual(JSON.stringify(primero), JSON.stringify(segundo));
+      igual(JSON.stringify(sesiones), antes);
+    });
+    prueba("CA-8.2: sesiones no válidas mezcladas con válidas → solo cuentan las válidas, sin errores", () => {
+      const sesiones = [
+        { fecha: "2026-09-02", minutos: 10 },
+        null,
+        42,
+        "texto",
+        [],
+        { fecha: "2026-09-02", minutos: "45" },
+        { fecha: "2026-09-02", minutos: 0 },
+        { fecha: "2026-09-02", minutos: -5 },
+        { fecha: "2026-09-02", minutos: 1.5 },
+        { fecha: "2026-02-30", minutos: 30 },
+        { fecha: "2026-9-3", minutos: 30 },
+        { date: "2026-09-04", minutes: 30 },
+        { fecha: "2026-09-02", minutos: 20 }
+      ];
+      const dias = diasDelMapa(calcularMapa(sesiones, "2026-10-04"));
+      igual(dias.filter((dia) => dia.minutos > 0).map((dia) => [dia.fecha, dia.minutos]), [["2026-09-02", 30]]);
+    });
+    prueba("CA-2.1: las sesiones repetidas cuentan todas (3 sesiones idénticas de 20 min → 60)", () => {
+      const sesion = { id: 1, fecha: "2026-09-02", tema: "a", minutos: 20 };
+      const dia = diasDelMapa(calcularMapa([sesion, sesion, sesion], "2026-10-04")).find((d) => d.fecha === "2026-09-02");
+      igual(dia.minutos, 60);
+    });
+    prueba("CA-9.4/5.1: el texto de cada día es igual a textoDetalle(fecha, minutos)", () => {
+      const sesiones = [{ fecha: "2026-08-03", minutos: 75 }, { fecha: "2026-10-04", minutos: 120 }];
+      diasDelMapa(calcularMapa(sesiones, "2026-10-04")).forEach((dia) => {
+        igual(dia.texto, textoDetalle(dia.fecha, dia.minutos));
+      });
+    });
+    prueba("CA-3.1: en el modelo, 29 min → nivel 1 y 30 min → nivel 2", () => {
+      const sesiones = [{ fecha: "2026-09-01", minutos: 29 }, { fecha: "2026-09-02", minutos: 30 }];
+      const dias = diasDelMapa(calcularMapa(sesiones, "2026-10-04"));
+      igual(dias.find((dia) => dia.fecha === "2026-09-01").nivel, 1);
+      igual(dias.find((dia) => dia.fecha === "2026-09-02").nivel, 2);
+    });
+    prueba("CA-3.1: en el modelo, 59 → 2, 60 → 3, 119 → 3 y 120 → 4", () => {
+      const sesiones = [
+        { fecha: "2026-09-01", minutos: 59 }, { fecha: "2026-09-02", minutos: 60 },
+        { fecha: "2026-09-03", minutos: 119 }, { fecha: "2026-09-04", minutos: 120 }
+      ];
+      const dias = diasDelMapa(calcularMapa(sesiones, "2026-10-04"));
+      igual(["2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04"].map((fecha) =>
+        dias.find((dia) => dia.fecha === fecha).nivel), [2, 3, 3, 4]);
+    });
+    prueba("CA-8.1: sin sesiones válidas en el periodo, todos los días están en nivel 0", () => {
+      const sesiones = [{ fecha: "2020-01-01", minutos: 60 }, { fecha: "2030-01-01", minutos: 60 }];
+      const dias = diasDelMapa(calcularMapa(sesiones, "2026-10-04"));
+      igual(dias.every((dia) => dia.nivel === 0 && dia.minutos === 0), true);
+    });
+    prueba("CA-8.3: lo guardado que no es una lista (null, {}, \"texto\", 42) se trata como sin sesiones", () => {
+      const vacio = JSON.stringify(calcularMapa([], "2026-10-04"));
+      [null, {}, "texto", 42].forEach((valor) => igual(JSON.stringify(calcularMapa(valor, "2026-10-04")), vacio));
+    });
+    prueba("CA-8.4: calcularMapa no modifica ninguna sesión, tampoco las no válidas", () => {
+      const sesiones = [{ id: 1, fecha: "2026-09-02", minutos: 10 }, { id: 2, fecha: "mal", minutos: "x" }, null];
+      const antes = JSON.stringify(sesiones);
+      calcularMapa(sesiones, "2026-10-04");
+      igual(JSON.stringify(sesiones), antes);
+    });
+    prueba("RNF-8: calcularMapa con 5 000 sesiones tarda menos de 100 ms (informativa)", () => {
+      const sesiones = [];
+      for (let i = 0; i < 5000; i++) {
+        sesiones.push({ id: i, fecha: sumarDias("2026-07-13", i % 84), tema: "tema " + i, minutos: 10 + (i % 90) });
+      }
+      const inicio = performance.now();
+      calcularMapa(sesiones, "2026-10-04");
+      const milisegundos = performance.now() - inicio;
+      console.info("RNF-8: calcularMapa con 5 000 sesiones tardó " + milisegundos.toFixed(1) + " ms");
+      igual(milisegundos < 100, true);
+    });
+
     mostrarResultados();
   </script>
 </body>
