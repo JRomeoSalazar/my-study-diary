@@ -488,6 +488,99 @@
       igual(mapa.etiquetasMes.length, 12);
     });
 
+    // ---------- Modelo del mapa: periodo, huecos y fechas especiales ----------
+
+    const HOYS_DE_REFERENCIA = [
+      "2026-10-04", "2026-10-05", "2026-09-30", "2026-06-01", "2027-01-01",
+      "2027-02-25", "2027-03-10", "2028-03-05", "2026-04-05", "2026-11-01"
+    ];
+
+    prueba("CA-1.5: para cada \"hoy\" de referencia, las fechas son todas distintas y cada una es el día siguiente de la anterior", () => {
+      HOYS_DE_REFERENCIA.forEach((hoy) => {
+        const fechas = diasDelMapa(calcularMapa([], hoy)).map((dia) => dia.fecha);
+        igual(new Set(fechas).size, fechas.length);
+        for (let i = 1; i < fechas.length; i++) {
+          igual([hoy, fechas[i]], [hoy, sumarDias(fechas[i - 1], 1)]);
+        }
+      });
+    });
+    prueba("CA-1.3: para cada \"hoy\" de referencia hay 77 días + los de la semana actual, empezando en el lunes 11 semanas antes y acabando en hoy", () => {
+      HOYS_DE_REFERENCIA.forEach((hoy) => {
+        const fechas = diasDelMapa(calcularMapa([], hoy)).map((dia) => dia.fecha);
+        const diasSemanaActual = (textoAFecha(hoy).getDay() + 6) % 7 + 1;
+        igual([hoy, fechas.length], [hoy, 77 + diasSemanaActual]);
+        igual([hoy, fechas[0]], [hoy, sumarDias(lunesDeLaSemana(hoy), -77)]);
+        igual([hoy, fechas[fechas.length - 1]], [hoy, hoy]);
+      });
+    });
+    prueba("CA-1.1: para cada \"hoy\" de referencia hay 12 columnas y solo la última puede estar incompleta", () => {
+      HOYS_DE_REFERENCIA.forEach((hoy) => {
+        const columnas = calcularMapa([], hoy).semanas;
+        igual([hoy, columnas.length], [hoy, 12]);
+        columnas.slice(0, 11).forEach((columna) => igual([hoy, columna.length], [hoy, 7]));
+      });
+    });
+    prueba("CA-1.2: el día de índice 0 de cada columna es lunes y el 6 (si existe) es domingo", () => {
+      HOYS_DE_REFERENCIA.forEach((hoy) => {
+        calcularMapa([], hoy).semanas.forEach((columna) => {
+          igual([hoy, formatearFechaCorta(columna[0].fecha).slice(0, 3)], [hoy, "lun"]);
+          if (columna.length === 7) {
+            igual([hoy, formatearFechaCorta(columna[6].fecha).slice(0, 3)], [hoy, "dom"]);
+          }
+        });
+      });
+    });
+    prueba("CA-4.1: con hoy lunes las posiciones 1–6 de la última columna son huecos", () => {
+      ["2026-10-05", "2026-06-01"].forEach((hoy) => {
+        const ultima = calcularMapa([], hoy).semanas[11];
+        igual([hoy, ultima.length], [hoy, 1]);
+        for (let posicion = 1; posicion <= 6; posicion++) {
+          igual([hoy, ultima[posicion]], [hoy, undefined]);
+        }
+      });
+    });
+    prueba("CA-4.1: con hoy domingo no hay ningún hueco (84 días)", () => {
+      ["2026-10-04", "2027-02-21"].forEach((hoy) => {
+        const mapa = calcularMapa([], hoy);
+        igual([hoy, mapa.semanas.every((columna) => columna.length === 7)], [hoy, true]);
+        igual([hoy, diasDelMapa(mapa).length], [hoy, 84]);
+      });
+    });
+    prueba("CA-4.1: una sesión de mañana no rellena su hueco (hoy lunes, sesión el martes)", () => {
+      const mapa = calcularMapa([{ fecha: "2026-10-06", minutos: 90 }], "2026-10-05");
+      igual(mapa.semanas[11].length, 1);
+      igual(diasDelMapa(mapa).filter((dia) => dia.minutos > 0), []);
+    });
+    prueba("CA-4.1: hoy miércoles (2026-09-30) el 1 de octubre es un hueco", () => {
+      const fechas = diasDelMapa(calcularMapa([], "2026-09-30")).map((dia) => dia.fecha);
+      igual(fechas.includes("2026-10-01"), false);
+      igual(fechas[fechas.length - 1], "2026-09-30");
+    });
+    prueba("CA-1.5: el periodo incluye el 29-02-2028 (hoy 2028-03-05)", () => {
+      const fechas = diasDelMapa(calcularMapa([], "2028-03-05")).map((dia) => dia.fecha);
+      igual(fechas.includes("2028-02-29"), true);
+      igual(fechas.indexOf("2028-03-01") - fechas.indexOf("2028-02-29"), 1);
+    });
+    prueba("CA-1.5: cambio de hora de marzo (hoy 2026-04-05) sin saltar ni repetir el 29-03-2026", () => {
+      const fechas = diasDelMapa(calcularMapa([], "2026-04-05")).map((dia) => dia.fecha);
+      igual(fechas.filter((fecha) => fecha === "2026-03-29").length, 1);
+      igual(fechas.slice(fechas.indexOf("2026-03-28"), fechas.indexOf("2026-03-28") + 3),
+        ["2026-03-28", "2026-03-29", "2026-03-30"]);
+    });
+    prueba("CA-1.5: cambio de hora de octubre (hoy 2026-11-01) sin saltar ni repetir el 25-10-2026", () => {
+      const fechas = diasDelMapa(calcularMapa([], "2026-11-01")).map((dia) => dia.fecha);
+      igual(fechas.filter((fecha) => fecha === "2026-10-25").length, 1);
+      igual(fechas.slice(fechas.indexOf("2026-10-24"), fechas.indexOf("2026-10-24") + 3),
+        ["2026-10-24", "2026-10-25", "2026-10-26"]);
+    });
+    prueba("CA-7.3: los periodos de hoy 2026-10-04 y hoy 2026-10-05 son distintos", () => {
+      const domingo = calcularMapa([], "2026-10-04");
+      const lunes = calcularMapa([], "2026-10-05");
+      igual(diasDelMapa(domingo)[0].fecha, "2026-07-13");
+      igual(diasDelMapa(lunes)[0].fecha, "2026-07-20");
+      igual(JSON.stringify(domingo) === JSON.stringify(lunes), false);
+    });
+
     mostrarResultados();
   </script>
 </body>

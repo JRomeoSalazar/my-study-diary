@@ -119,7 +119,7 @@ Reglas que valen para todas las tareas:
   `calcularMapa(null | {} | "texto" | 42, hoy)` da lo mismo que con `[]`; con hoy
   "2026-10-05" el primer día es "2026-07-20".
 
-- [ ] **T12. Pruebas del modelo: periodo, huecos y fechas especiales** (~25 min)
+- [x] **T12. Pruebas del modelo: periodo, huecos y fechas especiales** (~25 min)
   Solo pruebas en `tests.html`, sin cambiar `logica.js` salvo que aparezca un fallo.
   **Cubre:** RF-1 (CA-1.1 a CA-1.5) · RF-4 (CA-4.1) · RF-7 (CA-7.3).
   **Hecho cuando:** pasan las pruebas: para cada "hoy" de referencia (`2026-10-04`,
