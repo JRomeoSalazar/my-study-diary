@@ -34,6 +34,20 @@ function textoAFecha(texto) {
   return new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
 }
 
+// Comprueba que un valor es un texto "AAAA-MM-DD" con un día que existe en el calendario.
+// "2026-02-30" no vale: new Date lo convierte en el 2 de marzo y los números no coinciden.
+function esFechaValida(valor) {
+  if (typeof valor !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+    return false;
+  }
+  const partes = valor.split("-");
+  const anio = Number(partes[0]);
+  const mes = Number(partes[1]);
+  const dia = Number(partes[2]);
+  const fecha = new Date(anio, mes - 1, dia);
+  return fecha.getFullYear() === anio && fecha.getMonth() === mes - 1 && fecha.getDate() === dia;
+}
+
 // Devuelve el día anterior a una fecha (objeto Date)
 function diaAnterior(fecha) {
   return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() - 1);

@@ -143,6 +143,26 @@
     prueba("CA-5.4: TEXTO_DETALLE_INICIAL", () =>
       igual(TEXTO_DETALLE_INICIAL, "Pasa el ratón o toca un día para ver sus minutos."));
 
+    // ---------- esFechaValida ----------
+
+    prueba("esFechaValida: \"2026-08-03\" → true", () => igual(esFechaValida("2026-08-03"), true));
+    prueba("esFechaValida: formatos incorrectos → false (\"2026-8-3\", con hora, número, vacío)", () => {
+      igual(esFechaValida("2026-8-3"), false);
+      igual(esFechaValida("2026-08-03T10:00"), false);
+      igual(esFechaValida(20260803), false);
+      igual(esFechaValida(""), false);
+    });
+    prueba("esFechaValida: undefined y null → false", () => {
+      igual(esFechaValida(undefined), false);
+      igual(esFechaValida(null), false);
+    });
+    prueba("esFechaValida: día inexistente (\"2026-02-30\") → false", () =>
+      igual(esFechaValida("2026-02-30"), false));
+    prueba("esFechaValida: bisiesto (\"2028-02-29\" → true, \"2027-02-29\" → false)", () => {
+      igual(esFechaValida("2028-02-29"), true);
+      igual(esFechaValida("2027-02-29"), false);
+    });
+
     mostrarResultados();
   </script>
 </body>
