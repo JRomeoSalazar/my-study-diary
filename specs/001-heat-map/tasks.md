@@ -150,7 +150,7 @@ Reglas que valen para todas las tareas:
   apuntada, fecha fuera del mapa → se ignora; `fechaConParadaTab` sin selección → hoy, con
   selección en el mapa → la selección, con selección fuera del mapa → hoy.
 
-- [ ] **T15. `moverPosicion`** (~20 min)
+- [x] **T15. `moverPosicion`** (~20 min)
   **Cubre:** RF-9 (CA-9.2).
   **Hecho cuando:** pasan las pruebas: las cuatro flechas en una celda central se mueven en
   su dirección (arriba/abajo = día, izquierda/derecha = semana); arriba desde lunes, abajo
