@@ -354,6 +354,60 @@
       igual(textoDetalle("2026-08-03", 120), "lun 3 ago 2026: 2 h");
     });
 
+    // ---------- calcularEtiquetasMes ----------
+
+    // Construye a mano las 12 columnas del mapa hasta "hoy" (como hará calcularMapa):
+    // cada columna es una lista de días { fecha }; los huecos (días futuros) no existen.
+    function semanasHasta(hoy) {
+      const primerDia = sumarDias(lunesDeLaSemana(hoy), -(SEMANAS_MAPA - 1) * 7);
+      const semanas = [];
+      for (let s = 0; s < SEMANAS_MAPA; s++) {
+        const columna = [];
+        for (let d = 0; d < 7; d++) {
+          const fecha = sumarDias(primerDia, s * 7 + d);
+          if (fecha <= hoy) {
+            columna.push({ fecha: fecha });
+          }
+        }
+        semanas.push(columna);
+      }
+      return semanas;
+    }
+    // Crea la lista esperada de 12 textos: vacía salvo las columnas indicadas
+    function etiquetasEsperadas(columnasConMes) {
+      const esperadas = [];
+      for (let s = 0; s < SEMANAS_MAPA; s++) {
+        esperadas.push(columnasConMes[s] || "");
+      }
+      return esperadas;
+    }
+
+    prueba("CA-6.3/6.4: hoy 2026-10-04 → columnas 0 \"jul\", 2 \"ago\", 7 \"sep\", 11 \"oct\"; el resto vacías", () =>
+      igual(calcularEtiquetasMes(semanasHasta("2026-10-04")),
+        etiquetasEsperadas({ 0: "jul", 2: "ago", 7: "sep", 11: "oct" })));
+    prueba("CA-6.3: hoy 2026-09-30 → la columna 11 no lleva \"oct\" (el día 1 es un hueco)", () => {
+      const etiquetas = calcularEtiquetasMes(semanasHasta("2026-09-30"));
+      igual(etiquetas[11], "");
+      igual(etiquetas, etiquetasEsperadas({ 0: "jul", 2: "ago", 7: "sep" }));
+    });
+    prueba("CA-6.3: hoy 2026-06-01 → la columna 11 lleva \"jun\"", () =>
+      igual(calcularEtiquetasMes(semanasHasta("2026-06-01"))[11], "jun"));
+    prueba("CA-6.3: hoy 2027-01-01 → la columna 11 lleva \"ene\" (sin año)", () =>
+      igual(calcularEtiquetasMes(semanasHasta("2027-01-01"))[11], "ene"));
+    prueba("CA-6.4: hoy 2027-03-10 → columna 0 vacía y columna 1 \"ene\"", () => {
+      const etiquetas = calcularEtiquetasMes(semanasHasta("2027-03-10"));
+      igual(etiquetas[0], "");
+      igual(etiquetas[1], "ene");
+    });
+    prueba("CA-6.4: hoy 2027-02-25 → la columna 0 lleva \"dic\" (mes de su lunes)", () =>
+      igual(calcularEtiquetasMes(semanasHasta("2027-02-25"))[0], "dic"));
+    prueba("CA-6.3: siempre devuelve 12 textos y no cambia las semanas recibidas", () => {
+      const semanas = semanasHasta("2026-10-04");
+      const antes = JSON.stringify(semanas);
+      igual(calcularEtiquetasMes(semanas).length, 12);
+      igual(JSON.stringify(semanas), antes);
+    });
+
     mostrarResultados();
   </script>
 </body>

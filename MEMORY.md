@@ -30,6 +30,9 @@ Siguiente: T6.
 - T8 hecha: `calcularNivel` en `logica.js` con 5 pruebas; `tests.html` 61 de 61 OK. Siguiente: T9.
 - T9 hecha: `formatearFechaCorta` y `textoDetalle` en `logica.js` con 6 pruebas; `tests.html` 67 de 67 OK.
 Siguiente: T10.
+- T10 hecha: `calcularEtiquetasMes` en `logica.js` con 7 pruebas; `tests.html` 74 de 74 OK. Las semanas
+son columnas = listas de días `{ fecha }` sin huecos (los huecos son días que no existen).
+Siguiente: T11.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
