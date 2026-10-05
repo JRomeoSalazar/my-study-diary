@@ -90,7 +90,7 @@ Reglas que valen para todas las tareas:
   **Hecho cuando:** pasan las pruebas 0 → 0; 1 → 1; 29 → 1; 30 → 2; 59 → 2; 60 → 3; 119 → 3;
   120 → 4; 900 → 4; 1 000 000 → 4.
 
-- [ ] **T9. `formatearFechaCorta` y `textoDetalle`** (~20 min)
+- [x] **T9. `formatearFechaCorta` y `textoDetalle`** (~20 min)
   Fecha corta "lun 3 ago 2026" con `DIAS_CORTOS` y `MESES_CORTOS` (sin `toLocaleDateString`);
   `textoDetalle(fecha, minutos)` = fecha corta + ": " + `formatearMinutos`.
   **Cubre:** RF-5 (CA-5.1, CA-5.2) · RF-9 (CA-9.4).

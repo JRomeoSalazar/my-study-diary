@@ -61,6 +61,23 @@ function lunesDeLaSemana(texto) {
   return fechaATexto(inicioDeSemana(textoAFecha(texto)));
 }
 
+// ---------- Textos del detalle de un día ----------
+
+// Escribe una fecha "AAAA-MM-DD" como "lun 3 ago 2026" (sin toLocaleDateString,
+// que cambia según el navegador). getDay() da 0 para el domingo, y DIAS_CORTOS
+// empieza en lunes, por eso se desplaza con (getDay() + 6) % 7.
+function formatearFechaCorta(texto) {
+  const fecha = textoAFecha(texto);
+  const dia = DIAS_CORTOS[(fecha.getDay() + 6) % 7];
+  const mes = MESES_CORTOS[fecha.getMonth()];
+  return dia + " " + fecha.getDate() + " " + mes + " " + fecha.getFullYear();
+}
+
+// Texto del detalle de un día, por ejemplo "lun 3 ago 2026: 1 h 15 min"
+function textoDetalle(fecha, minutos) {
+  return formatearFechaCorta(fecha) + ": " + formatearMinutos(minutos);
+}
+
 // ---------- Nivel de color de cada día ----------
 
 // Devuelve el nivel de color (0 a 4) que corresponde a los minutos de un día

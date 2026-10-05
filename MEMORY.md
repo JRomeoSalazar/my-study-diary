@@ -28,6 +28,8 @@ Siguiente: T6.
 (también con TZ=Europe/Madrid). Siguiente: T7.
 - T7 hecha: `calcularMinutosPorDia` en `logica.js` con 7 pruebas; `tests.html` 56 de 56 OK. Siguiente: T8.
 - T8 hecha: `calcularNivel` en `logica.js` con 5 pruebas; `tests.html` 61 de 61 OK. Siguiente: T9.
+- T9 hecha: `formatearFechaCorta` y `textoDetalle` en `logica.js` con 6 pruebas; `tests.html` 67 de 67 OK.
+Siguiente: T10.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
