@@ -39,6 +39,8 @@ Siguiente: T11.
 `tests.html` 97 de 97 OK en 4 zonas horarias; `logica.js` sin cambios. Siguiente: T13.
 - T13 hecha: solo pruebas (10) del modelo: datos, niveles, texto y rendimiento (5 000 sesiones ≈ 5-7 ms);
 `tests.html` 107 de 107 OK; `logica.js` sin cambios. Siguiente: T14.
+- T14 hecha: `posicionDeFecha`, `textoLineaDetalle` y `fechaConParadaTab` en `logica.js` con 12 pruebas;
+`tests.html` 119 de 119 OK. Las funciones reciben el mapa de `calcularMapa`. Siguiente: T15.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.

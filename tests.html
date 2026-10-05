@@ -667,6 +667,62 @@
       igual(milisegundos < 100, true);
     });
 
+    // ---------- posicionDeFecha, textoLineaDetalle y fechaConParadaTab ----------
+
+    // Mapa de referencia: hoy lunes 2026-10-05 (la última columna solo tiene 1 día; el resto son huecos)
+    const MAPA_LUNES = calcularMapa([{ fecha: "2026-09-02", minutos: 75 }], "2026-10-05");
+
+    prueba("RF-9: posicionDeFecha devuelve { semana, dia } para fechas del mapa (primera, última y una intermedia)", () => {
+      igual(posicionDeFecha(MAPA_LUNES, "2026-07-20"), { semana: 0, dia: 0 });
+      igual(posicionDeFecha(MAPA_LUNES, "2026-10-05"), { semana: 11, dia: 0 });
+      igual(posicionDeFecha(MAPA_LUNES, "2026-09-02"), { semana: 6, dia: 2 });
+      igual(posicionDeFecha(MAPA_LUNES, "2026-10-04"), { semana: 10, dia: 6 });
+    });
+    prueba("RF-9: posicionDeFecha devuelve null para una fecha fuera del mapa o un hueco", () => {
+      igual(posicionDeFecha(MAPA_LUNES, "2026-07-19"), null);   // anterior al primer lunes
+      igual(posicionDeFecha(MAPA_LUNES, "2026-10-06"), null);   // hueco: mañana
+      igual(posicionDeFecha(MAPA_LUNES, "2030-01-01"), null);
+      igual(posicionDeFecha(MAPA_LUNES, null), null);
+      igual(posicionDeFecha(MAPA_LUNES, undefined), null);
+    });
+    prueba("CA-5.4/5.6: textoLineaDetalle sin apuntada ni seleccionada → TEXTO_DETALLE_INICIAL", () => {
+      igual(textoLineaDetalle(MAPA_LUNES, null, null), TEXTO_DETALLE_INICIAL);
+      igual(textoLineaDetalle(MAPA_LUNES, undefined, undefined), TEXTO_DETALLE_INICIAL);
+    });
+    prueba("CA-5.6/5.7: textoLineaDetalle con solo seleccionada → su texto", () =>
+      igual(textoLineaDetalle(MAPA_LUNES, null, "2026-09-02"), "mié 2 sep 2026: 1 h 15 min"));
+    prueba("CA-5.5: textoLineaDetalle con solo apuntada → su texto", () =>
+      igual(textoLineaDetalle(MAPA_LUNES, "2026-10-05", null), "lun 5 oct 2026: 0 min"));
+    prueba("CA-5.5: textoLineaDetalle con ambas → el de la apuntada", () =>
+      igual(textoLineaDetalle(MAPA_LUNES, "2026-10-05", "2026-09-02"), "lun 5 oct 2026: 0 min"));
+    prueba("CA-5.4: textoLineaDetalle ignora una fecha fuera del mapa (apuntada, seleccionada o ambas)", () => {
+      igual(textoLineaDetalle(MAPA_LUNES, "2026-10-06", null), TEXTO_DETALLE_INICIAL);
+      igual(textoLineaDetalle(MAPA_LUNES, null, "2020-01-01"), TEXTO_DETALLE_INICIAL);
+      igual(textoLineaDetalle(MAPA_LUNES, "2026-10-06", "2026-09-02"), "mié 2 sep 2026: 1 h 15 min");
+      igual(textoLineaDetalle(MAPA_LUNES, "2026-10-06", "2020-01-01"), TEXTO_DETALLE_INICIAL);
+    });
+    prueba("CA-5.9: sin selección tras volver a dibujar, la línea de detalle vuelve a CA-5.4", () => {
+      const mapaNuevo = calcularMapa([], "2026-10-05");
+      igual(textoLineaDetalle(mapaNuevo, null, null), TEXTO_DETALLE_INICIAL);
+    });
+    prueba("CA-9.1: fechaConParadaTab sin selección → hoy", () => {
+      igual(fechaConParadaTab(MAPA_LUNES, null, "2026-10-05"), "2026-10-05");
+      igual(fechaConParadaTab(MAPA_LUNES, undefined, "2026-10-05"), "2026-10-05");
+    });
+    prueba("CA-9.1: fechaConParadaTab con selección en el mapa → la selección", () =>
+      igual(fechaConParadaTab(MAPA_LUNES, "2026-09-02", "2026-10-05"), "2026-09-02"));
+    prueba("CA-9.1: fechaConParadaTab con selección fuera del mapa → hoy", () => {
+      igual(fechaConParadaTab(MAPA_LUNES, "2020-01-01", "2026-10-05"), "2026-10-05");
+      igual(fechaConParadaTab(MAPA_LUNES, "2026-10-06", "2026-10-05"), "2026-10-05");
+    });
+    prueba("CA-5.8/9.1: estas funciones no modifican el mapa", () => {
+      const antes = JSON.stringify(MAPA_LUNES);
+      posicionDeFecha(MAPA_LUNES, "2026-09-02");
+      textoLineaDetalle(MAPA_LUNES, "2026-10-05", "2026-09-02");
+      fechaConParadaTab(MAPA_LUNES, "2026-09-02", "2026-10-05");
+      igual(JSON.stringify(MAPA_LUNES), antes);
+    });
+
     mostrarResultados();
   </script>
 </body>

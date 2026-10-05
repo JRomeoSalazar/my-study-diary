@@ -135,6 +135,40 @@ function calcularMapa(sesiones, hoy) {
   return { semanas: semanas, etiquetasMes: calcularEtiquetasMes(semanas) };
 }
 
+// ---------- Selección y teclado en el mapa ----------
+
+// Busca una fecha en el mapa y devuelve su posición { semana, dia } (columna y fila),
+// o null si no está (fuera del periodo, hueco o valor que no es una fecha)
+function posicionDeFecha(mapa, fecha) {
+  for (let semana = 0; semana < mapa.semanas.length; semana++) {
+    for (let dia = 0; dia < mapa.semanas[semana].length; dia++) {
+      if (mapa.semanas[semana][dia].fecha === fecha) {
+        return { semana: semana, dia: dia };
+      }
+    }
+  }
+  return null;
+}
+
+// Texto que se ve en la línea de detalle. El día apuntado con el ratón gana al
+// seleccionado; una fecha que no esté en el mapa se ignora.
+function textoLineaDetalle(mapa, fechaApuntada, fechaSeleccionada) {
+  const candidatas = [fechaApuntada, fechaSeleccionada];
+  for (let i = 0; i < candidatas.length; i++) {
+    const posicion = posicionDeFecha(mapa, candidatas[i]);
+    if (posicion !== null) {
+      return mapa.semanas[posicion.semana][posicion.dia].texto;
+    }
+  }
+  return TEXTO_DETALLE_INICIAL;
+}
+
+// Fecha del día que recibe el foco al entrar en el mapa con Tab:
+// la seleccionada si está en el mapa; si no, hoy
+function fechaConParadaTab(mapa, fechaSeleccionada, hoy) {
+  return posicionDeFecha(mapa, fechaSeleccionada) !== null ? fechaSeleccionada : hoy;
+}
+
 // ---------- Nivel de color de cada día ----------
 
 // Devuelve el nivel de color (0 a 4) que corresponde a los minutos de un día
