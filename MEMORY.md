@@ -43,6 +43,8 @@ Siguiente: T11.
 `tests.html` 119 de 119 OK. Las funciones reciben el mapa de `calcularMapa`. Siguiente: T15.
 - T15 hecha: `moverPosicion` en `logica.js` con 11 pruebas; `tests.html` 130 de 130 OK. Cuando no hay
 movimiento devuelve la misma posición recibida. Siguiente: T16 (empieza la interfaz).
+- T16 hecha: `index.html` tiene la sección "Últimas 12 semanas" (`#mapa-titulo`, `#mapa`, `#mapa-detalle`,
+`#mapa-leyenda`) entre la racha y "Registrar sesión", todavía vacía (solo el título se ve). Siguiente: T17.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
