@@ -35,6 +35,8 @@ son columnas = listas de días `{ fecha }` sin huecos (los huecos son días que 
 Siguiente: T11.
 - T11 hecha: `calcularMapa(sesiones, hoy)` en `logica.js` → `{ semanas, etiquetasMes }` con 11 pruebas;
 `tests.html` 85 de 85 OK. Aún no se usa desde `app.js`/`index.html`. Siguiente: T12.
+- T12 hecha: solo pruebas (12) del modelo: periodo, huecos y fechas especiales con 10 "hoy" de referencia;
+`tests.html` 97 de 97 OK en 4 zonas horarias; `logica.js` sin cambios. Siguiente: T13.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
