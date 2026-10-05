@@ -159,7 +159,7 @@ Reglas que valen para todas las tareas:
 
 ## Fase 3 — Interfaz
 
-- [ ] **T16. Sección en `index.html`** (~15 min)
+- [x] **T16. Sección en `index.html`** (~15 min)
   Nueva `<section class="seccion">` justo después de la sección de la racha con
   `<h2 id="mapa-titulo">Últimas 12 semanas</h2>`, `<div id="mapa" class="mapa" role="grid"
   aria-labelledby="mapa-titulo">`, `<p id="mapa-detalle" class="mapa-detalle">` y
