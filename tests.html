@@ -131,6 +131,18 @@
     prueba("inicioDeSemana: cruza año (viernes \"2027-01-01\" → \"2026-12-28\")", () =>
       igual(fechaATexto(inicioDeSemana(textoAFecha("2027-01-01"))), "2026-12-28"));
 
+    // ---------- Constantes de texto ----------
+
+    prueba("CA-6.2: DIAS_CORTOS empieza en lunes (lun, mar, mié, jue, vie, sáb, dom)", () =>
+      igual(DIAS_CORTOS, ["lun", "mar", "mié", "jue", "vie", "sáb", "dom"]));
+    prueba("CA-6.6/6.7: TRAMOS_LEYENDA tiene los 5 tramos de la leyenda", () =>
+      igual(TRAMOS_LEYENDA, ["0 min", "1–29 min", "30–59 min", "60–119 min", "120 min o más"]));
+    prueba("CA-6.8/5.2: MESES_CORTOS tiene los 12 meses en español", () =>
+      igual(MESES_CORTOS, ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]));
+    prueba("CA-6.8: SEMANAS_MAPA es 12", () => igual(SEMANAS_MAPA, 12));
+    prueba("CA-5.4: TEXTO_DETALLE_INICIAL", () =>
+      igual(TEXTO_DETALLE_INICIAL, "Pasa el ratón o toca un día para ver sus minutos."));
+
     mostrarResultados();
   </script>
 </body>

@@ -42,7 +42,7 @@ Reglas que valen para todas las tareas:
 
 ## Fase 2 — Lógica pura (cada función con sus pruebas)
 
-- [ ] **T3. Constantes de texto** (~15 min)
+- [x] **T3. Constantes de texto** (~15 min)
   Añadir a `logica.js`: `SEMANAS_MAPA`, `DIAS_CORTOS`, `MESES_CORTOS`, `TRAMOS_LEYENDA` y
   `TEXTO_DETALLE_INICIAL`, con los valores exactos de plan §2.2. Pruebas de igualdad con
   los textos de la spec.

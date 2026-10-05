@@ -18,6 +18,8 @@ racha / Esta semana / Este mes (JS solo escribe la cifra).
 - T2 hecha: `tests.html` con `prueba(nombre, función)` e `igual(obtenido, esperado)`, resumen
 "X de Y pruebas superadas" y 21 pruebas de las 5 funciones movidas (todas OK). Las pruebas
 nuevas se añaden en el `<script>` de `tests.html`, antes de `mostrarResultados()`.
+- T3 hecha: `logica.js` tiene `SEMANAS_MAPA`, `DIAS_CORTOS`, `MESES_CORTOS`, `TRAMOS_LEYENDA` y
+`TEXTO_DETALLE_INICIAL` (valores de plan §2.2), con 5 pruebas en `tests.html` (26 de 26 OK). Siguiente: T4.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
