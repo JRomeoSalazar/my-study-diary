@@ -98,7 +98,7 @@ Reglas que valen para todas las tareas:
   1 h 15 min"; un ejemplo por cada día de la semana (incluido "mié") y por cada mes
   (incluido "sep"); "2026-01-05" → "lun 5 ene 2026" (sin cero inicial); 0 min → "…: 0 min".
 
-- [ ] **T10. `calcularEtiquetasMes`** (~25 min)
+- [x] **T10. `calcularEtiquetasMes`** (~25 min)
   Recibe las semanas del mapa (columnas con días o huecos) y devuelve 12 textos. Etiqueta de
   CA-6.3 (día 1 entre los días no hueco) y regla de CA-6.4 para la primera columna. Las
   pruebas construyen las semanas a mano con una función auxiliar de `tests.html`, ya que

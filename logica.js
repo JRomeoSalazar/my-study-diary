@@ -78,6 +78,29 @@ function textoDetalle(fecha, minutos) {
   return formatearFechaCorta(fecha) + ": " + formatearMinutos(minutos);
 }
 
+// ---------- Etiquetas de mes del mapa ----------
+
+// Recibe las columnas del mapa (listas de días { fecha }; los huecos no existen) y
+// devuelve 12 textos: la abreviatura del mes sobre la columna donde cae un día 1, o "".
+function calcularEtiquetasMes(semanas) {
+  const etiquetas = [];
+  semanas.forEach((columna) => {
+    let etiqueta = "";
+    columna.forEach((dia) => {
+      // Los dos últimos caracteres de "AAAA-MM-DD" son el día del mes
+      if (dia.fecha.slice(8) === "01") {
+        etiqueta = MESES_CORTOS[Number(dia.fecha.slice(5, 7)) - 1];
+      }
+    });
+    etiquetas.push(etiqueta);
+  });
+  // Si ni la primera ni la segunda columna tienen etiqueta, la primera lleva el mes de su lunes
+  if (etiquetas[0] === "" && etiquetas[1] === "") {
+    etiquetas[0] = MESES_CORTOS[Number(semanas[0][0].fecha.slice(5, 7)) - 1];
+  }
+  return etiquetas;
+}
+
 // ---------- Nivel de color de cada día ----------
 
 // Devuelve el nivel de color (0 a 4) que corresponde a los minutos de un día
