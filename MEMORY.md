@@ -20,6 +20,8 @@ racha / Esta semana / Este mes (JS solo escribe la cifra).
 nuevas se añaden en el `<script>` de `tests.html`, antes de `mostrarResultados()`.
 - T3 hecha: `logica.js` tiene `SEMANAS_MAPA`, `DIAS_CORTOS`, `MESES_CORTOS`, `TRAMOS_LEYENDA` y
 `TEXTO_DETALLE_INICIAL` (valores de plan §2.2), con 5 pruebas en `tests.html` (26 de 26 OK). Siguiente: T4.
+- T4 hecha: `esFechaValida` en `logica.js` (formato exacto + día real) con 5 pruebas; `tests.html`
+31 de 31 OK. Siguiente: T5.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.

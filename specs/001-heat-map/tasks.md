@@ -50,7 +50,7 @@ Reglas que valen para todas las tareas:
   **Hecho cuando:** `tests.html` incluye pruebas "CA-6.2", "CA-6.6/6.7", "CA-6.8" y "CA-5.4"
   que comparan cada constante con el texto de la spec, y todas pasan.
 
-- [ ] **T4. `esFechaValida`** (~20 min)
+- [x] **T4. `esFechaValida`** (~20 min)
   Texto con formato exacto `AAAA-MM-DD` y día existente (se construye con
   `new Date(año, mes - 1, día)` y se comparan año, mes y día).
   **Cubre:** RF-2 (definición, punto 2) · RF-8 (CA-8.2).
