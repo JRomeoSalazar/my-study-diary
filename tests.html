@@ -317,6 +317,43 @@
       igual(calcularNivel(1000000), 4);
     });
 
+    // ---------- formatearFechaCorta y textoDetalle ----------
+
+    prueba("CA-5.2: los 7 días de la semana (lun, mar, mié, jue, vie, sáb, dom)", () => {
+        igual(formatearFechaCorta("2026-10-05"), "lun 5 oct 2026");
+        igual(formatearFechaCorta("2026-10-06"), "mar 6 oct 2026");
+        igual(formatearFechaCorta("2026-10-07"), "mié 7 oct 2026");
+        igual(formatearFechaCorta("2026-10-08"), "jue 8 oct 2026");
+        igual(formatearFechaCorta("2026-10-09"), "vie 9 oct 2026");
+        igual(formatearFechaCorta("2026-10-10"), "sáb 10 oct 2026");
+        igual(formatearFechaCorta("2026-10-11"), "dom 11 oct 2026");
+    });
+    prueba("CA-5.2: los 12 meses (ene … sep … dic), sin puntos ni comas", () => {
+        igual(formatearFechaCorta("2026-01-15"), "jue 15 ene 2026");
+        igual(formatearFechaCorta("2026-02-15"), "dom 15 feb 2026");
+        igual(formatearFechaCorta("2026-03-15"), "dom 15 mar 2026");
+        igual(formatearFechaCorta("2026-04-15"), "mié 15 abr 2026");
+        igual(formatearFechaCorta("2026-05-15"), "vie 15 may 2026");
+        igual(formatearFechaCorta("2026-06-15"), "lun 15 jun 2026");
+        igual(formatearFechaCorta("2026-07-15"), "mié 15 jul 2026");
+        igual(formatearFechaCorta("2026-08-15"), "sáb 15 ago 2026");
+        igual(formatearFechaCorta("2026-09-15"), "mar 15 sep 2026");
+        igual(formatearFechaCorta("2026-10-15"), "jue 15 oct 2026");
+        igual(formatearFechaCorta("2026-11-15"), "dom 15 nov 2026");
+        igual(formatearFechaCorta("2026-12-15"), "mar 15 dic 2026");
+    });
+    prueba("CA-5.2: día sin cero inicial (\"2026-01-05\" → \"lun 5 ene 2026\")", () =>
+      igual(formatearFechaCorta("2026-01-05"), "lun 5 ene 2026"));
+    prueba("CA-5.2: año con 4 cifras y día 29-02-2028 (\"mar 29 feb 2028\")", () =>
+      igual(formatearFechaCorta("2028-02-29"), "mar 29 feb 2028"));
+    prueba("CA-5.1: textoDetalle(\"2026-08-03\", 75) → \"lun 3 ago 2026: 1 h 15 min\"", () =>
+      igual(textoDetalle("2026-08-03", 75), "lun 3 ago 2026: 1 h 15 min"));
+    prueba("CA-5.1: textoDetalle con 0, 45 y 120 minutos", () => {
+      igual(textoDetalle("2026-08-03", 0), "lun 3 ago 2026: 0 min");
+      igual(textoDetalle("2026-08-03", 45), "lun 3 ago 2026: 45 min");
+      igual(textoDetalle("2026-08-03", 120), "lun 3 ago 2026: 2 h");
+    });
+
     mostrarResultados();
   </script>
 </body>
