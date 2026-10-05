@@ -48,6 +48,19 @@ function esFechaValida(valor) {
   return fecha.getFullYear() === anio && fecha.getMonth() === mes - 1 && fecha.getDate() === dia;
 }
 
+// Suma n días a un texto "AAAA-MM-DD" (n puede ser negativo) y devuelve otro texto.
+// Se suma al día del mes, no con milisegundos: el día del cambio de hora no dura 24 h.
+function sumarDias(texto, n) {
+  const partes = texto.split("-");
+  const fecha = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]) + n);
+  return fechaATexto(fecha);
+}
+
+// Devuelve el lunes de la semana de un texto "AAAA-MM-DD", también como texto
+function lunesDeLaSemana(texto) {
+  return fechaATexto(inicioDeSemana(textoAFecha(texto)));
+}
+
 // ---------- Sesiones guardadas ----------
 
 // Comprueba que un elemento guardado sirve para el mapa: es un objeto, tiene una

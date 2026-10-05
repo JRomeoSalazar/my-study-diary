@@ -66,7 +66,7 @@ Reglas que valen para todas las tareas:
   `minutos` ausente y claves en inglés (`date`/`minutes`) → no válida; sesión sin `tema` o
   con `id` repetido → válida; `comoLista` con `null`, `{}`, "texto" y 42 → `[]`.
 
-- [ ] **T6. `sumarDias` y `lunesDeLaSemana`** (~25 min)
+- [x] **T6. `sumarDias` y `lunesDeLaSemana`** (~25 min)
   `sumarDias(texto, n)` con `new Date(año, mes - 1, día + n)` (n negativo permitido).
   `lunesDeLaSemana(texto)` devuelve el lunes de su semana como texto (apóyate en
   `inicioDeSemana`).

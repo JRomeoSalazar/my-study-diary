@@ -211,6 +211,45 @@
       igual(comoLista([]), []);
     });
 
+    // ---------- sumarDias ----------
+
+    prueba("sumarDias: suma y resta dentro del mes (\"2026-10-05\" +3 → \"2026-10-08\", −4 → \"2026-10-01\")", () => {
+      igual(sumarDias("2026-10-05", 3), "2026-10-08");
+      igual(sumarDias("2026-10-05", -4), "2026-10-01");
+      igual(sumarDias("2026-10-05", 0), "2026-10-05");
+    });
+    prueba("sumarDias: cruza mes (\"2026-09-30\" +1 → \"2026-10-01\", \"2026-10-01\" −1 → \"2026-09-30\")", () => {
+      igual(sumarDias("2026-09-30", 1), "2026-10-01");
+      igual(sumarDias("2026-10-01", -1), "2026-09-30");
+    });
+    prueba("sumarDias: cruza año (\"2026-12-31\" +1 → \"2027-01-01\", \"2027-01-01\" −1 → \"2026-12-31\")", () => {
+      igual(sumarDias("2026-12-31", 1), "2027-01-01");
+      igual(sumarDias("2027-01-01", -1), "2026-12-31");
+    });
+    prueba("sumarDias: 29-02-2028 (\"2028-02-28\" +1 → \"2028-02-29\", +2 → \"2028-03-01\")", () => {
+      igual(sumarDias("2028-02-28", 1), "2028-02-29");
+      igual(sumarDias("2028-02-28", 2), "2028-03-01");
+    });
+    prueba("sumarDias: alrededor del cambio de hora, +1 día da el siguiente (\"2026-03-28\" y \"2026-10-24\")", () => {
+      igual(sumarDias("2026-03-28", 1), "2026-03-29");
+      igual(sumarDias("2026-03-29", 1), "2026-03-30");
+      igual(sumarDias("2026-10-24", 1), "2026-10-25");
+      igual(sumarDias("2026-10-25", 1), "2026-10-26");
+    });
+    prueba("sumarDias: 84 días a través del cambio de hora (\"2026-03-01\" +84 → \"2026-05-24\")", () =>
+      igual(sumarDias("2026-03-01", 84), "2026-05-24"));
+
+    // ---------- lunesDeLaSemana ----------
+
+    prueba("lunesDeLaSemana: un lunes es su propio lunes (\"2026-10-05\", no el domingo anterior)", () =>
+      igual(lunesDeLaSemana("2026-10-05"), "2026-10-05"));
+    prueba("lunesDeLaSemana: un domingo (\"2026-10-04\" → \"2026-09-28\")", () =>
+      igual(lunesDeLaSemana("2026-10-04"), "2026-09-28"));
+    prueba("lunesDeLaSemana: mitad de semana y cruce de año (\"2026-09-30\" → \"2026-09-28\", \"2027-01-01\" → \"2026-12-28\")", () => {
+      igual(lunesDeLaSemana("2026-09-30"), "2026-09-28");
+      igual(lunesDeLaSemana("2027-01-01"), "2026-12-28");
+    });
+
     mostrarResultados();
   </script>
 </body>
