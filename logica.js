@@ -81,6 +81,24 @@ function comoLista(valor) {
   return Array.isArray(valor) ? valor : [];
 }
 
+// Suma los minutos de cada día entre "desde" y "hasta" (ambos incluidos).
+// Devuelve un objeto { "AAAA-MM-DD": minutos }. Ignora las sesiones no válidas y
+// no modifica la lista que recibe.
+function calcularMinutosPorDia(sesiones, desde, hasta) {
+  const minutosPorDia = {};
+  sesiones.forEach((sesion) => {
+    if (!esSesionValida(sesion)) {
+      return;
+    }
+    // Las fechas son texto "AAAA-MM-DD", así que se comparan directamente
+    if (sesion.fecha < desde || sesion.fecha > hasta) {
+      return;
+    }
+    minutosPorDia[sesion.fecha] = (minutosPorDia[sesion.fecha] || 0) + sesion.minutos;
+  });
+  return minutosPorDia;
+}
+
 // Devuelve el día anterior a una fecha (objeto Date)
 function diaAnterior(fecha) {
   return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() - 1);
