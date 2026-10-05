@@ -48,6 +48,26 @@ function esFechaValida(valor) {
   return fecha.getFullYear() === anio && fecha.getMonth() === mes - 1 && fecha.getDate() === dia;
 }
 
+// ---------- Sesiones guardadas ----------
+
+// Comprueba que un elemento guardado sirve para el mapa: es un objeto, tiene una
+// fecha válida y sus minutos son un número entero mayor que 0. El tema y el id no importan.
+function esSesionValida(sesion) {
+  return (
+    typeof sesion === "object" &&
+    sesion !== null &&
+    esFechaValida(sesion.fecha) &&
+    typeof sesion.minutos === "number" &&
+    Number.isInteger(sesion.minutos) &&
+    sesion.minutos > 0
+  );
+}
+
+// Devuelve el valor si es una lista; si no (null, texto, objeto...), una lista vacía
+function comoLista(valor) {
+  return Array.isArray(valor) ? valor : [];
+}
+
 // Devuelve el día anterior a una fecha (objeto Date)
 function diaAnterior(fecha) {
   return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() - 1);

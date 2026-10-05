@@ -58,7 +58,7 @@ Reglas que valen para todas las tareas:
   "2026-08-03T10:00", `20260803`, `""`, `undefined`, `null` y "2026-02-30" → `false`;
   "2028-02-29" → `true` y "2027-02-29" → `false`.
 
-- [ ] **T5. `esSesionValida` y `comoLista`** (~20 min)
+- [x] **T5. `esSesionValida` y `comoLista`** (~20 min)
   `esSesionValida`: objeto no nulo, `fecha` válida y `minutos` de tipo número, entero y > 0.
   `comoLista`: devuelve el valor si es lista, y `[]` si no.
   **Cubre:** RF-2 (definición) · RF-8 (CA-8.2, CA-8.3).

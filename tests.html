@@ -163,6 +163,54 @@
       igual(esFechaValida("2027-02-29"), false);
     });
 
+    // ---------- esSesionValida ----------
+
+    prueba("esSesionValida: sesión correcta → true", () =>
+      igual(esSesionValida({ id: 1, fecha: "2026-08-03", tema: "JS", minutos: 45 }), true));
+    prueba("esSesionValida: null, números y textos → false", () => {
+      igual(esSesionValida(null), false);
+      igual(esSesionValida(undefined), false);
+      igual(esSesionValida(42), false);
+      igual(esSesionValida("texto"), false);
+    });
+    prueba("esSesionValida: fecha no válida → false", () => {
+      igual(esSesionValida({ fecha: "2026-02-30", minutos: 45 }), false);
+      igual(esSesionValida({ fecha: "2026-8-3", minutos: 45 }), false);
+      igual(esSesionValida({ minutos: 45 }), false);
+    });
+    prueba("esSesionValida: minutos como texto (\"45\") → false", () =>
+      igual(esSesionValida({ fecha: "2026-08-03", minutos: "45" }), false));
+    prueba("esSesionValida: minutos 0, −5, 1,5, NaN, Infinity y ausentes → false", () => {
+      igual(esSesionValida({ fecha: "2026-08-03", minutos: 0 }), false);
+      igual(esSesionValida({ fecha: "2026-08-03", minutos: -5 }), false);
+      igual(esSesionValida({ fecha: "2026-08-03", minutos: 1.5 }), false);
+      igual(esSesionValida({ fecha: "2026-08-03", minutos: NaN }), false);
+      igual(esSesionValida({ fecha: "2026-08-03", minutos: Infinity }), false);
+      igual(esSesionValida({ fecha: "2026-08-03" }), false);
+    });
+    prueba("esSesionValida: claves en inglés (date/minutes) → false", () =>
+      igual(esSesionValida({ date: "2026-08-03", minutes: 45 }), false));
+    prueba("esSesionValida: sin tema o con id repetido → true", () => {
+      igual(esSesionValida({ fecha: "2026-08-03", minutos: 45 }), true);
+      igual(esSesionValida({ id: 7, fecha: "2026-08-03", minutos: 45 }), true);
+      igual(esSesionValida({ id: 7, fecha: "2026-08-04", minutos: 10 }), true);
+    });
+
+    // ---------- comoLista ----------
+
+    prueba("comoLista: null, {}, \"texto\" y 42 → []", () => {
+      igual(comoLista(null), []);
+      igual(comoLista({}), []);
+      igual(comoLista("texto"), []);
+      igual(comoLista(42), []);
+      igual(comoLista(undefined), []);
+    });
+    prueba("comoLista: una lista se devuelve tal cual", () => {
+      const lista = [{ fecha: "2026-08-03", minutos: 45 }];
+      igual(comoLista(lista), lista);
+      igual(comoLista([]), []);
+    });
+
     mostrarResultados();
   </script>
 </body>
