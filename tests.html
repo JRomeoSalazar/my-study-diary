@@ -250,6 +250,52 @@
       igual(lunesDeLaSemana("2027-01-01"), "2026-12-28");
     });
 
+    // ---------- calcularMinutosPorDia ----------
+
+    prueba("CA-2.1: 20 + 15 + 10 el mismo día → 45", () =>
+      igual(calcularMinutosPorDia([
+        { id: 1, fecha: "2026-10-05", tema: "a", minutos: 20 },
+        { id: 2, fecha: "2026-10-05", tema: "b", minutos: 15 },
+        { id: 3, fecha: "2026-10-05", tema: "c", minutos: 10 }
+      ], "2026-07-20", "2026-10-05"), { "2026-10-05": 45 }));
+    prueba("CA-2.1: dos sesiones idénticas se suman las dos", () => {
+      const sesion = { id: 1, fecha: "2026-10-05", tema: "a", minutos: 30 };
+      igual(calcularMinutosPorDia([sesion, sesion], "2026-07-20", "2026-10-05"), { "2026-10-05": 60 });
+    });
+    prueba("CA-2.1: días distintos van en claves distintas", () =>
+      igual(calcularMinutosPorDia([
+        { fecha: "2026-10-04", minutos: 20 },
+        { fecha: "2026-10-05", minutos: 15 }
+      ], "2026-07-20", "2026-10-05"), { "2026-10-04": 20, "2026-10-05": 15 }));
+    prueba("CA-8.2: una válida (30) y una no válida el mismo día → 30", () =>
+      igual(calcularMinutosPorDia([
+        { fecha: "2026-10-05", minutos: 30 },
+        { fecha: "2026-10-05", minutos: "45" },
+        { fecha: "2026-10-05", minutos: -5 },
+        null
+      ], "2026-07-20", "2026-10-05"), { "2026-10-05": 30 }));
+    prueba("CA-2.3: fuera del rango no aparecen (domingo anterior al primer lunes y posterior a \"hasta\")", () =>
+      igual(calcularMinutosPorDia([
+        { fecha: "2026-07-19", minutos: 10 },
+        { fecha: "2026-10-06", minutos: 20 },
+        { fecha: "2026-07-20", minutos: 30 },
+        { fecha: "2026-10-05", minutos: 40 }
+      ], "2026-07-20", "2026-10-05"), { "2026-07-20": 30, "2026-10-05": 40 }));
+    prueba("CA-2.3: sin sesiones, o con lo guardado vacío → {}", () => {
+      igual(calcularMinutosPorDia([], "2026-07-20", "2026-10-05"), {});
+      igual(calcularMinutosPorDia([{ fecha: "2026-01-01", minutos: 10 }], "2026-07-20", "2026-10-05"), {});
+    });
+    prueba("CA-8.4: la lista de entrada es igual antes y después", () => {
+      const lista = [
+        { id: 1, fecha: "2026-10-05", tema: "a", minutos: 20 },
+        { id: 2, fecha: "2026-10-05", tema: "b", minutos: "mal" },
+        { id: 3, fecha: "2020-01-01", tema: "c", minutos: 10 }
+      ];
+      const antes = JSON.stringify(lista);
+      calcularMinutosPorDia(lista, "2026-07-20", "2026-10-05");
+      igual(JSON.stringify(lista), antes);
+    });
+
     mostrarResultados();
   </script>
 </body>

@@ -76,7 +76,7 @@ Reglas que valen para todas las tareas:
   año y 29-02-2028; sumar 1 día a "2026-03-28" y a "2026-10-24" (alrededor del cambio de
   hora) da el día siguiente, sin saltar ni repetir.
 
-- [ ] **T7. `calcularMinutosPorDia`** (~20 min)
+- [x] **T7. `calcularMinutosPorDia`** (~20 min)
   Devuelve `{ "AAAA-MM-DD": minutos }` con solo las sesiones válidas dentro del rango
   (ambos extremos incluidos). Sin modificar la lista de entrada.
   **Cubre:** RF-2 (CA-2.1, CA-2.3) · RF-8 (CA-8.2, CA-8.4).
