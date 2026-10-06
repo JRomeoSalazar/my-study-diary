@@ -9,9 +9,12 @@
   --margen: #c93a3a;
   --fosforito: #f4ea4f;
 
-  /* Mapa de calor: del nivel 0 (neutro) al 4 (más oscuro); ajustar contraste en T21 */
+  /* Mapa de calor: del nivel 0 (neutro) al 4 (más oscuro).
+     Contraste medido con --papel: nivel 0 = 1,63:1 (mínimo 1,5) y nivel 4 = 9,86:1 (mínimo 3).
+     El nivel 1 se oscureció (antes #a8bbe8) para que se distinga del 0: entre niveles contiguos
+     hay al menos 1,4:1. */
   --nivel-0: #c0c9d8;
-  --nivel-1: #a8bbe8;
+  --nivel-1: #93abe3;
   --nivel-2: #6f8fd6;
   --nivel-3: #3d62bf;
   --nivel-4: var(--tinta);

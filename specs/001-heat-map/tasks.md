@@ -212,7 +212,7 @@ Reglas que valen para todas las tareas:
   página (`document.documentElement.scrollWidth` ≤ 360), la distancia entre centros de dos
   días contiguos es 24 px, y con zoom al 200 % solo se desplaza el mapa, no la página.
 
-- [ ] **T21. Comprobar y ajustar el contraste** (~15 min)
+- [x] **T21. Comprobar y ajustar el contraste** (~15 min)
   Medir con el panel de contraste de DevTools y ajustar los valores de `--nivel-0` y
   `--nivel-4` si hace falta (R-2).
   **Cubre:** RF-3 (CA-3.3).

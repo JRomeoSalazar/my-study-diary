@@ -54,11 +54,14 @@ con `role=img`, `title` y `aria-label`, y "Más". Sin estilos aún. Verificado c
 (11 comprobaciones + árbol de accesibilidad). Siguiente: T19.
 - T19 hecha: estilos del mapa en `styles.css` (escritorio): `--nivel-0…4`, `--tam-dia` 26px, `--ancho-etiqueta`
 28px, rejilla por fila, huecos sin fondo, leyenda. Guion de Playwright (18 comprobaciones a 1280px).
-Colores de nivel: provisionales hasta medir el contraste en T21. Siguiente: T20.
+Siguiente: T20.
 - T20 hecha: móvil (`--tam-dia` 20px, etiquetas 0.7rem), `#mapa` con `overflow-x:auto` (relleno 3px y margen -3px
 para no recortar el foco), `.dia.seleccionado` (contorno 2px grafito) y `.dia:focus-visible` (3px fosforito).
 Guion de Playwright: 19 comprobaciones (360px, zoom 200% = 180px, foco con Tab). A 360px caben 308px de 310.
 Pendiente aparte (no es del mapa): a 180px (zoom 200%) la lista de sesiones desborda la página. Siguiente: T21.
+- T21 hecha: contraste medido con --papel (WCAG): nivel 0 = 1,63:1 (mín. 1,5) y nivel 4 = 9,86:1 (mín. 3), sin
+cambios. Solo se oscureció `--nivel-1` (#a8bbe8 → #93abe3): entre el 0 y el 1 había 1,15:1; ahora todos los
+pasos contiguos son ≥ 1,37:1. Guion t21 (5 comprobaciones). Siguiente: T22 (eventos de ratón).
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
