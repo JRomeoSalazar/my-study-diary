@@ -229,7 +229,7 @@ Reglas que valen para todas las tareas:
   ago 2026: 1 h 15 min"), al salir del mapa vuelve al texto inicial, y las sesiones de
   `localStorage` y la lista quedan idénticas.
 
-- [ ] **T23. Selección con clic, toque y foco** (~25 min)
+- [x] **T23. Selección con clic, toque y foco** (~25 min)
   `click` sobre `.dia` → dar el foco a su celda. `focusin` sobre `.dia` →
   `diaSeleccionado`, quitar clase, `aria-selected` y `tabindex="0"` al anterior (pasa a −1) y
   ponerlos en el nuevo; actualizar la línea. `mostrarMapa()` quita la selección (CA-5.9).

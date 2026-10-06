@@ -345,6 +345,38 @@ mapaElemento.addEventListener("mouseleave", () => {
   mostrarLineaDetalle();
 });
 
+// Un clic o toque en un día le da el foco; al recibirlo, el día queda seleccionado (ver "focusin")
+mapaElemento.addEventListener("click", (evento) => {
+  const celda = evento.target.closest(".dia");
+  if (celda !== null) {
+    celda.focus();
+  }
+});
+
+// Cuando un día recibe el foco (por clic, toque o teclado), pasa a ser el seleccionado.
+// Solo hay un día seleccionado y un solo día con tabindex="0" (la parada del tabulador):
+// el seleccionado, que sustituye al anterior.
+mapaElemento.addEventListener("focusin", (evento) => {
+  const celda = evento.target.closest(".dia");
+  if (celda === null) {
+    return;
+  }
+  diaSeleccionado = fechaDeCelda(celda);
+
+  mapaElemento.querySelectorAll(".dia.seleccionado").forEach((anterior) => {
+    anterior.classList.remove("seleccionado");
+    anterior.removeAttribute("aria-selected");
+  });
+  mapaElemento.querySelectorAll('.dia[tabindex="0"]').forEach((anterior) => {
+    anterior.tabIndex = -1;
+  });
+
+  celda.classList.add("seleccionado");
+  celda.setAttribute("aria-selected", "true");
+  celda.tabIndex = 0;
+  mostrarLineaDetalle();
+});
+
 function prepararFormulario() {
   inputFecha.value = hoyTexto();
   inputFecha.max = hoyTexto();
