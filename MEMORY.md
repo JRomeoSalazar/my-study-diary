@@ -49,6 +49,9 @@ movimiento devuelve la misma posición recibida. Siguiente: T16 (empieza la inte
 `rowheader`, celdas `.dia.nivel-N` y `.hueco`, un solo `tabindex=0`. Sin estilos ni eventos aún: hasta
 T19 el mapa se ve como texto apilado (lun…dom). Verificado con un guion de Playwright (19 comprobaciones,
 `page.clock` para fijar "hoy"). Siguiente: T18.
+- T18 hecha: `mostrarLeyenda()` en `app.js` (llamada desde `mostrarMapa()`): "Menos", 5 `span.leyenda-cuadro.nivel-N`
+con `role=img`, `title` y `aria-label`, y "Más". Sin estilos aún. Verificado con guion de Playwright
+(11 comprobaciones + árbol de accesibilidad). Siguiente: T19.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
