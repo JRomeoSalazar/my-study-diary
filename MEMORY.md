@@ -65,6 +65,9 @@ pasos contiguos son ≥ 1,37:1. Guion t21 (5 comprobaciones). Siguiente: T22 (ev
 - T22 hecha: `app.js` tiene `diaApuntado`, `mostrarLineaDetalle()`, `fechaDeCelda()` y dos escuchadores delegados en
 `#mapa` (`mouseover` sobre `.dia`, `mouseleave`), añadidos una sola vez. Guion t22 (12 comprobaciones con ratón
 real). Aún sin clic ni teclado: `diaSeleccionado` sigue siempre en null. Siguiente: T23.
+- T23 hecha: `app.js` tiene los escuchadores `click` (da el foco al día) y `focusin` (selecciona: clase
+`seleccionado`, `aria-selected`, único `tabindex=0`, actualiza la línea), delegados y añadidos una sola vez.
+Guion t23 (19 comprobaciones con clics y Tab reales). Falta el teclado con flechas. Siguiente: T24.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
