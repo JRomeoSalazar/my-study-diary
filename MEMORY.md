@@ -52,6 +52,10 @@ T19 el mapa se ve como texto apilado (lun…dom). Verificado con un guion de Pla
 - T18 hecha: `mostrarLeyenda()` en `app.js` (llamada desde `mostrarMapa()`): "Menos", 5 `span.leyenda-cuadro.nivel-N`
 con `role=img`, `title` y `aria-label`, y "Más". Sin estilos aún. Verificado con guion de Playwright
 (11 comprobaciones + árbol de accesibilidad). Siguiente: T19.
+- T19 hecha: estilos del mapa en `styles.css` (escritorio): `--nivel-0…4`, `--tam-dia` 26px, `--ancho-etiqueta`
+28px, rejilla por fila, huecos sin fondo, leyenda. Guion de Playwright (18 comprobaciones a 1280px).
+OJO: a 360px la página aún se desplaza en horizontal (422px) hasta T20 (`overflow-x:auto` + móvil).
+Colores de nivel: provisionales hasta medir el contraste en T21. Siguiente: T20.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.

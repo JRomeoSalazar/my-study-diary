@@ -192,7 +192,7 @@ Reglas que valen para todas las tareas:
   tramos "0 min", "1–29 min", "30–59 min", "60–119 min" y "120 min o más" en `title` y
   `aria-label`, y "Más"; el árbol de accesibilidad (snapshot de DevTools) los lista.
 
-- [ ] **T19. Estilos: colores de nivel y rejilla en escritorio** (~25 min)
+- [x] **T19. Estilos: colores de nivel y rejilla en escritorio** (~25 min)
   En `styles.css`: `--nivel-0`…`--nivel-4` en `:root`, rejilla por fila
   (`grid-template-columns: var(--ancho-etiqueta) repeat(12, var(--tam-dia))`, `gap: 4px`,
   `--tam-dia: 26px`, `--ancho-etiqueta: 28px`), celdas `.dia.nivel-N`, `.hueco` sin fondo ni
