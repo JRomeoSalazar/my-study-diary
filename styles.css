@@ -9,6 +9,16 @@
   --margen: #c93a3a;
   --fosforito: #f4ea4f;
 
+  /* Mapa de calor: del nivel 0 (neutro) al 4 (más oscuro); ajustar contraste en T21 */
+  --nivel-0: #c0c9d8;
+  --nivel-1: #a8bbe8;
+  --nivel-2: #6f8fd6;
+  --nivel-3: #3d62bf;
+  --nivel-4: var(--tinta);
+  --tam-dia: 26px;
+  --ancho-etiqueta: 28px;
+  --espacio-dia: 4px;
+
   /* Fuentes de Google Fonts; si no hay conexión se usan las del sistema */
   --letra-titulos: Literata, Charter, "Bitstream Charter", Cambria, Georgia, serif;
   --letra-texto: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -281,4 +291,96 @@ button:focus-visible {
   button {
     align-self: stretch;
   }
+}
+
+/* ---------- Mapa de calor ---------- */
+
+/* Los tamaños son fijos: el mapa no se estira y queda alineado a la izquierda */
+.mapa {
+  display: grid;
+  gap: var(--espacio-dia);
+  width: fit-content;
+}
+
+/* Cada fila (meses, lun, mar...) tiene las mismas columnas: etiqueta + 12 semanas */
+.mapa-fila {
+  display: grid;
+  grid-template-columns: var(--ancho-etiqueta) repeat(12, var(--tam-dia));
+  gap: var(--espacio-dia);
+}
+
+.mapa-dia-nombre,
+.mapa-mes {
+  font-size: 0.8rem;
+  color: var(--grafito-suave);
+  white-space: nowrap;
+}
+
+/* Centrada en vertical con su fila */
+.mapa-dia-nombre {
+  line-height: var(--tam-dia);
+}
+
+/* Sin recorte: el nombre del mes puede pasar por encima de las columnas vacías de al lado */
+.mapa-mes {
+  line-height: 1.2;
+  overflow: visible;
+}
+
+.dia,
+.hueco {
+  width: var(--tam-dia);
+  height: var(--tam-dia);
+}
+
+.dia {
+  border-radius: 4px;
+}
+
+/* El hueco (día posterior a hoy) ocupa su sitio, pero sin fondo ni borde */
+.hueco {
+  background: none;
+  border: 0;
+}
+
+/* Los mismos colores para los días y para los cuadros de la leyenda */
+.nivel-0 {
+  background-color: var(--nivel-0);
+}
+
+.nivel-1 {
+  background-color: var(--nivel-1);
+}
+
+.nivel-2 {
+  background-color: var(--nivel-2);
+}
+
+.nivel-3 {
+  background-color: var(--nivel-3);
+}
+
+.nivel-4 {
+  background-color: var(--nivel-4);
+}
+
+/* Sin nowrap: con minutos enormes el texto puede partirse en dos líneas */
+.mapa-detalle {
+  margin: 12px 0 0;
+  color: var(--grafito);
+}
+
+.mapa-leyenda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--grafito-suave);
+}
+
+.leyenda-cuadro {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
 }
