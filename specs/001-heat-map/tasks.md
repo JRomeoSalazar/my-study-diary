@@ -203,7 +203,7 @@ Reglas que valen para todas las tareas:
   cada uno más oscuro, los huecos no tienen color, las etiquetas de mes pasan por encima de
   las columnas vacías, el mapa no se estira y queda alineado a la izquierda con el resto.
 
-- [ ] **T20. Estilos: móvil, desplazamiento, selección y foco** (~25 min)
+- [x] **T20. Estilos: móvil, desplazamiento, selección y foco** (~25 min)
   `@media (max-width: 480px)`: `--tam-dia: 20px`, `--ancho-etiqueta: 20px`, etiquetas a
   `0.7rem`. `#mapa` con `overflow-x: auto`. Clase `.seleccionado` (contorno 2 px
   `--grafito`) y foco visible (contorno 3 px `--fosforito`, como los campos actuales).
