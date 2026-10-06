@@ -169,7 +169,7 @@ Reglas que valen para todas las tareas:
   mejor racha / esta semana / este mes y "Registrar sesión", con el mismo estilo que los
   demás `h2`, y la consola está limpia.
 
-- [ ] **T17. `mostrarMapa()`: filas, días, huecos y etiquetas** (~30 min)
+- [x] **T17. `mostrarMapa()`: filas, días, huecos y etiquetas** (~30 min)
   En `app.js`: `mostrarMapa()` llama a `calcularMapa(sesiones, hoyTexto())`, vacía `#mapa` y
   lo construye por filas con `createElement` + `textContent` (plan §4.2): fila de meses
   (`aria-hidden`), 7 filas `role="row"` con `rowheader` (`DIAS_CORTOS`) y 12 celdas. Día =
