@@ -17,6 +17,7 @@ const lista = document.getElementById("lista");
 const mensajeVacio = document.getElementById("vacio");
 const mapaElemento = document.getElementById("mapa");
 const mapaDetalle = document.getElementById("mapa-detalle");
+const mapaLeyenda = document.getElementById("mapa-leyenda");
 
 // Lista de sesiones. Cada sesión es: { id, fecha: "AAAA-MM-DD", tema, minutos }
 let sesiones = cargarSesiones();
@@ -256,6 +257,29 @@ function crearHueco() {
   return hueco;
 }
 
+// Escribe la leyenda: "Menos", un cuadro por nivel (de 0 a 4) y "Más".
+// Cada cuadro dice su tramo de minutos al pasar el ratón (title) y a los lectores de pantalla.
+function mostrarLeyenda() {
+  mapaLeyenda.innerHTML = "";
+
+  const menos = document.createElement("span");
+  menos.textContent = "Menos";
+  mapaLeyenda.appendChild(menos);
+
+  TRAMOS_LEYENDA.forEach((tramo, nivel) => {
+    const cuadro = document.createElement("span");
+    cuadro.className = "leyenda-cuadro nivel-" + nivel;
+    cuadro.setAttribute("role", "img");
+    cuadro.title = tramo;
+    cuadro.setAttribute("aria-label", tramo);
+    mapaLeyenda.appendChild(cuadro);
+  });
+
+  const mas = document.createElement("span");
+  mas.textContent = "Más";
+  mapaLeyenda.appendChild(mas);
+}
+
 function mostrarMapa() {
   const hoy = hoyTexto();
   mapaActual = calcularMapa(sesiones, hoy);
@@ -286,6 +310,7 @@ function mostrarMapa() {
   });
 
   mapaDetalle.textContent = TEXTO_DETALLE_INICIAL;
+  mostrarLeyenda();
 }
 
 function prepararFormulario() {

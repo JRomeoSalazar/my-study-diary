@@ -184,7 +184,7 @@ Reglas que valen para todas las tareas:
   celda tiene su `aria-label` (p. ej. "dom 4 oct 2026: 0 min"), el texto inicial se ve bajo
   el mapa, y al guardar una sesión el mapa se repinta sin recargar con esa celda en su nivel.
 
-- [ ] **T18. Leyenda** (~15 min)
+- [x] **T18. Leyenda** (~15 min)
   Rellenar `#mapa-leyenda` en `mostrarMapa()`: "Menos", 5 cuadros `nivel-0`…`nivel-4` con
   `role="img"`, `title` y `aria-label` de `TRAMOS_LEYENDA`, y "Más".
   **Cubre:** RF-6 (CA-6.6, CA-6.7, CA-6.8).
