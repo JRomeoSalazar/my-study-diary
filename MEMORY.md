@@ -62,6 +62,9 @@ Pendiente aparte (no es del mapa): a 180px (zoom 200%) la lista de sesiones desb
 - T21 hecha: contraste medido con --papel (WCAG): nivel 0 = 1,63:1 (mín. 1,5) y nivel 4 = 9,86:1 (mín. 3), sin
 cambios. Solo se oscureció `--nivel-1` (#a8bbe8 → #93abe3): entre el 0 y el 1 había 1,15:1; ahora todos los
 pasos contiguos son ≥ 1,37:1. Guion t21 (5 comprobaciones). Siguiente: T22 (eventos de ratón).
+- T22 hecha: `app.js` tiene `diaApuntado`, `mostrarLineaDetalle()`, `fechaDeCelda()` y dos escuchadores delegados en
+`#mapa` (`mouseover` sobre `.dia`, `mouseleave`), añadidos una sola vez. Guion t22 (12 comprobaciones con ratón
+real). Aún sin clic ni teclado: `diaSeleccionado` sigue siempre en null. Siguiente: T23.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
