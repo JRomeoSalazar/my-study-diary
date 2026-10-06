@@ -15,9 +15,15 @@ const minutosSemana = document.getElementById("minutos-semana");
 const diasMes = document.getElementById("dias-mes");
 const lista = document.getElementById("lista");
 const mensajeVacio = document.getElementById("vacio");
+const mapaElemento = document.getElementById("mapa");
+const mapaDetalle = document.getElementById("mapa-detalle");
 
 // Lista de sesiones. Cada sesión es: { id, fecha: "AAAA-MM-DD", tema, minutos }
 let sesiones = cargarSesiones();
+
+// Estado del mapa de calor: el último modelo calculado y el día seleccionado (fecha o null)
+let mapaActual = null;
+let diaSeleccionado = null;
 
 // ---------- Fechas (siempre en hora local, nunca UTC) ----------
 // fechaATexto, textoAFecha, diaAnterior e inicioDeSemana están en logica.js
@@ -206,6 +212,82 @@ function mostrarLista() {
   mensajeVacio.hidden = sesiones.length > 0;
 }
 
+// ---------- Mapa de calor ----------
+// La lógica (qué días, minutos y niveles) está en logica.js; aquí solo se dibuja.
+// El mapa se construye por filas (una por día de la semana), como pide el patrón
+// "grid" de accesibilidad.
+
+// Crea la fila de arriba con las etiquetas de mes (solo decorativa: los lectores la ignoran)
+function crearFilaMeses(etiquetasMes) {
+  const fila = document.createElement("div");
+  fila.className = "mapa-fila mapa-meses";
+  fila.setAttribute("aria-hidden", "true");
+
+  // Primer hueco: la columna donde van las abreviaturas de los días
+  fila.appendChild(document.createElement("span"));
+
+  etiquetasMes.forEach((etiqueta) => {
+    const mes = document.createElement("span");
+    mes.className = "mapa-mes";
+    mes.textContent = etiqueta;
+    fila.appendChild(mes);
+  });
+  return fila;
+}
+
+// Crea la celda de un día con datos
+function crearCeldaDia(dia, semana, numeroDia, fechaConTab) {
+  const celda = document.createElement("div");
+  celda.className = "dia nivel-" + dia.nivel;
+  celda.setAttribute("role", "gridcell");
+  celda.setAttribute("aria-label", dia.texto);
+  celda.dataset.semana = semana;
+  celda.dataset.dia = numeroDia;
+  // Solo una celda recibe el foco con Tab; con las flechas se llega a las demás
+  celda.tabIndex = dia.fecha === fechaConTab ? 0 : -1;
+  return celda;
+}
+
+// Crea el hueco de un día posterior a hoy: ocupa su sitio pero no se ve ni se anuncia
+function crearHueco() {
+  const hueco = document.createElement("div");
+  hueco.className = "hueco";
+  hueco.setAttribute("aria-hidden", "true");
+  return hueco;
+}
+
+function mostrarMapa() {
+  const hoy = hoyTexto();
+  mapaActual = calcularMapa(sesiones, hoy);
+  diaSeleccionado = null;
+  const fechaConTab = fechaConParadaTab(mapaActual, diaSeleccionado, hoy);
+
+  mapaElemento.innerHTML = "";
+  mapaElemento.appendChild(crearFilaMeses(mapaActual.etiquetasMes));
+
+  // Una fila por día de la semana (lunes arriba) con sus 12 semanas
+  DIAS_CORTOS.forEach((nombreDia, numeroDia) => {
+    const fila = document.createElement("div");
+    fila.className = "mapa-fila";
+    fila.setAttribute("role", "row");
+
+    const nombre = document.createElement("span");
+    nombre.className = "mapa-dia-nombre";
+    nombre.setAttribute("role", "rowheader");
+    nombre.textContent = nombreDia;
+    fila.appendChild(nombre);
+
+    mapaActual.semanas.forEach((columna, semana) => {
+      const dia = columna[numeroDia];
+      // Si el día no está en la lista, es un hueco (posterior a hoy)
+      fila.appendChild(dia ? crearCeldaDia(dia, semana, numeroDia, fechaConTab) : crearHueco());
+    });
+    mapaElemento.appendChild(fila);
+  });
+
+  mapaDetalle.textContent = TEXTO_DETALLE_INICIAL;
+}
+
 function prepararFormulario() {
   inputFecha.value = hoyTexto();
   inputFecha.max = hoyTexto();
@@ -219,6 +301,7 @@ function mostrarTodo() {
   mostrarSemana();
   mostrarMes();
   mostrarLista();
+  mostrarMapa();
 }
 
 // ---------- Formulario ----------

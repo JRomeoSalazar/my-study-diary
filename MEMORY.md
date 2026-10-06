@@ -45,6 +45,10 @@ Siguiente: T11.
 movimiento devuelve la misma posición recibida. Siguiente: T16 (empieza la interfaz).
 - T16 hecha: `index.html` tiene la sección "Últimas 12 semanas" (`#mapa-titulo`, `#mapa`, `#mapa-detalle`,
 `#mapa-leyenda`) entre la racha y "Registrar sesión", todavía vacía (solo el título se ve). Siguiente: T17.
+- T17 hecha: `app.js` tiene `mostrarMapa()` (llamado desde `mostrarTodo()`): fila de meses, 7 filas con
+`rowheader`, celdas `.dia.nivel-N` y `.hueco`, un solo `tabindex=0`. Sin estilos ni eventos aún: hasta
+T19 el mapa se ve como texto apilado (lun…dom). Verificado con un guion de Playwright (19 comprobaciones,
+`page.clock` para fijar "hoy"). Siguiente: T18.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
