@@ -219,7 +219,7 @@ Reglas que valen para todas las tareas:
   **Hecho cuando:** `--nivel-0` tiene al menos 1,5:1 y `--nivel-4` al menos 3:1 respecto a
   `--papel`, anotados los valores medidos, y los 5 niveles siguen siendo distinguibles.
 
-- [ ] **T22. Eventos de ratón** (~20 min)
+- [x] **T22. Eventos de ratón** (~20 min)
   Un solo escuchador por evento en `#mapa` (delegación, D-10), añadido una sola vez. Variables
   `mapaActual`, `diaApuntado` y `diaSeleccionado`; `mostrarMapa()` las reinicia. `mouseover`
   sobre `.dia` → `diaApuntado`; `mouseleave` de `#mapa` → `null`; ambos actualizan la

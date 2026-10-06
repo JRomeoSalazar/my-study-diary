@@ -22,8 +22,10 @@ const mapaLeyenda = document.getElementById("mapa-leyenda");
 // Lista de sesiones. Cada sesión es: { id, fecha: "AAAA-MM-DD", tema, minutos }
 let sesiones = cargarSesiones();
 
-// Estado del mapa de calor: el último modelo calculado y el día seleccionado (fecha o null)
+// Estado del mapa de calor: el último modelo calculado, el día señalado con el ratón
+// y el día seleccionado (fechas, o null si no hay ninguno)
 let mapaActual = null;
+let diaApuntado = null;
 let diaSeleccionado = null;
 
 // ---------- Fechas (siempre en hora local, nunca UTC) ----------
@@ -283,6 +285,7 @@ function mostrarLeyenda() {
 function mostrarMapa() {
   const hoy = hoyTexto();
   mapaActual = calcularMapa(sesiones, hoy);
+  diaApuntado = null;
   diaSeleccionado = null;
   const fechaConTab = fechaConParadaTab(mapaActual, diaSeleccionado, hoy);
 
@@ -312,6 +315,35 @@ function mostrarMapa() {
   mapaDetalle.textContent = TEXTO_DETALLE_INICIAL;
   mostrarLeyenda();
 }
+
+// Escribe en la línea de detalle el texto que toca (día apuntado, seleccionado o el inicial)
+function mostrarLineaDetalle() {
+  mapaDetalle.textContent = textoLineaDetalle(mapaActual, diaApuntado, diaSeleccionado);
+}
+
+// Devuelve la fecha del día que representa una celda
+function fechaDeCelda(celda) {
+  return mapaActual.semanas[celda.dataset.semana][celda.dataset.dia].fecha;
+}
+
+// Los escuchadores se ponen una sola vez en #mapa (no en cada celda), porque el mapa
+// se vuelve a dibujar y los de las celdas se perderían.
+
+// Al pasar el ratón por un día, se ve su detalle
+mapaElemento.addEventListener("mouseover", (evento) => {
+  const celda = evento.target.closest(".dia");
+  if (celda === null) {
+    return;
+  }
+  diaApuntado = fechaDeCelda(celda);
+  mostrarLineaDetalle();
+});
+
+// Al salir del mapa, se vuelve al día seleccionado o al texto inicial
+mapaElemento.addEventListener("mouseleave", () => {
+  diaApuntado = null;
+  mostrarLineaDetalle();
+});
 
 function prepararFormulario() {
   inputFecha.value = hoyTexto();
