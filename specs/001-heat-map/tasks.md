@@ -279,7 +279,7 @@ Reglas que valen para todas las tareas:
   errores en consola, y `README.md` explica el mapa, la leyenda, el uso con teclado y cómo
   ejecutar las pruebas, en español.
 
-- [ ] **T28. Cierre: spec, `AGENTS.md` y `MEMORY.md`** (~20 min)
+- [x] **T28. Cierre: spec, `AGENTS.md` y `MEMORY.md`** (~20 min)
   - Spec: marcar los criterios de §8 cumplidos y revisar que no haya diferencias con el código
     (principio 2). Las etiquetas de plan §7.3 ya están aplicadas.
   - `AGENTS.md`: en "Verificación", sustituir "No hay tests automáticos" por abrir `tests.html`
