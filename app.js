@@ -377,6 +377,30 @@ mapaElemento.addEventListener("focusin", (evento) => {
   mostrarLineaDetalle();
 });
 
+const TECLAS_FLECHA = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+// Con una flecha, el foco pasa al día de al lado. Al recibir el foco, ese día queda
+// seleccionado (ver "focusin"). En un borde o ante un hueco el foco no se mueve.
+mapaElemento.addEventListener("keydown", (evento) => {
+  const celda = evento.target.closest(".dia");
+  const conAtajo = evento.altKey || evento.ctrlKey || evento.metaKey;
+  if (celda === null || conAtajo || !TECLAS_FLECHA.includes(evento.key)) {
+    return;
+  }
+  // La página no debe desplazarse al pulsar una flecha, tanto si el foco se mueve como si no
+  evento.preventDefault();
+
+  const actual = { semana: Number(celda.dataset.semana), dia: Number(celda.dataset.dia) };
+  const nueva = moverPosicion(mapaActual, actual, evento.key);
+  if (nueva.semana === actual.semana && nueva.dia === actual.dia) {
+    return;
+  }
+  const destino = mapaElemento.querySelector(
+    '.dia[data-semana="' + nueva.semana + '"][data-dia="' + nueva.dia + '"]'
+  );
+  destino.focus();
+});
+
 function prepararFormulario() {
   inputFecha.value = hoyTexto();
   inputFecha.max = hoyTexto();

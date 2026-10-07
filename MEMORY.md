@@ -68,6 +68,10 @@ real). Aún sin clic ni teclado: `diaSeleccionado` sigue siempre en null. Siguie
 - T23 hecha: `app.js` tiene los escuchadores `click` (da el foco al día) y `focusin` (selecciona: clase
 `seleccionado`, `aria-selected`, único `tabindex=0`, actualiza la línea), delegados y añadidos una sola vez.
 Guion t23 (19 comprobaciones con clics y Tab reales). Falta el teclado con flechas. Siguiente: T24.
+- T24 hecha: `keydown` delegado en `#mapa` (`app.js`): las 4 flechas llaman a `moverPosicion` y dan el foco a la
+nueva celda (el `focusin` la selecciona). `preventDefault()` en TODAS las flechas (también en bordes y huecos) para
+que la página no se desplace; se ignoran con Alt/Ctrl/Meta. Guion t24 (24 comprobaciones con teclas reales).
+Fase 3 (interfaz) completa. Siguiente: T25 (verificación manual) y cierre; `README.md` pendiente.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
