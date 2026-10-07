@@ -83,6 +83,11 @@ Siguiente: T26.
 (5 000 sesiones: `mostrarMapa()` 6-11 ms; `mostrarTodo()` entero 600 ms por la lista); R-5 idéntico al código original
 (commit 2f748c3) en 6 conjuntos de datos. Arreglo: `.sesion-fecha { overflow-wrap: anywhere }` (a 180px la lista
 desbordaba la página 5px). Siguiente: T27 (pruebas completas + README) y T28.
+- T27 hecha: `tests.html` 133 de 133 en verde (4 zonas horarias), sin errores de consola. Auditoría de cobertura:
+30 de 34 criterios [auto]/[auto + manual] con prueba; se añadió CA-1.4 (3 pruebas; detecta un lunesDeLaSemana en UTC con
+TZ=America/Los_Angeles). CA-7.1, 7.2 y 9.3 no tienen prueba automática (plan §7.3: `tests.html` por `file://` no carga
+`index.html`); se verificaron a mano en T25. `README.md` actualizado: mapa, leyenda, detalle, ratón/clic/teclado,
+pruebas y estructura. Pendiente de T28: spec §8, `AGENTS.md` (dice "no hay tests automáticos") y revisar etiquetas §7.3.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
