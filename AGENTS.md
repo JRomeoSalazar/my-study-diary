@@ -55,7 +55,8 @@ los campos guardados son `fecha`, `tema` y `minutos`, no `date/topic/minutes`).
 `tests.html` (el usuario lo ha descartado dos veces).
 
 ## Verificación
-- No hay tests automáticos. Después de cada cambio, verifica con el MCP de Chrome DevTools: abre `index.html`, prueba la funcionalidad, revisa la consola y comprueba la vista móvil.
+- Pruebas: abre `tests.html` y comprueba que todas pasan ("N de N pruebas superadas" en verde). Cubren `logica.js`; la interfaz no tiene pruebas automáticas.
+- Después de cada cambio, verifica con el MCP de Chrome DevTools: abre `index.html`, prueba la funcionalidad, revisa la consola y comprueba la vista móvil.
 - Para empezar de cero: DevTools → Application → Local Storage → borrar la clave
 `diario-estudio-sesiones`.
 - Abre las páginas con el MCP en un contexto aislado (`isolatedContext`) para no tocar las

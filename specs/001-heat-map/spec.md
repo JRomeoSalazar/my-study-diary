@@ -1,6 +1,6 @@
 # Spec 001 — Mapa de calor de días estudiados
 
-Estado: revisada (QA) y aclarada, lista para el plan · Fecha: 2026-10-04
+Estado: implementada · Fecha: 2026-10-04
 
 > Nota: la carpeta de esta spec se llama `001-heat-map` por decisión del usuario, aunque el
 > resto del proyecto va en español (principio 6). Es una excepción consciente.
@@ -295,16 +295,17 @@ visible y de una sola línea de texto (puede partirse en dos si no cabe).
 
 ## 8. Criterios de finalización
 
-- [ ] Se cumplen todos los criterios de aceptación de RF-1 a RF-9.
-- [ ] Cada criterio [auto] y [auto + manual] tiene al menos una prueba automática y todas
+- [x] Se cumplen todos los criterios de aceptación de RF-1 a RF-9.
+- [x] Cada criterio [auto] y [auto + manual] tiene al menos una prueba automática y todas
       pasan en el navegador, incluidos los casos límite de la sección 6 que se puedan calcular.
-- [ ] Cada criterio [manual] y [auto + manual] está verificado en el navegador: en
+- [x] Cada criterio [manual] y [auto + manual] está verificado en el navegador: en
       escritorio, en el móvil a 360 px, con teclado y con zoom al 200 %.
-- [ ] La consola no muestra errores de la aplicación.
-- [ ] Las sesiones guardadas antes del cambio siguen intactas y se ven en el mapa.
+- [x] La consola no muestra errores de la aplicación (con datos válidos; con datos corruptos
+      los paneles antiguos de racha/semana/mes/lista siguen fallando, fuera de alcance según §7).
+- [x] Las sesiones guardadas antes del cambio siguen intactas y se ven en el mapa.
 - [x] Todas las dudas marcadas como [NECESITA ACLARACIÓN] están resueltas y la spec
       actualizada.
-- [ ] README y memoria del proyecto actualizados.
+- [x] README y memoria del proyecto actualizados.
 
 ## 9. Dudas abiertas
 
