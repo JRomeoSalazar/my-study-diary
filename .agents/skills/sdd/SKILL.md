@@ -46,7 +46,7 @@ medible.
 ## Plan (plan.md)
 Archivos y responsabilidades · Funciones puras (con "hoy" como parámetro) · Algoritmo en
 pseudocódigo · Interfaz · Decisiones justificadas con su alternativa descartada ·
-Estrategia de tests con `node --test`. Indica qué RF cubre cada parte.
+Estrategia de tests con `tests.html`. Indica qué RF cubre cada parte.
 
 ## Tareas (tasks.md)
 ```
@@ -57,5 +57,5 @@ Máximo 20-30 min por tarea, en orden de dependencia. Si salen más de 10, prop�
 la spec.
 
 ## Implementación
-Una sola tarea cada vez: tests primero (en rojo), después el código, `node --test` en
+Una sola tarea cada vez: tests primero (en rojo), después el código, `tests.html` en
 verde, marcar la tarea y parar.
