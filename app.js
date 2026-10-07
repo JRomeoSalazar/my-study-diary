@@ -410,11 +410,13 @@ function prepararFormulario() {
 }
 
 function mostrarTodo() {
+  // El mapa va primero: aunque lo guardado no sea una lista (o tenga elementos rotos) y
+  // fallen los cálculos de abajo, que no validan las sesiones, el mapa se dibuja igualmente.
+  mostrarMapa();
   mostrarRacha();
   mostrarSemana();
   mostrarMes();
   mostrarLista();
-  mostrarMapa();
 }
 
 // ---------- Formulario ----------

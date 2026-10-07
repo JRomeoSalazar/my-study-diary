@@ -72,6 +72,13 @@ Guion t23 (19 comprobaciones con clics y Tab reales). Falta el teclado con flech
 nueva celda (el `focusin` la selecciona). `preventDefault()` en TODAS las flechas (también en bordes y huecos) para
 que la página no se desplace; se ignoran con Alt/Ctrl/Meta. Guion t24 (24 comprobaciones con teclas reales).
 Fase 3 (interfaz) completa. Siguiente: T25 (verificación manual) y cierre; `README.md` pendiente.
+- T25 hecha (verificación con Playwright, no DevTools; guion t25: 32 comprobaciones, pasos 1-5 y 8 del plan §7.2).
+BUG encontrado y corregido: con la clave en `{}`, `"texto"`, `42` o con una lista con elementos rotos, los paneles
+antiguos (racha, semana, mes, lista) lanzaban una excepción en `mostrarTodo()` ANTES de `mostrarMapa()` y el mapa no
+se dibujaba (CA-8.3). Arreglo mínimo: `mostrarMapa()` va el primero en `mostrarTodo()`. SIGUE PENDIENTE (spec §7 lo
+acepta, pero el plan §7.2 paso 8 pide "sin errores"): con esos datos los paneles antiguos aún dan errores de consola
+(`sesiones.map is not a function`); arreglarlo exigiría validar racha/semana/mes/lista (tarea aparte, preguntar).
+Siguiente: T26.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
