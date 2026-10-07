@@ -249,7 +249,7 @@ Reglas que valen para todas las tareas:
 
 ## Fase 4 — Verificación y cierre
 
-- [ ] **T25. Verificación manual: funcionamiento** (~30 min)
+- [x] **T25. Verificación manual: funcionamiento** (~30 min)
   Con el MCP de Chrome DevTools en `isolatedContext`, seguir plan §7.2 pasos 1–5 y 8:
   mapa sin sesiones, guardar sesiones de 15, 45, 90 y 150 min en días distintos, ratón, clic,
   teclado, árbol de accesibilidad, y almacenamiento no válido (la clave no cambia).
