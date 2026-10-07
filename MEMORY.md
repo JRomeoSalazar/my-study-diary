@@ -79,6 +79,10 @@ se dibujaba (CA-8.3). Arreglo mínimo: `mostrarMapa()` va el primero en `mostrar
 acepta, pero el plan §7.2 paso 8 pide "sin errores"): con esos datos los paneles antiguos aún dan errores de consola
 (`sesiones.map is not a function`); arreglarlo exigiría validar racha/semana/mes/lista (tarea aparte, preguntar).
 Siguiente: T26.
+- T26 hecha (Playwright; guion t26: 20 comprobaciones): 360x740, 740x360, 360x360, zoom 200% (180px) y 1280px; RNF-8
+(5 000 sesiones: `mostrarMapa()` 6-11 ms; `mostrarTodo()` entero 600 ms por la lista); R-5 idéntico al código original
+(commit 2f748c3) en 6 conjuntos de datos. Arreglo: `.sesion-fecha { overflow-wrap: anywhere }` (a 180px la lista
+desbordaba la página 5px). Siguiente: T27 (pruebas completas + README) y T28.
 
 ## Decisiones (y por qué)
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
