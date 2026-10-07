@@ -239,7 +239,7 @@ Reglas que valen para todas las tareas:
   hay siempre un único `tabindex="0"` (el día seleccionado); al guardar una sesión la
   selección desaparece y vuelve el texto inicial.
 
-- [ ] **T24. Teclado con flechas** (~20 min)
+- [x] **T24. Teclado con flechas** (~20 min)
   `keydown` delegado: con una flecha llama a `moverPosicion`; si la posición cambia,
   `preventDefault()` y foco a la nueva celda (el `focusin` de T23 la selecciona).
   **Cubre:** RF-9 (CA-9.1, CA-9.2, CA-9.3).
