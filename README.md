@@ -17,6 +17,8 @@ Es además un **proyecto didáctico**: el código está escrito para que pueda e
 - [Por qué usarlo](#por-qué-usarlo)
 - [Primeros pasos](#primeros-pasos)
 - [Cómo se usa](#cómo-se-usa)
+- [Mapa de calor](#mapa-de-calor)
+- [Pruebas](#pruebas)
 - [Estructura del proyecto](#estructura-del-proyecto)
 - [Cómo funciona por dentro](#cómo-funciona-por-dentro)
 - [Ayuda y documentación](#ayuda-y-documentación)
@@ -29,6 +31,7 @@ Es además un **proyecto didáctico**: el código está escrito para que pueda e
 - 🏆 **Mejor racha**: el tramo más largo de días seguidos de todo tu historial.
 - 📚 **Total de la semana**: minutos estudiados de lunes a domingo (por ejemplo, `1 h 45 min`).
 - 📅 **Días de este mes**: cuántos días distintos has estudiado desde el día 1 del mes hasta hoy.
+- 🟦 **Mapa de calor de las últimas 12 semanas**: un cuadrito por día, más oscuro cuanto más estudias. Se puede recorrer con el ratón, el dedo o el teclado.
 - 🗂️ **Lista de sesiones** ordenada de la más reciente a la más antigua.
 - 📅 **Días pasados**: puedes apuntar sesiones de días anteriores (nunca futuras).
 - 📱 **Diseño responsive**, pensado también para el móvil.
@@ -83,7 +86,7 @@ python3 -m http.server 8000
 
 1. En **Registrar sesión**, elige la fecha (por defecto, hoy), escribe el tema y los minutos.
 2. Pulsa **Guardar sesión**.
-3. El bloque de la racha, arriba del todo, se actualiza al momento:
+3. El bloque de la racha, arriba del todo, y el [mapa de calor](#mapa-de-calor) se actualizan al momento:
 
 ```text
 Racha actual
@@ -110,13 +113,66 @@ Abre DevTools → **Application** → **Local Storage** y borra la clave `diario
 localStorage.removeItem("diario-estudio-sesiones");
 ```
 
+## Mapa de calor
+
+Bajo la racha, la sección **Últimas 12 semanas** dibuja un cuadrito por cada día:
+
+- Cada **columna es una semana** (de lunes a domingo, con el lunes arriba): la de la izquierda es la más antigua y la de la derecha, la semana actual. El mapa empieza en el lunes de hace 11 semanas y termina hoy.
+- Los **días posteriores a hoy** quedan como huecos, sin color.
+- Encima de las columnas aparece la abreviatura del **mes** donde empieza cada uno, y a la izquierda la del **día de la semana**.
+- El color depende de los **minutos de ese día** (si hay varias sesiones, se suman). La **leyenda** de debajo, de "Menos" a "Más", enseña los 5 niveles; pasa el ratón por un color para ver su tramo:
+
+| Nivel | Minutos del día |
+| --- | --- |
+| 0 | 0 min |
+| 1 | 1–29 min |
+| 2 | 30–59 min |
+| 3 | 60–119 min |
+| 4 | 120 min o más |
+
+El color nunca es lo único que informa: cada día tiene su **detalle** en texto, bajo el mapa, con este formato (día de la semana, día, mes y año, en minúsculas y sin puntos ni comas):
+
+```text
+lun 3 ago 2026: 1 h 15 min
+```
+
+### Cómo moverse por el mapa
+
+| Acción | Qué pasa |
+| --- | --- |
+| Pasar el ratón por un día | Se ve su detalle; al salir del mapa vuelve el del día seleccionado, o el texto "Pasa el ratón o toca un día para ver sus minutos." |
+| Clic o toque en un día | Queda **seleccionado** (con contorno) y su detalle se mantiene. Solo hay uno seleccionado; tocar otro lo sustituye, y tocar el mismo o fuera del mapa no cambia nada |
+| `Tab` | El mapa es **una sola parada** del tabulador: el foco cae en el día seleccionado o, si no hay ninguno, en hoy |
+| Flechas `↑` `↓` `←` `→` | Mueven el foco al día de al lado (arriba/abajo, día anterior/siguiente; izquierda/derecha, la misma fila en la semana anterior/siguiente). El día con el foco queda seleccionado. En los bordes y ante un hueco el foco no se mueve y la página no se desplaza |
+
+Al guardar una sesión, o al recargar la página, el mapa se dibuja de nuevo con la fecha de ese momento y se **borra la selección**. Los lectores de pantalla anuncian cada día con el mismo texto del detalle. En el móvil el mapa cabe entero en 360 px de ancho; con zoom o letra grande se desplaza solo el mapa, no la página.
+
+El mapa **solo lee** las sesiones: no guarda nada nuevo ni cambia el formato de los datos. Ignora las sesiones no válidas (sin fecha `AAAA-MM-DD` real o con minutos que no sean un entero mayor que 0) y, si lo guardado no es una lista, se muestra vacío.
+
+## Pruebas
+
+Las pruebas de la lógica (fechas, minutos, niveles, textos y navegación del mapa) están en `tests.html`. No hace falta instalar nada: **haz doble clic en `tests.html`** y se ejecutan en el navegador. Arriba verás un resumen en verde, por ejemplo **"133 de 133 pruebas superadas"**; si alguna falla, el resumen sale en rojo y esa prueba aparece como `FALLO` con el valor obtenido y el esperado (y también en la consola).
+
+Para añadir una prueba, escribe en el `<script>` de `tests.html`, antes de `mostrarResultados()`:
+
+```js
+prueba("CA-5.1: textoDetalle de 75 minutos", () =>
+  igual(textoDetalle("2026-08-03", 75), "lun 3 ago 2026: 1 h 15 min"));
+```
+
+Cada prueba empieza por el criterio de la spec que comprueba (`CA-5.1`…). Lo que depende de la página (dibujar el mapa, el ratón, el foco) no se puede probar desde `tests.html` abierto con doble clic, así que se comprueba a mano abriendo `index.html`.
+
 ## Estructura del proyecto
 
 ```text
 .
 ├── index.html   # Estructura de la página
 ├── styles.css   # Estilos (responsive)
-├── app.js       # Lógica: fechas, racha, semana, mes, formulario y localStorage
+├── logica.js    # Funciones puras: fechas, minutos, niveles y textos del mapa (sin tocar la página)
+├── app.js       # Racha, semana, mes, formulario, localStorage y dibujo del mapa
+├── tests.html   # Pruebas de la lógica: ábrelo con doble clic
+├── docs/        # Constitución del proyecto (principios innegociables)
+├── specs/       # Especificaciones de cada funcionalidad (spec, plan y tareas)
 ├── AGENTS.md    # Normas del proyecto (convenciones, reglas de fechas y racha)
 └── MEMORY.md    # Estado actual y decisiones tomadas
 ```
@@ -138,9 +194,11 @@ Las sesiones se guardan en `localStorage` bajo la clave `diario-estudio-sesiones
 | `tema` | texto | Lo que has estudiado |
 | `minutos` | entero | Duración de la sesión (mayor que 0) |
 
-La racha, la mejor racha, el total semanal y los días del mes **no se guardan**: se calculan siempre a partir de las sesiones.
+La racha, la mejor racha, el total semanal, los días del mes y el mapa de calor **no se guardan**: se calculan siempre a partir de las sesiones.
 
-Las fechas se manejan siempre en hora local con funciones propias (`fechaATexto` y `textoAFecha` en `app.js`). Se evitan a propósito `toISOString()` y `new Date("AAAA-MM-DD")`, porque trabajan en UTC y pueden desplazar el día.
+Los cálculos del mapa viven en `logica.js` como funciones puras (reciben las sesiones y la fecha de hoy, y devuelven un valor sin tocar la página ni `localStorage`); `app.js` solo las llama y dibuja el resultado. Por eso se pueden probar en `tests.html`.
+
+Las fechas se manejan siempre en hora local con funciones propias (`fechaATexto` y `textoAFecha` en `logica.js`). Se evitan a propósito `toISOString()` y `new Date("AAAA-MM-DD")`, porque trabajan en UTC y pueden desplazar el día.
 
 ## Ayuda y documentación
 
@@ -159,4 +217,5 @@ Mantenido por [@JRomeoSalazar](https://github.com/JRomeoSalazar).
 - Textos de la interfaz en **español**.
 - Cambios pequeños y enfocados, con código sencillo y nombres descriptivos.
 - Si cambias el formato de los datos, **mantén la compatibilidad** con las sesiones ya guardadas.
-- Prueba los cambios abriendo `index.html` en el navegador (también en tamaño móvil); no hay tests ni lint.
+- Cada regla tiene su prueba en `tests.html`, y antes de cada commit **todas tienen que pasar**. Además, prueba los cambios abriendo `index.html` en el navegador (también en tamaño móvil). No hay lint.
+- Cada funcionalidad tiene su spec en `specs/`; si cambias una, spec y código cambian en el mismo commit. Los principios del proyecto están en [`docs/constitution.md`](docs/constitution.md).

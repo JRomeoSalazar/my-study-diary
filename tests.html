@@ -769,6 +769,28 @@
       igual(JSON.stringify(MAPA_MIERCOLES), mapaAntes);
     });
 
+    // ---------- CA-1.4: el inicio de la semana se calcula con la fecha local ----------
+
+    prueba("CA-1.4: de lunes a domingo, lunesDeLaSemana da el mismo lunes (2026-10-05 … 2026-10-11 → \"2026-10-05\")", () => {
+      for (let n = 0; n < 7; n++) {
+        igual(lunesDeLaSemana(sumarDias("2026-10-05", n)), "2026-10-05");
+      }
+      igual(lunesDeLaSemana("2026-10-04"), "2026-09-28");
+    });
+    prueba("CA-1.4: en las semanas del cambio de hora el lunes y los días siguen bien (2026-03-29 → \"2026-03-23\", 2026-10-25 → \"2026-10-19\")", () => {
+      igual(lunesDeLaSemana("2026-03-29"), "2026-03-23");
+      igual(lunesDeLaSemana("2026-03-30"), "2026-03-30");
+      igual(lunesDeLaSemana("2026-10-25"), "2026-10-19");
+      igual(lunesDeLaSemana("2026-10-26"), "2026-10-26");
+    });
+    prueba("CA-1.4: sumarDias y lunesDeLaSemana devuelven siempre fechas válidas AAAA-MM-DD en hora local", () => {
+      ["2026-10-05", "2026-12-31", "2027-01-01", "2028-02-29", "2026-03-29", "2026-10-25"].forEach((fecha) => {
+        igual([fecha, esFechaValida(lunesDeLaSemana(fecha))], [fecha, true]);
+        igual([fecha, esFechaValida(sumarDias(fecha, 84))], [fecha, true]);
+        igual([fecha, esFechaValida(sumarDias(fecha, -77))], [fecha, true]);
+      });
+    });
+
     mostrarResultados();
   </script>
 </body>

@@ -270,7 +270,7 @@ Reglas que valen para todas las tareas:
   estira a 1280 px, el título no es mayor que los demás `h2` y no hay animaciones; con 5 000
   sesiones `mostrarMapa()` tarda menos de 100 ms.
 
-- [ ] **T27. Pruebas completas y `README.md`** (~20 min)
+- [x] **T27. Pruebas completas y `README.md`** (~20 min)
   Abrir `tests.html` y ver que todo pasa; comprobar que cada criterio [auto] y [auto + manual]
   tiene al menos una prueba (plan §6.3). Actualizar `README.md`: el mapa de calor, el formato
   del detalle y cómo abrir `tests.html`.
