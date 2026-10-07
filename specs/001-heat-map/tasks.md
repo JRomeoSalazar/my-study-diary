@@ -260,7 +260,7 @@ Reglas que valen para todas las tareas:
   puesta a `{}`, a `"texto"` o con JSON corrupto el mapa sale vacío (todo en nivel 0) y el
   valor guardado no cambia.
 
-- [ ] **T26. Verificación manual: visual y móvil** (~25 min)
+- [x] **T26. Verificación manual: visual y móvil** (~25 min)
   Plan §7.2 pasos 6 y 7: 360 × 740 vertical y horizontal, zoom al 200 %, 1280 px; comprobar
   RNF-8 con 5 000 sesiones en la página y que racha, semana y mes siguen dando los mismos
   valores (R-5).

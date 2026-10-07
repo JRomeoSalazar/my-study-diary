@@ -249,6 +249,8 @@ button:focus-visible {
   margin: 0;
   font-size: 0.9rem;
   color: var(--grafito-suave);
+  /* Como el tema: con zoom o letra grande, una palabra larga no ensancha la página */
+  overflow-wrap: anywhere;
 }
 
 .sesion-minutos {
