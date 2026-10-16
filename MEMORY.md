@@ -51,10 +51,10 @@ tests: sembrar sesiones relativas a hoy en `localStorage` (contexto aislado) y c
 (sin el time-budget la animación no se ve).
 
 ## Próximos pasos
-- Rediseño (2026-10-11): al usuario NO le gusta el estilo cuaderno ni sus colores. Hay 3 maquetas en
-Claude Design (https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr): A Umbral (oscura, minimalista),
-B Cartel (editorial suizo, naranja), C Brote (verde, tarjetas). ELEGIDA: C Brote (mejor distribución,
-se entiende mejor, transmite calma). Rama `feature/sprout-redesign`; spec 002 en
-`specs/002-sprout-redesign/spec.md` (borrador, dudas resueltas: sí insignia con inicial, aparición
-suave de la racha). Siguiente: aprobación de la spec → plan.md → tasks.md.
+- Rediseño Brote (spec 002, `specs/002-sprout-redesign/`): spec APROBADA (GATE 1, 2026-10-16) con
+Clarificaciones (emoji en insignia permitido: CA-1.5 es solo la interfaz propia; cifras en fila >480 px;
+≤480 px sin mejor racha → 2 columnas; iconos en 2 SVG aparte, autorizados; columna derecha ~390 px).
+plan.md, research.md, data-model.md, contracts/, quickstart.md y tasks.md (T001–T019) creados.
+Pendiente: /speckit-analyze y GATE 2 (aprobación de plan + tareas). Maquetas:
+https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).
 - Elegir la siguiente tarea con el usuario (p. ej. racha/semana/mes como funciones puras).
