@@ -7,7 +7,7 @@ aporte.
 - Mapa de calor (spec 001) cerrado: `logica.js` (funciones puras, "hoy" como parámetro, scripts
 clásicos), `tests.html` (140 de 140 OK; pruebas nuevas antes de `mostrarResultados()`), `app.js` pinta.
 - Rediseño "Brote" (spec 002) cerrado y validado por el reviewer (2026-10-16): paleta salvia,
-tarjetas, dos columnas desde 1024 px, insignia `inicialDelTema`, iconos SVG; PR a main abierto.
+tarjetas, dos columnas desde 1024 px, insignia `inicialDelTema`, iconos SVG; fusionado en main (PR #29).
 - Pendientes (tareas aparte, preguntar antes):
   - Pasar racha, semana y mes a funciones puras (principios III y IV); hoy usan `sesiones` y `new Date()`.
   - Con lo guardado corrupto racha/semana/mes/lista dan errores de consola; el mapa sí se dibuja.
@@ -45,4 +45,4 @@ relativas a hoy en `localStorage` (contexto aislado) y comparar el DOM con la ve
 - Playwright global (`/opt/pw-browsers/chromium`) con scripts en el scratchpad, nunca en el repo.
 
 ## Próximos pasos
-- Revisar y fusionar el PR de la spec 002; luego, los pendientes de arriba (preguntar antes).
+- Elegir el siguiente trabajo entre los pendientes de arriba (preguntar antes).
