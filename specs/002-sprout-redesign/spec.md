@@ -242,14 +242,14 @@ teclado, leyenda y textos.
 
 ## 9. Criterios de finalización
 
-- [ ] Se cumplen todos los criterios de RF-1 a RF-9.
-- [ ] `tests.html` muestra todas las pruebas superadas.
-- [ ] Verificado en el navegador: en escritorio a 1280 px, en el móvil a 360 px y 390 px,
+- [X] Se cumplen todos los criterios de RF-1 a RF-9.
+- [X] `tests.html` muestra todas las pruebas superadas.
+- [X] Verificado en el navegador: en escritorio a 1280 px, en el móvil a 360 px y 390 px,
       con teclado y con zoom al 200 %.
-- [ ] La consola no muestra errores de la aplicación.
-- [ ] Las sesiones guardadas antes del cambio siguen intactas y se ven.
-- [ ] Todas las dudas marcadas como [NECESITA ACLARACIÓN] están resueltas.
-- [ ] README y MEMORY actualizados.
+- [X] La consola no muestra errores de la aplicación.
+- [X] Las sesiones guardadas antes del cambio siguen intactas y se ven.
+- [X] Todas las dudas marcadas como [NECESITA ACLARACIÓN] están resueltas.
+- [X] README y MEMORY actualizados.
 
 ## 10. Dudas abiertas
 

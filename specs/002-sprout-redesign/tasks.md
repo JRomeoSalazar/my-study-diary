@@ -236,7 +236,7 @@ y 15.
   **Hecho cuando:** el README no menciona el estilo cuaderno, el fosforito ni las fuentes
   antiguas, y describe lo que hay.
 
-- [ ] T019 Marcar los criterios de finalización (§9) en `specs/002-sprout-redesign/spec.md` y
+- [X] T019 Marcar los criterios de finalización (§9) en `specs/002-sprout-redesign/spec.md` y
   actualizar `MEMORY.md` (estado, decisiones con su porqué, errores a evitar; máximo ~50 líneas).
   Depende de T017 y T018.
   **Hecho cuando:** §9 marcada, `MEMORY.md` refleja el rediseño terminado y ya no describe el
