@@ -48,4 +48,10 @@ tests: sembrar sesiones relativas a hoy en `localStorage` (contexto aislado) y c
 (sin el time-budget la animación no se ve).
 
 ## Próximos pasos
+- Rediseño (2026-10-11): al usuario NO le gusta el estilo cuaderno ni sus colores. Hay 3 maquetas en
+Claude Design (https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr): A Umbral (oscura, minimalista),
+B Cartel (editorial suizo, naranja), C Brote (verde, tarjetas). ELEGIDA: C Brote (mejor distribución,
+se entiende mejor, transmite calma). Rama `feature/sprout-redesign`; spec 002 en
+`specs/002-sprout-redesign/spec.md` (borrador, dudas resueltas: sí insignia con inicial, aparición
+suave de la racha). Siguiente: aprobación de la spec → plan.md → tasks.md.
 - Elegir la siguiente tarea con el usuario (p. ej. racha/semana/mes como funciones puras).
