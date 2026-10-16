@@ -1,6 +1,6 @@
 ---
 name: sdd
-description: Úsala siempre que trabajes con Spec-Driven Development en este proyecto (docs/constitution.md o cualquier archivo dentro de specs/) - redactar, revisar o cambiar specs, planes y tareas, o implementar y validar tareas de una spec.
+description: Flujo SDD anterior del proyecto, solo como referencia. No la uses para trabajar: el flujo vigente es GitHub Spec Kit (skills speckit-*). Consúltala solo si el usuario pide comparar con el flujo anterior.
 --- 
 # Spec-Driven Development (SDD)
 

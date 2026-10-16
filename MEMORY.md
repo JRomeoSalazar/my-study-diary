@@ -16,12 +16,13 @@ puras con "hoy" como parámetro, scripts clásicos), `tests.html` (133 de 133 OK
   - Con lo guardado corrupto (`{}`, `"texto"`, elementos rotos) racha/semana/mes/lista dan errores de consola
     (`sesiones.map is not a function`); el mapa sí se dibuja. Spec §7 lo acepta.
   - CA-7.1, 7.2 y 9.3 sin prueba automática (`tests.html` por `file://` no carga `index.html`); verificados a mano.
-- GitHub Spec Kit instalado (CLI 1.2.1, integración Claude, scripts sh): `.specify/` y skills
-`.claude/skills/speckit-*` (`/speckit-specify`, `/speckit-plan`...). Convive con la skill
-`sdd` propia: falta decidir cuál manda. `.specify/memory/constitution.md` es la plantilla vacía; la
-constitución real sigue en `docs/constitution.md` y las specs en `specs/NNN-*/`.
+- SDD con GitHub Spec Kit (CLI 1.2.1, integración Claude, scripts sh): `.specify/` y skills
+`.claude/skills/speckit-*`. Constitución vigente: `.specify/memory/constitution.md` v1.0.0 (los 6
+principios migrados literalmente). README y `AGENTS.md` (Reglas) al día.
 
 ## Decisiones (y por qué)
+- Manda Spec Kit (decisión del usuario): `docs/constitution.md` y la skill `sdd` quedan solo como
+referencia. La copia de `sdd` en `.agents/skills/` (OpenCode) no se ha tocado.
 - Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
 - Minutos solo enteros > 0. Tras guardar, el formulario se vacía y la fecha vuelve a hoy.
 - Mejor racha calculada, no guardada; oculta si es 0 (un récord de 0 no motiva). Sin

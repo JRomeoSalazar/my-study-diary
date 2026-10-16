@@ -1,50 +1,47 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Constitución del Diario de Estudio
 
-## Core Principles
+Principios innegociables. Un cambio que incumpla alguno no se acepta.
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+## Principios
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### I. Stack mínimo
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Solo HTML, CSS y JavaScript puros: sin npm, frameworks, build ni módulos ES. `index.html`
+funciona abierto con doble clic (`file://`).
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. La spec manda
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Cada funcionalidad tiene su spec en `specs/`. Spec y código cambian en el mismo commit; si no
+coinciden, es un error.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### III. Lógica separada de la interfaz
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Los cálculos (racha, semana, mes, formatos) son funciones puras: reciben las sesiones y la fecha
+de hoy, devuelven un valor y no tocan ni el DOM ni localStorage.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### IV. Cada regla tiene su test
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Cada regla de una spec tiene al menos un test en `tests.html`, que se abre en el navegador sin
+instalar nada. Antes de cada commit, todos tienen que pasar.
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+### V. Los datos del usuario son sagrados
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Ningún cambio puede perder ni romper lo guardado en `diario-estudio-sesiones`. Si cambia el
+formato, se pregunta antes y se siguen leyendo los datos antiguos.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### VI. Todo en español
+
+Los textos de la interfaz, los nombres de variables y funciones, los comentarios y la
+documentación van en español, escritos para quien empieza a programar.
+
+## Gobierno
+
+- Esta constitución está por encima de cualquier otra norma del proyecto. Cada spec, plan y
+  conjunto de tareas debe comprobar que la cumple.
+- Cambiarla requiere la aprobación explícita del usuario y se hace con `/speckit-constitution`.
+- Versionado semántico: MAYOR si se elimina o redefine un principio, MENOR si se añade un
+  principio o sección, PARCHE si solo se aclara la redacción.
+- Las normas de trabajo del día a día (convenciones, reglas de fechas, verificación) están en
+  `AGENTS.md`.
+
+**Versión**: 1.0.0 | **Ratificada**: 2026-10-04 | **Última modificación**: 2026-10-16

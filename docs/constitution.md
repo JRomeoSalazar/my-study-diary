@@ -1,4 +1,8 @@
 # Constitución del Diario de Estudio
+> [!NOTE]
+> Solo como referencia del flujo SDD anterior. La constitución vigente es
+> [`.specify/memory/constitution.md`](../.specify/memory/constitution.md) (GitHub Spec Kit).
+
 Principios innegociables. Un cambio que incumpla alguno no se acepta.
 
 1. **Stack mínimo.** Solo HTML, CSS y JavaScript puros: sin npm, frameworks, build ni
