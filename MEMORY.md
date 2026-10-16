@@ -42,4 +42,5 @@ relativas a hoy en `localStorage` (contexto aislado) y comparar el DOM.
 - Rediseño Brote (spec 002, `specs/002-sprout-redesign/`): spec APROBADA (GATE 1, 2026-10-16) con
 Clarificaciones; plan, research, data-model, contracts, quickstart y tasks (T001–T019) listos.
 `/speckit-analyze` hecho y sus correcciones aplicadas (2026-10-16). GATE 2 aprobado (2026-10-16);
-siguiente: implementar T001–T019. Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).
+hechas T001, T003 y T004 (HTML en tarjetas/columnas, base de `styles.css`); T002 espera
+a T007. Mientras tanto `.racha-brote` se ve en línea y las cifras sin estilo (T007, T010). Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).

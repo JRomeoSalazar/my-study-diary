@@ -28,7 +28,7 @@ Reglas para todas las tareas:
 
 ## Fase 1 — Preparación
 
-- [ ] T001 [P] Crear `icono-brote.svg` en la raíz: brote dibujado con líneas (tallo + dos hojas,
+- [X] T001 [P] Crear `icono-brote.svg` en la raíz: brote dibujado con líneas (tallo + dos hojas,
   `fill="none"`, trazo redondeado), `viewBox` cuadrado, trazo `#FFFFFF` (va sobre el cuadrado
   verde bosque de la cabecera). La etiqueta raíz lleva `xmlns="http://www.w3.org/2000/svg"`
   (sin él, `<img>` no lo muestra). Sin scripts ni enlaces externos dentro del SVG.
@@ -46,7 +46,7 @@ Reglas para todas las tareas:
 
 ## Fase 2 — Base (bloquea todas las historias)
 
-- [ ] T003 Reorganizar `index.html` según `contracts/estructura-html.md` y `plan.md` D-2:
+- [X] T003 Reorganizar `index.html` según `contracts/estructura-html.md` y `plan.md` D-2:
   `<link>` de Google Fonts a Bricolage Grotesque + Figtree (`research.md` R-7);
   `<header class="cabecera">` con `<span class="logo" aria-hidden="true"><img src="icono-brote.svg" alt=""></span>`
   y el `<h1>`; `<div class="columnas">` con `.columna-principal` (racha, cifras, mapa) y
@@ -61,7 +61,7 @@ Reglas para todas las tareas:
   sesiones sembradas, racha, mejor racha, semana, mes, mapa y lista muestran los mismos valores
   que antes y guardar una sesión sigue funcionando; consola limpia.
 
-- [ ] T004 Reescribir la base de `styles.css` (`plan.md` D-3): variables de `:root` con la paleta
+- [X] T004 Reescribir la base de `styles.css` (`plan.md` D-3): variables de `:root` con la paleta
   Brote, colores de `research.md` R-3/R-4 y las fuentes; `body` con fondo `--fondo` liso (sin
   cuadrícula); `.contenedor` sin margen rojo, `max-width: 1180px` y centrado; `.tarjeta` (blanco,
   radio ~16-20 px, relleno ~20-24 px); títulos en `--letra-titulos`; cabecera con `.logo`
