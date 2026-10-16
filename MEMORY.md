@@ -46,6 +46,6 @@ se recortaría en los días del borde, porque `.mapa` tiene `overflow-x: auto`.
 - Rediseño Brote (spec 002, `specs/002-sprout-redesign/`): spec APROBADA (GATE 1, 2026-10-16) con
 Clarificaciones; plan, research, data-model, contracts, quickstart y tasks (T001–T019) listos.
 `/speckit-analyze` hecho y sus correcciones aplicadas (2026-10-16). GATE 2 aprobado (2026-10-16);
-hechas T001, T003-T006 (HTML en tarjetas/columnas, base de `styles.css`, mapa y formulario
-Brote); T002 espera a T007. Mientras tanto `.racha-brote` se ve en línea y las cifras sin estilo
-(T007, T010). A 360 px el mapa aún tiene scroll: lo arregla T012 (relleno ≤ 26 px por lado). Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).
+hechas T001-T008 (HTML en tarjetas, base de `styles.css`, mapa, formulario, tarjeta de la
+racha y aparición suave). Faltan: columnas y cifras en fila (T009-T010), móvil (T011-T012: hoy a
+360 px el número mide 72 px y el mapa tiene scroll), insignia (T013-T016) y cierre (T017-T019). Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).

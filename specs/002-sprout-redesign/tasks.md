@@ -37,7 +37,7 @@ Reglas para todas las tareas:
   trazos, y tras T003/T004 el brote se ve **dentro de `index.html`** (cabecera), no solo abierto
   suelto.
 
-- [ ] T002 [P] Crear `brote-racha.svg` en la raíz: el mismo dibujo de brote, más grande, con trazo
+- [X] T002 [P] Crear `brote-racha.svg` en la raíz: el mismo dibujo de brote, más grande, con trazo
   `#2C6E4D` (verde algo más claro que `#1E5A3E`). La etiqueta raíz lleva
   `xmlns="http://www.w3.org/2000/svg"`. Sin scripts ni enlaces externos.
   **Cubre:** CA-3.3 · `research.md` R-2, R-4.
@@ -110,7 +110,7 @@ de `quickstart.md`.
 **Objetivo:** tarjeta verde bosque con el número más grande de la página. **Prueba
 independiente:** escenarios 7, 8 y 9 de `quickstart.md`.
 
-- [ ] T007 [US2] Tarjeta de la racha en `styles.css`: fondo `--bosque`; "Racha actual" y
+- [X] T007 [US2] Tarjeta de la racha en `styles.css`: fondo `--bosque`; "Racha actual" y
   `#racha-texto` en `--bosque-claro`; `.racha-numero` blanco, `--letra-titulos`, `font-size: 6rem`,
   cifras `lining-nums tabular-nums`; `position: relative; overflow: hidden`; `.racha-brote` en
   posición absoluta a la derecha, visible solo desde 1024 px (`display: none` por debajo).
@@ -118,7 +118,7 @@ independiente:** escenarios 7, 8 y 9 de `quickstart.md`.
   **Hecho cuando:** el escenario 7 se cumple a 1280 px (número ≥ 96 px medido en DevTools, brote
   visible) y a 800 px el brote no se ve; "1 día seguido" / "N días seguidos" como antes.
 
-- [ ] T008 [US2] Aparición suave en `styles.css`: `@keyframes aparecer` (de `opacity: 0;
+- [X] T008 [US2] Aparición suave en `styles.css`: `@keyframes aparecer` (de `opacity: 0;
   transform: translateY(8px)` a `opacity: 1; transform: none`), `0.5s ease-out` una vez en
   `.racha-numero`; `@media (prefers-reduced-motion: reduce)` → `animation: none`.
   **Cubre:** RF-9 (CA-9.2, CA-9.3), RNF-7.
