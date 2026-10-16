@@ -791,6 +791,41 @@
       });
     });
 
+    // ---------- CA-8.5 y CA-8.6: inicial del tema para la insignia ----------
+
+    prueba("CA-8.5: la inicial es la primera letra en mayúscula (\"matemáticas\" → \"M\", \"Física\" → \"F\", \"ñandú\" → \"Ñ\")", () => {
+      igual(inicialDelTema("matemáticas"), "M");
+      igual(inicialDelTema("Física"), "F");
+      igual(inicialDelTema("ñandú"), "Ñ");
+    });
+    prueba("CA-8.5: se ignoran los espacios y tabuladores del principio (\"  álgebra\" → \"Á\", \"\\tHistoria\" → \"H\")", () => {
+      igual(inicialDelTema("  álgebra"), "Á");
+      igual(inicialDelTema("\tHistoria"), "H");
+    });
+    prueba("CA-8.5: si el tema empieza por un número, la inicial es ese número (\"3D\" → \"3\")", () => {
+      igual(inicialDelTema("3D"), "3");
+    });
+    prueba("CA-8.5: una letra con la tilde escrita aparte no se parte (\"a\\u0301lgebra\" → \"A\\u0301\")", () => {
+      igual(inicialDelTema("a\u0301lgebra"), "A\u0301");
+    });
+    prueba("CA-8.5: un emoji se toma entero, también los compuestos, banderas y con selector de variante", () => {
+      igual(inicialDelTema("📚 Lectura"), "📚");
+      igual(inicialDelTema("👩‍💻 Programar"), "👩‍💻");
+      igual(inicialDelTema("🇪🇸 Español"), "🇪🇸");
+      igual(inicialDelTema("❤️ Música"), "❤️");
+    });
+    prueba("CA-8.6: un tema vacío o solo con espacios no tiene inicial (\"\", \"   \", \"\\t \\n\" → \"\")", () => {
+      igual(inicialDelTema(""), "");
+      igual(inicialDelTema("   "), "");
+      igual(inicialDelTema("\t \n"), "");
+    });
+    prueba("CA-8.6: si el tema no es un texto (datos corruptos) no hay inicial (undefined, null, 42, {} → \"\")", () => {
+      igual(inicialDelTema(undefined), "");
+      igual(inicialDelTema(null), "");
+      igual(inicialDelTema(42), "");
+      igual(inicialDelTema({}), "");
+    });
+
     mostrarResultados();
   </script>
 </body>

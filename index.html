@@ -6,65 +6,78 @@
   <title>Diario de Estudio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,400;7..72,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;600&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="contenedor">
-    <h1>Diario de Estudio</h1>
+    <header class="cabecera">
+      <span class="logo" aria-hidden="true"><img src="icono-brote.svg" alt=""></span>
+      <h1>Diario de Estudio</h1>
+    </header>
 
-    <section class="seccion racha">
-      <p class="racha-titulo">Racha actual</p>
-      <div class="racha-cifra">
-        <p class="racha-numero"><span class="fosforito" id="racha-dias">0</span></p>
-        <p class="racha-texto" id="racha-texto">días seguidos</p>
+    <div class="columnas">
+      <!-- Izquierda en pantalla ancha: racha, cifras y mapa -->
+      <div class="columna-principal">
+        <section class="tarjeta racha">
+          <p class="racha-titulo">Racha actual</p>
+          <div class="racha-cifra">
+            <p class="racha-numero"><span id="racha-dias">0</span></p>
+            <p class="racha-texto" id="racha-texto">días seguidos</p>
+          </div>
+          <img class="racha-brote" src="brote-racha.svg" alt="">
+        </section>
+
+        <dl class="cifras">
+          <div class="tarjeta cifra" id="mejor-racha" hidden>
+            <dt>Mejor racha</dt>
+            <dd id="mejor-racha-valor"></dd>
+          </div>
+          <div class="tarjeta cifra cifra-semana">
+            <dt>Esta semana</dt>
+            <dd id="minutos-semana"></dd>
+          </div>
+          <div class="tarjeta cifra cifra-mes">
+            <dt>Este mes</dt>
+            <dd id="dias-mes"></dd>
+          </div>
+        </dl>
+
+        <section class="tarjeta">
+          <h2 id="mapa-titulo">Últimas 12 semanas</h2>
+          <div id="mapa" class="mapa" role="grid" aria-labelledby="mapa-titulo"></div>
+          <p id="mapa-detalle" class="mapa-detalle"></p>
+          <div id="mapa-leyenda" class="mapa-leyenda"></div>
+        </section>
       </div>
-      <dl class="racha-datos">
-        <div id="mejor-racha" hidden>
-          <dt>Mejor racha</dt>
-          <dd id="mejor-racha-valor"></dd>
-        </div>
-        <div>
-          <dt>Esta semana</dt>
-          <dd id="minutos-semana"></dd>
-        </div>
-        <div>
-          <dt>Este mes</dt>
-          <dd id="dias-mes"></dd>
-        </div>
-      </dl>
-    </section>
 
-    <section class="seccion">
-      <h2 id="mapa-titulo">Últimas 12 semanas</h2>
-      <div id="mapa" class="mapa" role="grid" aria-labelledby="mapa-titulo"></div>
-      <p id="mapa-detalle" class="mapa-detalle"></p>
-      <div id="mapa-leyenda" class="mapa-leyenda"></div>
-    </section>
+      <!-- Derecha en pantalla ancha: formulario y sesiones -->
+      <div class="columna-lateral">
+        <section class="tarjeta">
+          <h2>Registrar sesión</h2>
+          <form id="formulario">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" required>
 
-    <section class="seccion">
-      <h2>Registrar sesión</h2>
-      <form id="formulario">
-        <label for="fecha">Fecha</label>
-        <input type="date" id="fecha" required>
+            <label for="tema">Tema</label>
+            <input type="text" id="tema" placeholder="Ej.: Matemáticas" required>
 
-        <label for="tema">Tema</label>
-        <input type="text" id="tema" placeholder="Ej.: Matemáticas" required>
+            <label for="minutos">Minutos</label>
+            <input type="number" id="minutos" min="1" step="1" placeholder="Ej.: 30" required>
 
-        <label for="minutos">Minutos</label>
-        <input type="number" id="minutos" min="1" step="1" placeholder="Ej.: 30" required>
+            <p class="error" id="error"></p>
 
-        <p class="error" id="error"></p>
+            <button type="submit">Guardar sesión</button>
+          </form>
+        </section>
 
-        <button type="submit">Guardar sesión</button>
-      </form>
-    </section>
-
-    <section class="seccion">
-      <h2>Sesiones</h2>
-      <p class="vacio" id="vacio">Todavía no has registrado ninguna sesión.</p>
-      <ul class="lista" id="lista"></ul>
-    </section>
+        <section class="tarjeta">
+          <h2>Sesiones</h2>
+          <p class="vacio" id="vacio">Todavía no has registrado ninguna sesión.</p>
+          <ul class="lista" id="lista"></ul>
+        </section>
+      </div>
+    </div>
   </main>
 
   <script src="logica.js"></script>

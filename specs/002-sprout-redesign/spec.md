@@ -1,6 +1,6 @@
 # Spec 002 — Rediseño visual "Brote"
 
-Estado: borrador · Fecha: 2026-10-11
+Estado: aprobada (2026-10-16) · Fecha: 2026-10-11
 
 > Nota: la carpeta se llama `002-sprout-redesign`, como la rama, por decisión del usuario
 > (misma excepción consciente al principio 6 que la spec 001).
@@ -19,6 +19,16 @@ se entiende y la que transmite más calma.
 **Objetivo:** cambiar el aspecto y la distribución del diario al estilo Brote: tonos verdes
 serenos, tarjetas blancas redondeadas y, en pantallas anchas, dos columnas. Todo lo que el
 diario hace, calcula, guarda y escribe sigue igual. **Es un cambio solo visual.**
+
+## Clarificaciones
+
+### Sesión 2026-10-16
+
+- P: ¿CA-1.5 ("sin emojis") choca con §7, donde la insignia muestra el emoji con que empieza un tema? → R: CA-1.5 se refiere solo a la interfaz propia (textos y adornos). Lo que escribe el usuario, incluida su inicial en la insignia (aunque sea un emoji, entero), se muestra tal cual.
+- P: ¿Cómo se colocan las tarjetas de cifras entre 481 y 1023 px de ancho? → R: En una fila, como en la pantalla ancha.
+- P: A 480 px o menos, con la mejor racha oculta (CA-4.4), ¿cómo se reparten "Esta semana" y "Este mes"? → R: En una fila de dos columnas iguales.
+- P: ¿Cómo se incluyen los iconos del brote (CA-1.4 y CA-3.3)? → R: Cada icono en su propio archivo de imagen SVG aparte (el usuario autoriza crear esos archivos nuevos). Deben verse al abrir la página con doble clic (`file://`), sin cargarlos con `fetch`, y ser decorativos (texto alternativo vacío / ocultos a lectores de pantalla).
+- P: En pantalla ancha (máx. 1180 px), ¿qué proporción tienen las dos columnas de CA-2.1? → R: Columna derecha de ancho fijo (unos 380-400 px); la izquierda ocupa el resto.
 
 ## 2. Usuarios
 
@@ -75,14 +85,18 @@ Cada criterio indica cómo se comprueba: **[manual]** = verificación en el nave
   la racha, cada una de las tres cifras, el mapa, el formulario y la lista de sesiones.
 - **CA-1.4.** [manual] EL SISTEMA mostrará en la cabecera un icono de brote dibujado con
   líneas, dentro de un cuadrado redondeado verde bosque, junto al título "Diario de
-  Estudio". El icono es decorativo: los lectores de pantalla no lo anuncian.
-- **CA-1.5.** [manual] EL SISTEMA no mostrará emojis.
+  Estudio". El icono es decorativo: los lectores de pantalla no lo anuncian. Es un
+  archivo de imagen aparte que se ve al abrir la página con doble clic (ver Clarificaciones).
+- **CA-1.5.** [manual] EL SISTEMA no mostrará emojis en la interfaz propia (textos y
+  adornos). Lo que escribe el usuario, incluida la inicial de la insignia (CA-8.4), se
+  muestra tal cual, aunque sea un emoji (entero, sin partir).
 
 ### RF-2. Distribución
 
 - **CA-2.1.** [manual] MIENTRAS la pantalla sea ancha, EL SISTEMA mostrará dos columnas:
-  a la izquierda (más ancha) la racha, las cifras y el mapa; a la derecha el formulario y
-  la lista de sesiones. El contenido no superará los 1180 px de ancho y quedará centrado.
+  a la izquierda la racha, las cifras y el mapa; a la derecha el formulario y la lista de
+  sesiones. La columna derecha tendrá un ancho fijo (unos 380-400 px) y la izquierda ocupará
+  el resto. El contenido no superará los 1180 px de ancho y quedará centrado.
 - **CA-2.2.** [manual] MIENTRAS la pantalla sea estrecha, EL SISTEMA mostrará una sola
   columna en este orden: racha, cifras, mapa, formulario, sesiones.
 - **CA-2.3.** [manual] EL SISTEMA mantendrá ese mismo orden (racha, cifras, mapa,
@@ -97,18 +111,20 @@ Cada criterio indica cómo se comprueba: **[manual]** = verificación en el nave
   de la página (al menos 96 px en pantalla ancha y 80 px a 360 px de ancho).
 - **CA-3.3.** [manual] MIENTRAS la pantalla sea ancha, EL SISTEMA mostrará en la tarjeta
   de la racha un brote grande y decorativo en un verde algo más claro que el fondo de la
-  tarjeta, que los lectores de pantalla no anuncian.
+  tarjeta, que los lectores de pantalla no anuncian. Es un archivo de imagen aparte, como el
+  de CA-1.4.
 
 ### RF-4. Cifras: mejor racha, esta semana y este mes
 
 - **CA-4.1.** [manual] EL SISTEMA mostrará cada cifra en su propia tarjeta blanca, con la
   etiqueta en texto secundario y el valor debajo, más grande.
-- **CA-4.2.** [manual] MIENTRAS la pantalla sea ancha, EL SISTEMA mostrará las tarjetas
-  visibles en una fila.
+- **CA-4.2.** [manual] MIENTRAS la pantalla mida más de 480 px (pantalla ancha y también
+  estrecha entre 481 y 1023 px), EL SISTEMA mostrará las tarjetas visibles en una fila.
 - **CA-4.3.** [manual] MIENTRAS la pantalla mida 480 px o menos, EL SISTEMA mostrará
   "Mejor racha" y "Este mes" en dos columnas, y "Esta semana" debajo, a todo el ancho.
 - **CA-4.4.** [manual] SI la mejor racha es 0 (y por tanto está oculta, como hoy),
-  ENTONCES EL SISTEMA repartirá las tarjetas restantes sin dejar un hueco vacío.
+  ENTONCES EL SISTEMA repartirá las tarjetas restantes sin dejar un hueco vacío. A 480 px o
+  menos, "Esta semana" y "Este mes" irán en una fila de dos columnas iguales.
 - **CA-4.5.** [manual] EL SISTEMA no partirá un valor en dos líneas (p. ej. "3 h 10 min")
   a 360 px de ancho.
 
@@ -201,7 +217,7 @@ teclado, leyenda y textos.
 
 | Caso | Comportamiento esperado |
 |------|-------------------------|
-| Mejor racha 0 (oculta) | Las tarjetas de semana y mes ocupan el espacio sin hueco (CA-4.4). |
+| Mejor racha 0 (oculta) | Las tarjetas de semana y mes ocupan el espacio sin hueco; a 480 px o menos, en dos columnas iguales (CA-4.4). |
 | Sin sesiones | Mapa con todos los días en nivel 0 y la tarjeta de sesiones con el mensaje vacío. |
 | Tema muy largo sin espacios | Se parte dentro de la tarjeta, sin ensanchar la página. |
 | Minutos enormes (p. ej. 1 000 000) | La píldora de minutos no se sale de la tarjeta. Como hoy, la lista muestra "1000000 min". |
@@ -210,7 +226,7 @@ teclado, leyenda y textos.
 | Zoom al 200 % o letra grande | Se pasa a una columna. Solo el mapa se desplaza en horizontal. |
 | Sin conexión | Fuentes del sistema; la página se ve bien y nada se descoloca. |
 | Tema que empieza por minúscula, acento o número | "matemáticas" → "M", "álgebra" → "Á", "3D" → "3". |
-| Tema que empieza por un emoji | La insignia muestra el emoji entero. |
+| Tema que empieza por un emoji | La insignia muestra el emoji entero (es texto del usuario; CA-1.5 no lo impide). |
 | Tema vacío o solo espacios (datos antiguos o corruptos) | La sesión se ve sin insignia. |
 | Lista con muchas sesiones | La tarjeta crece hacia abajo. La página hace scroll de forma normal, sin scroll interno. |
 
@@ -226,18 +242,20 @@ teclado, leyenda y textos.
 
 ## 9. Criterios de finalización
 
-- [ ] Se cumplen todos los criterios de RF-1 a RF-9.
-- [ ] `tests.html` muestra todas las pruebas superadas.
-- [ ] Verificado en el navegador: en escritorio a 1280 px, en el móvil a 360 px y 390 px,
+- [X] Se cumplen todos los criterios de RF-1 a RF-9.
+- [X] `tests.html` muestra todas las pruebas superadas.
+- [X] Verificado en el navegador: en escritorio a 1280 px, en el móvil a 360 px y 390 px,
       con teclado y con zoom al 200 %.
-- [ ] La consola no muestra errores de la aplicación.
-- [ ] Las sesiones guardadas antes del cambio siguen intactas y se ven.
-- [ ] Todas las dudas marcadas como [NECESITA ACLARACIÓN] están resueltas.
-- [ ] README y MEMORY actualizados.
+- [X] La consola no muestra errores de la aplicación.
+- [X] Las sesiones guardadas antes del cambio siguen intactas y se ven.
+- [X] Todas las dudas marcadas como [NECESITA ACLARACIÓN] están resueltas.
+- [X] README y MEMORY actualizados.
 
 ## 10. Dudas abiertas
 
 Ninguna.
+
+Decisiones del usuario (2026-10-16): ver Clarificaciones. Spec aprobada (GATE 1).
 
 Decisiones del usuario (2026-10-11):
 - Propuesta elegida: C · Brote.

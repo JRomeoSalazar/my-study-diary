@@ -37,12 +37,14 @@ Y se construye con **desarrollo guiado por especificaciones (SDD)**: este proyec
 - 🟦 **Mapa de calor de las últimas 12 semanas**: un cuadrito por día, más oscuro cuanto más estudias. Se puede recorrer con el ratón, el dedo o el teclado.
 - 🗂️ **Lista de sesiones** ordenada de la más reciente a la más antigua.
 - 📅 **Días pasados**: puedes apuntar sesiones de días anteriores (nunca futuras).
-- 📱 **Diseño responsive**, pensado también para el móvil.
+- 🌱 **Aspecto "Brote"**: tonos verdes tranquilos y cada parte en su tarjeta blanca redondeada. La racha va en una tarjeta verde bosque con el número más grande de la página, que aparece suave al cargar (sin animación si tienes activado "reducir movimiento").
+- 🔤 **Insignia con la inicial** del tema delante de cada sesión (si el tema empieza por un emoji, se muestra el emoji entero).
+- 📱 **Diseño responsive**: en pantallas de 1024 px o más, dos columnas (racha, cifras y mapa a la izquierda; formulario y sesiones a la derecha); por debajo, una sola columna. También pensado para el móvil (360 px).
 
 ## Por qué usarlo
 
 - **Cero configuración**: HTML, CSS y JavaScript puros. Sin frameworks, sin npm y sin paso de build.
-- **Funciona sin conexión** y directamente desde el disco (`file://`). Las fuentes (Literata y Atkinson Hyperlegible) se cargan de Google Fonts; sin internet se usan las del sistema y todo sigue funcionando.
+- **Funciona sin conexión** y directamente desde el disco (`file://`). Las fuentes (Bricolage Grotesque para títulos y cifras, y Figtree para el texto) se cargan de Google Fonts; sin internet se usan las del sistema y todo sigue funcionando.
 - **Tus datos se quedan en tu navegador** (`localStorage`); no se envían a ningún sitio.
 - **Fechas fiables**: todo se calcula con tu fecha local, sin desfases por zonas horarias.
 - **Código fácil de leer**: ideal para aprender o para usarlo como base de tus propios proyectos.
@@ -89,7 +91,7 @@ python3 -m http.server 8000
 
 1. En **Registrar sesión**, elige la fecha (por defecto, hoy), escribe el tema y los minutos.
 2. Pulsa **Guardar sesión**.
-3. El bloque de la racha, arriba del todo, y el [mapa de calor](#mapa-de-calor) se actualizan al momento:
+3. La tarjeta de la racha, arriba del todo, las cifras de debajo y el [mapa de calor](#mapa-de-calor) se actualizan al momento:
 
 ```text
 Racha actual
@@ -118,7 +120,7 @@ localStorage.removeItem("diario-estudio-sesiones");
 
 ## Mapa de calor
 
-Bajo la racha, la sección **Últimas 12 semanas** dibuja un cuadrito por cada día:
+Bajo la racha y las cifras, la tarjeta **Últimas 12 semanas** dibuja un cuadrito por cada día:
 
 - Cada **columna es una semana** (de lunes a domingo, con el lunes arriba): la de la izquierda es la más antigua y la de la derecha, la semana actual. El mapa empieza en el lunes de hace 11 semanas y termina hoy.
 - Los **días posteriores a hoy** quedan como huecos, sin color.
@@ -154,7 +156,7 @@ El mapa **solo lee** las sesiones: no guarda nada nuevo ni cambia el formato de 
 
 ## Pruebas
 
-Las pruebas de la lógica (fechas, minutos, niveles, textos y navegación del mapa) están en `tests.html`. No hace falta instalar nada: **haz doble clic en `tests.html`** y se ejecutan en el navegador. Arriba verás un resumen en verde, por ejemplo **"133 de 133 pruebas superadas"**; si alguna falla, el resumen sale en rojo y esa prueba aparece como `FALLO` con el valor obtenido y el esperado (y también en la consola).
+Las pruebas de la lógica (fechas, minutos, niveles, textos y navegación del mapa, e inicial de la insignia) están en `tests.html`. No hace falta instalar nada: **haz doble clic en `tests.html`** y se ejecutan en el navegador. Arriba verás un resumen en verde, por ejemplo **"140 de 140 pruebas superadas"**; si alguna falla, el resumen sale en rojo y esa prueba aparece como `FALLO` con el valor obtenido y el esperado (y también en la consola).
 
 Para añadir una prueba, escribe en el `<script>` de `tests.html`, antes de `mostrarResultados()`:
 
@@ -169,17 +171,19 @@ Cada prueba empieza por el criterio de la spec que comprueba (`CA-5.1`…). Lo q
 
 ```text
 .
-├── index.html   # Estructura de la página
-├── styles.css   # Estilos (responsive)
-├── logica.js    # Funciones puras: fechas, minutos, niveles y textos del mapa (sin tocar la página)
-├── app.js       # Racha, semana, mes, formulario, localStorage y dibujo del mapa
-├── tests.html   # Pruebas de la lógica: ábrelo con doble clic
-├── .specify/    # GitHub Spec Kit: constitución (principios innegociables), plantillas y scripts
-├── .claude/     # Skills de Spec Kit (speckit-*) y agentes del flujo SDD (agents/)
-├── docs/        # Constitución del flujo SDD anterior (solo como referencia)
-├── specs/       # Especificaciones de cada funcionalidad (spec, plan y tareas)
-├── AGENTS.md    # Normas del proyecto (convenciones, reglas de fechas y racha)
-└── MEMORY.md    # Estado actual y decisiones tomadas
+├── index.html       # Estructura de la página (tarjetas y dos columnas)
+├── styles.css       # Estilos "Brote" (colores en :root, responsive)
+├── icono-brote.svg  # Icono del brote de la cabecera (decorativo)
+├── brote-racha.svg  # Brote grande de la tarjeta de la racha (decorativo, solo en pantalla ancha)
+├── logica.js        # Funciones puras: fechas, minutos, niveles, textos del mapa e inicial del tema (sin tocar la página)
+├── app.js           # Racha, semana, mes, formulario, localStorage y dibujo del mapa
+├── tests.html       # Pruebas de la lógica: ábrelo con doble clic
+├── .specify/        # GitHub Spec Kit: constitución (principios innegociables), plantillas y scripts
+├── .claude/         # Skills de Spec Kit (speckit-*) y agentes del flujo SDD (agents/)
+├── docs/            # Constitución del flujo SDD anterior (solo como referencia)
+├── specs/           # Especificaciones de cada funcionalidad (spec, plan y tareas)
+├── AGENTS.md        # Normas del proyecto (convenciones, reglas de fechas y racha)
+└── MEMORY.md        # Estado actual y decisiones tomadas
 ```
 
 ## Flujo SDD con agentes (Claude Code)
@@ -214,7 +218,7 @@ Las sesiones se guardan en `localStorage` bajo la clave `diario-estudio-sesiones
 
 La racha, la mejor racha, el total semanal, los días del mes y el mapa de calor **no se guardan**: se calculan siempre a partir de las sesiones.
 
-Los cálculos del mapa viven en `logica.js` como funciones puras (reciben las sesiones y la fecha de hoy, y devuelven un valor sin tocar la página ni `localStorage`); `app.js` solo las llama y dibuja el resultado. Por eso se pueden probar en `tests.html`.
+Los cálculos del mapa y la inicial de la insignia (`inicialDelTema`) viven en `logica.js` como funciones puras (reciben datos, como las sesiones y la fecha de hoy o el tema de una sesión, y devuelven un valor sin tocar la página ni `localStorage`); `app.js` solo las llama y dibuja el resultado. Por eso se pueden probar en `tests.html`.
 
 Las fechas se manejan siempre en hora local con funciones propias (`fechaATexto` y `textoAFecha` en `logica.js`). Se evitan a propósito `toISOString()` y `new Date("AAAA-MM-DD")`, porque trabajan en UTC y pueden desplazar el día.
 

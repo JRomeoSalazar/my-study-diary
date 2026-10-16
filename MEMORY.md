@@ -4,57 +4,45 @@ aporte.
 
 ## Estado actual
 - v1: registrar sesiones, racha actual, lista y fila Mejor racha / Esta semana / Este mes.
-- Diseño "cuaderno de cuadros": fondo cuadriculado, margen rojo, tinta azul; Literata (títulos y
-cifras) y Atkinson Hyperlegible (texto). Solo la racha es llamativa (fosforito animado una vez,
-sin animación con `prefers-reduced-motion`). Colores en `:root`.
-- Mapa de calor "Últimas 12 semanas" (spec 001) IMPLEMENTADO y cerrado (T1–T28): `logica.js` (funciones
-puras con "hoy" como parámetro, scripts clásicos), `tests.html` (133 de 133 OK), `app.js` pinta
-(`mostrarMapa()`, eventos delegados de ratón/clic/teclado), `styles.css`. Spec §8 marcada. README al día.
-- Las pruebas se añaden en el `<script>` de `tests.html`, antes de `mostrarResultados()`.
+- Mapa de calor (spec 001) cerrado: `logica.js` (funciones puras, "hoy" como parámetro, scripts
+clásicos), `tests.html` (140 de 140 OK; pruebas nuevas antes de `mostrarResultados()`), `app.js` pinta.
+- Rediseño "Brote" (spec 002) cerrado y validado por el reviewer (2026-10-16): paleta salvia,
+tarjetas, dos columnas desde 1024 px, insignia `inicialDelTema`, iconos SVG; PR a main abierto.
 - Pendientes (tareas aparte, preguntar antes):
-  - Pasar racha, semana y mes a funciones puras (principios 3 y 4); hoy usan `sesiones` global y `new Date()`.
-  - Con lo guardado corrupto (`{}`, `"texto"`, elementos rotos) racha/semana/mes/lista dan errores de consola
-    (`sesiones.map is not a function`); el mapa sí se dibuja. Spec §7 lo acepta.
-  - CA-7.1, 7.2 y 9.3 sin prueba automática (`tests.html` por `file://` no carga `index.html`); verificados a mano.
-- SDD con GitHub Spec Kit (CLI 1.2.1, integración Claude, scripts sh): `.specify/` y skills
-`.claude/skills/speckit-*`. Constitución vigente: `.specify/memory/constitution.md` v1.0.0 (los 6
-principios migrados literalmente). README y `AGENTS.md` (Reglas) al día.
-- Agentes SDD en `.claude/agents/` (rama `chore/sdd-agents`, pendiente de probar): `coordinator`
-(se usa con `claude --agent coordinator`), `planner`, `implementer`, `reviewer`; llaman a las skills
-`speckit-*`. Dos aprobaciones del usuario (spec; plan+tareas). Los commits los hace el usuario.
+  - Pasar racha, semana y mes a funciones puras (principios III y IV); hoy usan `sesiones` y `new Date()`.
+  - Con lo guardado corrupto racha/semana/mes/lista dan errores de consola; el mapa sí se dibuja.
+  - A 180 px CSS (zoom 200 % en móvil) las cifras con `nowrap` y valores enormes desbordan (fuera de la spec 002).
+- SDD con GitHub Spec Kit (CLI 1.2.1, scripts sh): `.specify/`, skills `.claude/skills/speckit-*`,
+constitución `.specify/memory/constitution.md` v1.0.0. Agentes en `.claude/agents/` (`coordinator`,
+`planner`, `implementer`, `reviewer`). Dos aprobaciones del usuario (spec; plan+tareas).
 
 ## Decisiones (y por qué)
-- Manda Spec Kit (decisión del usuario): `docs/constitution.md` y la skill `sdd` quedan solo como
-referencia. La copia de `sdd` en `.agents/skills/` (OpenCode) no se ha tocado.
-- Fecha editable con máximo hoy: permite apuntar días pasados; una sesión futura no suma.
-- Minutos solo enteros > 0. Tras guardar, el formulario se vacía y la fecha vuelve a hoy.
-- Mejor racha calculada, no guardada; oculta si es 0 (un récord de 0 no motiva). Sin
-mensaje de récord ni fechas del tramo: el usuario no los quiso.
-- Semana y mes se muestran aunque sean 0: son datos del periodo, no récords. Mes = mes
-natural, sin "X de N días". Minutos: "45 min" / "1 h 45 min" / "2 h".
-- Google Fonts permitido por el usuario: es un `<link>`, funciona con `file://` y sin
-conexión usa las fuentes del sistema. Sin emojis en la interfaz (petición del usuario).
-- Spec 001: la carpeta `001-heat-map` se queda en inglés por decisión del usuario (no
-renombrar). Criterios marcados [auto], [manual] o [auto + manual] (este último, porque
-`tests.html` con `file://` no puede cargar `index.html`).
+- Manda Spec Kit: `docs/constitution.md` y la skill `sdd` quedan solo como referencia.
+- Fecha editable con máximo hoy; una sesión futura no suma. Minutos solo enteros > 0.
+- Mejor racha calculada, no guardada; oculta si es 0 (un récord de 0 no motiva). Semana y mes se
+muestran aunque sean 0. Mes = mes natural. Minutos: "45 min" / "1 h 45 min" / "2 h".
+- Google Fonts permitido (`<link>`, funciona con `file://`). Sin emojis en la interfaz propia; lo
+que escribe el usuario (p. ej. la inicial de la insignia) se muestra tal cual (spec 002).
+- Colores del mapa recalculados (research R-3) para cumplir 1,4:1 entre niveles; nivel 4 = bosque.
+- Carpetas `001-heat-map` y `002-sprout-redesign` en inglés por decisión del usuario.
+- Principio IV: criterios [manual] (visuales) sin prueba en `tests.html` (`file://` no carga
+`index.html`); se verifican a mano. Excepción aceptada por el usuario (spec 001 y 002).
 
 ## Aprendizajes y errores a evitar
-- Cifras en serif: forzar `font-variant-numeric: lining-nums` (Georgia usa cifras antiguas).
-- Si cambia la fuente, revisar los % del degradado de `.fosforito`.
-- En móvil, "3 h 10 min" se partía: `.racha-datos dd` lleva `nowrap` y letra menor.
-- En móvil (360 px) el contenido útil mide 310 px; el mapa ocupa 308.
-- No usar `node --test` (prohibido en `AGENTS.md`): pruebas solo en `tests.html`. Para refactors sin
-tests: sembrar sesiones relativas a hoy en `localStorage` (contexto aislado) y comparar el DOM.
-- En `mostrarTodo()`, `mostrarMapa()` va primero: así el mapa se dibuja aunque otro panel falle.
-- A 180 px (zoom 200 %) la fecha de la lista desbordaba: `.sesion-fecha { overflow-wrap: anywhere }`.
-- Capturas: `google-chrome --headless=new --virtual-time-budget=3000 --screenshot=...`
-(sin el time-budget la animación no se ve).
+- Cifras: forzar `font-variant-numeric: lining-nums` (algunas fuentes usan cifras antiguas).
+- A 360 px el mapa mide 308 px fijos: relleno lateral total ≤ 26 px por lado (hoy 12 + 14).
+- Cifras: a 1.5rem "12 h 30 min" no cabe en fila de tres hasta ~590 px; entre 481 y 600 px van a
+1.05rem. Valores con `nowrap`.
+- Una regla con `display` anula el atributo `hidden`: añadir `.x[hidden] { display: none; }`.
+- No usar `node --test`: pruebas solo en `tests.html`. Para verificar la interfaz: sembrar sesiones
+relativas a hoy en `localStorage` (contexto aislado) y comparar el DOM con la versión anterior.
+- En `mostrarTodo()`, `mostrarMapa()` va primero: el mapa se dibuja aunque otro panel falle.
+- Escribir con escapes (`\u0301`) los caracteres combinados en specs y pruebas: el editor los fusiona.
+- `.mapa` lleva 5 px de relleno (y margen -5 px) para que no se recorte el anillo de foco.
+- `input type=date` en Chrome: el Tab pasa al botón del calendario y el campo pierde
+`:focus-visible`; por eso el anillo usa también `input[type="date"]:focus-within` (CA-7.3).
+- Con `minutos` 0 salta antes la validación nativa (`min="1"`) que el mensaje rojo propio.
+- Playwright global (`/opt/pw-browsers/chromium`) con scripts en el scratchpad, nunca en el repo.
 
 ## Próximos pasos
-- Rediseño (2026-10-11): al usuario NO le gusta el estilo cuaderno ni sus colores. Hay 3 maquetas en
-Claude Design (https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr): A Umbral (oscura, minimalista),
-B Cartel (editorial suizo, naranja), C Brote (verde, tarjetas). ELEGIDA: C Brote (mejor distribución,
-se entiende mejor, transmite calma). Rama `feature/sprout-redesign`; spec 002 en
-`specs/002-sprout-redesign/spec.md` (borrador, dudas resueltas: sí insignia con inicial, aparición
-suave de la racha). Siguiente: aprobación de la spec → plan.md → tasks.md.
-- Elegir la siguiente tarea con el usuario (p. ej. racha/semana/mes como funciones puras).
+- Revisar y fusionar el PR de la spec 002; luego, los pendientes de arriba (preguntar antes).
