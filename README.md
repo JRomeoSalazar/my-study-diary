@@ -6,10 +6,13 @@
 ![Dependencias: 0](https://img.shields.io/badge/dependencias-0-brightgreen)
 ![Sin build](https://img.shields.io/badge/build-no%20necesario-blue)
 [![Built with OpenCode](https://img.shields.io/badge/Built%20with-OpenCode-000000?logo=opencode&logoColor=white)](https://opencode.ai/)
+[![SDD con Spec Kit](https://img.shields.io/badge/SDD-Spec%20Kit-181717?logo=github&logoColor=white)](https://github.com/github/spec-kit)
 
 Web estática para **registrar tus sesiones de estudio** y motivarte viendo tu **racha de días seguidos**. Sin instalaciones, sin servidor y sin cuentas: abres `index.html` y empiezas a apuntar.
 
 Es además un **proyecto didáctico**: el código está escrito para que pueda entenderlo alguien que empieza a programar.
+
+Y se construye con **desarrollo guiado por especificaciones (SDD)**: este proyecto implementa el flujo SDD con [GitHub Spec Kit](https://github.com/github/spec-kit). Cada funcionalidad nueva pasa por spec, plan y tareas antes de tocar una línea de código, siempre respetando la constitución del proyecto.
 
 ## Contenido
 
@@ -171,7 +174,8 @@ Cada prueba empieza por el criterio de la spec que comprueba (`CA-5.1`…). Lo q
 ├── logica.js    # Funciones puras: fechas, minutos, niveles y textos del mapa (sin tocar la página)
 ├── app.js       # Racha, semana, mes, formulario, localStorage y dibujo del mapa
 ├── tests.html   # Pruebas de la lógica: ábrelo con doble clic
-├── docs/        # Constitución del proyecto (principios innegociables)
+├── .specify/    # GitHub Spec Kit: constitución (principios innegociables), plantillas y scripts
+├── docs/        # Constitución del flujo SDD anterior (solo como referencia)
 ├── specs/       # Especificaciones de cada funcionalidad (spec, plan y tareas)
 ├── AGENTS.md    # Normas del proyecto (convenciones, reglas de fechas y racha)
 └── MEMORY.md    # Estado actual y decisiones tomadas
@@ -218,4 +222,4 @@ Mantenido por [@JRomeoSalazar](https://github.com/JRomeoSalazar).
 - Cambios pequeños y enfocados, con código sencillo y nombres descriptivos.
 - Si cambias el formato de los datos, **mantén la compatibilidad** con las sesiones ya guardadas.
 - Cada regla tiene su prueba en `tests.html`, y antes de cada commit **todas tienen que pasar**. Además, prueba los cambios abriendo `index.html` en el navegador (también en tamaño móvil). No hay lint.
-- Cada funcionalidad tiene su spec en `specs/`; si cambias una, spec y código cambian en el mismo commit. Los principios del proyecto están en [`docs/constitution.md`](docs/constitution.md).
+- Cada funcionalidad tiene su spec en `specs/`; si cambias una, spec y código cambian en el mismo commit. Los principios del proyecto están en [`.specify/memory/constitution.md`](.specify/memory/constitution.md), y las specs nuevas se crean con los comandos de [Spec Kit](https://github.com/github/spec-kit) (`/speckit-specify`, `/speckit-plan`, `/speckit-tasks`…).

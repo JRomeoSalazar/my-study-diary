@@ -78,4 +78,6 @@ dejarlo en la memoria.
 - No guardes nunca datos sensibles (claves, tokens, datos personales).
 
 ## Reglas
-- Lee `docs/constitution.md` y la spec activa (`specs/NNN-*/`) antes de tocar código. 
+- El flujo SDD es GitHub Spec Kit (skills `speckit-*`). La constitución vigente es
+`.specify/memory/constitution.md`; `docs/constitution.md` y la skill `sdd` quedan solo como referencia.
+- Lee `.specify/memory/constitution.md` y la spec activa (`specs/NNN-*/`) antes de tocar código. 
