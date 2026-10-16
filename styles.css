@@ -12,11 +12,13 @@
   --foco: #2e8b57;
 
   /* Mapa de calor: del nivel 0 (neutro) al 4 (más oscuro) */
-  --nivel-0: #c0c9d8;
-  --nivel-1: #93abe3;
-  --nivel-2: #6f8fd6;
-  --nivel-3: #3d62bf;
-  --nivel-4: var(--bosque);
+  /* Contrastes (research.md R-3): nivel 0 con el blanco ≥ 1,5:1, nivel 4 ≥ 3:1
+     y cada nivel con el contiguo ≥ 1,4:1 */
+  --nivel-0: #c4cfc7;
+  --nivel-1: #7fb592;
+  --nivel-2: #4f9a70;
+  --nivel-3: #2e7652;
+  --nivel-4: #1e5a3e;
   --tam-dia: 26px;
   --ancho-etiqueta: 28px;
   --espacio-dia: 4px;
@@ -157,33 +159,41 @@ label {
   margin-bottom: 4px;
 }
 
+/* Campos con relleno suave, borde fino y al menos 44 px de alto (fáciles de tocar) */
 input {
   font: inherit;
   color: var(--texto);
+  min-height: 44px;
   padding: 10px 12px;
-  border: 1px solid #aab3c5;
-  border-radius: 4px;
+  border: 1px solid #8a978e;
+  border-radius: 12px;
   margin-bottom: 20px;
-  background: #ffffff;
+  background: var(--relleno);
   width: 100%;
+}
+
+input::placeholder {
+  color: var(--texto-suave);
+  opacity: 1;
 }
 
 input:focus-visible {
   outline: 3px solid var(--foco);
-  outline-offset: 0;
-  border-color: var(--bosque);
+  outline-offset: 2px;
 }
 
+/* Botón: píldora verde bosque a todo el ancho de la tarjeta */
 button {
   font: inherit;
   font-weight: 600;
+  min-height: 44px;
   padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 999px;
   background: var(--bosque);
   color: #ffffff;
   cursor: pointer;
-  align-self: flex-start;
+  align-self: stretch;
 }
 
 button:hover {
@@ -253,7 +263,7 @@ button:focus-visible {
   color: var(--texto-suave);
 }
 
-/* Móvil: menos relleno y botón a todo el ancho */
+/* Móvil: menos relleno */
 @media (max-width: 480px) {
   :root {
     --tam-dia: 20px;
@@ -271,10 +281,6 @@ button:focus-visible {
   .racha-numero {
     font-size: 4.5rem;
   }
-
-  button {
-    align-self: stretch;
-  }
 }
 
 /* ---------- Mapa de calor ---------- */
@@ -286,11 +292,11 @@ button:focus-visible {
   width: fit-content;
   /* Si no cabe (zoom o letra grande), se desplaza el mapa, nunca la página */
   overflow-x: auto;
-  /* El relleno deja sitio al contorno del foco en las celdas de los bordes;
-     el margen negativo lo compensa para que el mapa siga alineado con el título */
-  padding: 3px;
-  margin: -3px;
-  max-width: calc(100% + 6px);
+  /* El relleno deja sitio al anillo del foco (3 px + 2 px de separación) en las celdas
+     de los bordes; el margen negativo lo compensa para que el mapa siga alineado con el título */
+  padding: 5px;
+  margin: -5px;
+  max-width: calc(100% + 10px);
 }
 
 /* Cada fila (meses, lun, mar...) tiene las mismas columnas: etiqueta + 12 semanas */
@@ -325,17 +331,18 @@ button:focus-visible {
 }
 
 .dia {
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
-/* Día seleccionado: contorno de 2 px */
+/* Día seleccionado: contorno de 2 px en el color del texto */
 .dia.seleccionado {
   outline: 2px solid var(--texto);
 }
 
-/* Foco del teclado: contorno de 3 px, como en los campos y el botón */
+/* Foco del teclado: anillo verde de 3 px algo separado, como en los campos y el botón */
 .dia:focus-visible {
   outline: 3px solid var(--foco);
+  outline-offset: 2px;
 }
 
 /* Si el día está seleccionado y con foco, se ven las dos marcas */
@@ -370,9 +377,15 @@ button:focus-visible {
   background-color: var(--nivel-4);
 }
 
-/* Sin nowrap: con minutos enormes el texto puede partirse en dos líneas */
+/* Línea de detalle en una píldora de relleno suave.
+   Sin nowrap: con minutos enormes el texto puede partirse en dos líneas */
 .mapa-detalle {
-  margin: 12px 0 0;
+  width: fit-content;
+  max-width: 100%;
+  margin: 14px 0 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--relleno);
   color: var(--texto);
 }
 
@@ -389,7 +402,7 @@ button:focus-visible {
 .leyenda-cuadro {
   width: 12px;
   height: 12px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 /* Móvil: etiquetas del mapa más pequeñas (después de los estilos base, para que ganen) */

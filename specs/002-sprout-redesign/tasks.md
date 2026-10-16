@@ -87,7 +87,7 @@ Reglas para todas las tareas:
 **Objetivo:** mapa y formulario con el estilo Brote. **Prueba independiente:** escenarios 13 y 14
 de `quickstart.md`.
 
-- [ ] T005 [US1] Estilos del mapa en `styles.css`: niveles `--nivel-0` a `--nivel-4` de
+- [X] T005 [US1] Estilos del mapa en `styles.css`: niveles `--nivel-0` a `--nivel-4` de
   `research.md` R-3 (`#C4CFC7`, `#7FB592`, `#4F9A70`, `#2E7652`, `#1E5A3E`), `.dia` con radio
   ~5 px, `.mapa-detalle` como píldora con `--relleno`, `.dia.seleccionado` con contorno 2 px
   `--texto`, `.dia:focus-visible` con anillo 3 px `--foco` y `outline-offset: 2px`, seleccionado +
@@ -97,7 +97,7 @@ de `quickstart.md`.
   **Hecho cuando:** el escenario 14 de `quickstart.md` se cumple; con DevTools los niveles miden
   los contrastes de R-3; con teclado y clic se ven las marcas de CA-5.4; consola limpia.
 
-- [ ] T006 [US1] Estilos del formulario en `styles.css`: `input` con fondo `--relleno`, borde 1 px,
+- [X] T006 [US1] Estilos del formulario en `styles.css`: `input` con fondo `--relleno`, borde 1 px,
   radio ~12 px, `min-height: 44px`, `::placeholder` en `--texto-suave`; foco (`:focus-visible`)
   de campos y botón con anillo 3 px `--foco`; botón píldora `--bosque` con texto blanco,
   `min-height: 44px` y a todo el ancho; `.error` en `--error` (`#B42318`).
