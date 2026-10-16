@@ -30,7 +30,9 @@ que escribe el usuario (p. ej. la inicial de la insignia) se muestra tal cual (s
 ## Aprendizajes y errores a evitar
 - Cifras: forzar `font-variant-numeric: lining-nums` (Georgia usa cifras antiguas).
 - En móvil "3 h 10 min" se partía: valores con `nowrap` y letra menor.
-- A 360 px el mapa mide 308 px fijos: relleno lateral total ≤ 26 px por lado.
+- A 360 px el mapa mide 308 px fijos: relleno lateral total ≤ 26 px por lado (hoy 12 + 14).
+- Cifras: a 1.5rem "12 h 30 min" no cabe en fila de tres hasta ~590 px; entre 481 y 600 px van a
+1.05rem. Con la mejor racha oculta la semana es 0, así que a 360 px no hace falta reducir.
 - Una regla con `display` anula el atributo `hidden`: añadir `.x[hidden] { display: none; }`.
 - No usar `node --test`: pruebas solo en `tests.html`. Para refactors sin tests: sembrar sesiones
 relativas a hoy en `localStorage` (contexto aislado) y comparar el DOM.
@@ -46,6 +48,6 @@ se recortaría en los días del borde, porque `.mapa` tiene `overflow-x: auto`.
 - Rediseño Brote (spec 002, `specs/002-sprout-redesign/`): spec APROBADA (GATE 1, 2026-10-16) con
 Clarificaciones; plan, research, data-model, contracts, quickstart y tasks (T001–T019) listos.
 `/speckit-analyze` hecho y sus correcciones aplicadas (2026-10-16). GATE 2 aprobado (2026-10-16);
-hechas T001-T008 (HTML en tarjetas, base de `styles.css`, mapa, formulario, tarjeta de la
-racha y aparición suave). Faltan: columnas y cifras en fila (T009-T010), móvil (T011-T012: hoy a
-360 px el número mide 72 px y el mapa tiene scroll), insignia (T013-T016) y cierre (T017-T019). Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).
+hechas T001-T012 (HTML en tarjetas, base de `styles.css`, mapa, formulario, racha, aparición
+suave, dos columnas desde 1024 px, cifras en fila y en rejilla ≤ 480 px, móvil: número 80 px y
+mapa sin scroll a 360 px). Faltan: insignia (T013-T016) y cierre (T017-T019). Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).

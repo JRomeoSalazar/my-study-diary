@@ -370,8 +370,14 @@ button:focus-visible {
     --ancho-etiqueta: 20px;
   }
 
+  /* El mapa mide 308 px fijos y a 360 px solo quedan 308 px: el relleno lateral
+     de .contenedor + .tarjeta no puede pasar de 26 px por lado (12 + 14) */
   .contenedor {
-    padding: 24px 16px 48px;
+    padding: 24px 12px 48px;
+  }
+
+  .tarjeta {
+    padding: 18px 14px;
   }
 
   h1 {
@@ -379,7 +385,32 @@ button:focus-visible {
   }
 
   .racha-numero {
-    font-size: 4.5rem;
+    font-size: 5rem;
+  }
+
+  /* Cifras: "Mejor racha | Este mes" arriba y "Esta semana" debajo, a todo el ancho */
+  .cifras {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "mejor mes"
+      "semana semana";
+  }
+
+  #mejor-racha {
+    grid-area: mejor;
+  }
+
+  .cifra-semana {
+    grid-area: semana;
+  }
+
+  .cifra-mes {
+    grid-area: mes;
+  }
+
+  /* Sin mejor racha (oculta): semana y mes en una fila, en dos columnas iguales */
+  .cifras:has(#mejor-racha[hidden]) {
+    grid-template-areas: "semana mes";
   }
 }
 

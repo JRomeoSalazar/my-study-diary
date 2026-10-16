@@ -155,7 +155,7 @@ independiente:** escenarios 7, 8 y 9 de `quickstart.md`.
 **Objetivo:** todo se lee y se toca bien a 360-480 px. **Prueba independiente:** escenarios 5, 6
 y 15.
 
-- [ ] T011 [US4] Cifras a ≤ 480 px en `styles.css`: `grid-template-areas: "mejor mes" "semana semana"`
+- [X] T011 [US4] Cifras a ≤ 480 px en `styles.css`: `grid-template-areas: "mejor mes" "semana semana"`
   (con `grid-area` en `#mejor-racha`, `.cifra-semana` y `.cifra-mes`, clases añadidas en T003) y
   `.cifras:has(#mejor-racha[hidden])` → `"semana mes"` en dos columnas iguales.
   **Archivos:** `styles.css`.
@@ -164,7 +164,7 @@ y 15.
   el ancho; sin sesiones, Semana y Mes en dos columnas iguales; ningún valor partido en dos
   líneas (probar "3 h 10 min" y "12 h 30 min").
 
-- [ ] T012 [US4] Ajustes de móvil en `styles.css` (`@media (max-width: 480px)`): `.racha-numero`
+- [X] T012 [US4] Ajustes de móvil en `styles.css` (`@media (max-width: 480px)`): `.racha-numero`
   a `5rem`; relleno + borde lateral de `.contenedor` + `.tarjeta` de **26 px por lado como máximo**
   (p. ej. 12 + 14), porque el mapa mide 308 px fijos y a 360 px solo quedan 308 px; mantener
   `--tam-dia: 20px` y `--ancho-etiqueta: 20px` del mapa.
