@@ -91,13 +91,29 @@ h2 {
   height: 26px;
 }
 
-/* Columnas: de momento todo en una columna, con separación entre tarjetas */
+/* Columnas: en pantalla estrecha todo en una columna, con separación entre tarjetas */
 .columnas,
 .columna-principal,
 .columna-lateral {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* min-width: 0 evita que el mapa o un tema largo ensanchen la columna (y la página) */
+.columna-principal,
+.columna-lateral {
+  min-width: 0;
+}
+
+/* Pantalla ancha: dos columnas; la derecha (formulario y sesiones) mide 390 px fijos.
+   El orden del HTML no cambia, así que el teclado sigue el mismo recorrido */
+@media (min-width: 1024px) {
+  .columnas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+    align-items: start;
+  }
 }
 
 /* Cada parte de la página va en una tarjeta blanca */
@@ -183,13 +199,53 @@ h2 {
   }
 }
 
-/* Cifras (mejor racha, semana y mes) */
+/* Cifras (mejor racha, semana y mes): cada una en su tarjeta, todas en una fila.
+   Si la mejor racha está oculta, las otras dos se reparten la fila sin dejar hueco */
 .cifras {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 16px;
   margin: 0;
 }
 
+.cifra {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 16px 18px;
+}
+
+/* Una regla con display anula el atributo hidden: la mejor racha 0 no debe verse */
+.cifra[hidden] {
+  display: none;
+}
+
+.cifra dt {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+}
+
+/* El valor, más grande y sin partirse en dos líneas ("3 h 10 min") */
 .cifra dd {
   margin: 0;
+  font-family: var(--letra-titulos);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--bosque);
+  white-space: nowrap;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Entre 481 y 600 px las tres tarjetas van en fila y son estrechas:
+   con letra de 1.5rem "12 h 30 min" no cabe, así que los valores van algo más pequeños */
+@media (min-width: 481px) and (max-width: 600px) {
+  .cifra dd {
+    font-size: 1.05rem;
+  }
 }
 
 /* Formulario */

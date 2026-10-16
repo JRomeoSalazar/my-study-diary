@@ -130,7 +130,7 @@ independiente:** escenarios 7, 8 y 9 de `quickstart.md`.
 
 **Objetivo:** dos columnas y cifras en una fila. **Prueba independiente:** escenarios 1-4 y 6.
 
-- [ ] T009 [US3] Columnas en `styles.css`: `.columnas` en una columna por defecto (separación
+- [X] T009 [US3] Columnas en `styles.css`: `.columnas` en una columna por defecto (separación
   entre tarjetas) y `@media (min-width: 1024px)` → `display: grid;
   grid-template-columns: minmax(0, 1fr) 390px`; `min-width: 0` en ambas columnas.
   **Cubre:** RF-2 (CA-2.1–2.3), §7 "Ventana justo en 1024 px".
@@ -138,7 +138,7 @@ independiente:** escenarios 7, 8 y 9 de `quickstart.md`.
   DevTools) centradas en ≤ 1180 px; a 1024 px sin scroll horizontal; a 1023 px una columna en el
   orden de CA-2.2; Tab recorre formulario después del mapa.
 
-- [ ] T010 [US3] Cifras en una fila en `styles.css`: `.cifras` en rejilla con
+- [X] T010 [US3] Cifras en una fila en `styles.css`: `.cifras` en rejilla con
   `grid-auto-flow: column; grid-auto-columns: 1fr`; `.cifra` con etiqueta (`dt`) en
   `--texto-suave` y valor (`dd`) debajo, más grande, `--letra-titulos`, `white-space: nowrap`,
   cifras tabulares; añadir `.cifra[hidden] { display: none; }` (`research.md` R-5).
