@@ -277,7 +277,10 @@ input::placeholder {
   opacity: 1;
 }
 
-input:focus-visible {
+/* En Chrome, el Tab lleva el foco al botón del calendario de la fecha y el campo deja de
+   cumplir :focus-visible; :focus-within mantiene el anillo en todo el campo */
+input:focus-visible,
+input[type="date"]:focus-within {
   outline: 3px solid var(--foco);
   outline-offset: 2px;
 }

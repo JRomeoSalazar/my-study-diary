@@ -222,7 +222,7 @@ y 15.
 
 ## Fase 8 — Cierre
 
-- [ ] T017 Verificación completa con `quickstart.md` (escenarios 1-19) en el MCP de Chrome
+- [X] T017 Verificación completa con `quickstart.md` (escenarios 1-19) en el MCP de Chrome
   DevTools, contexto aislado: 1280, 1024, 1023, 600, 481, 390 y 360 px, teclado, zoom 200 %,
   reducir movimiento, sin conexión, contraste y sesiones guardadas antes del cambio. Corregir en
   `styles.css` / `index.html` lo que falle (sin añadir nada fuera de la spec).
