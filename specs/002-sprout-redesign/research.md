@@ -14,7 +14,7 @@ decisiones técnicas que la spec deja en manos del plan.
   compuestos).
 - **Por qué:** `texto[0]` y `charAt(0)` parten los emojis en dos mitades ("�"). `Array.from`
   respeta los emojis sencillos (📚), pero parte los compuestos (👩‍💻, 🇪🇸, ❤️) y los acentos
-  escritos como letra + tilde aparte ("a" + "́"). `Intl.Segmenter` es parte del navegador
+  escritos como letra + tilde aparte ("a" + "\u0301", la tilde como carácter aparte). `Intl.Segmenter` es parte del navegador
   (Chrome 87+, Safari 14.1+, Firefox 125+): no es una dependencia y funciona con `file://`.
 - **Alternativas descartadas:** expresiones regulares con `\p{Extended_Pictographic}` (difíciles
   de leer para quien empieza y no cubren banderas ni secuencias); una librería (prohibido,

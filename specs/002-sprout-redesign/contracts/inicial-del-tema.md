@@ -31,7 +31,7 @@ Archivo: `logica.js` (script clásico, sin `export`). Función pura: no toca el 
 | `"ñandú"` | `"Ñ"` | CA-8.5 |
 | `"\tHistoria"` | `"H"` | CA-8.5 |
 | `"Física"` | `"F"` | CA-8.5 |
-| `"álgebra"` (a + tilde aparte) | `"Á"` | CA-8.5 (no se parte) |
+| `"a\u0301lgebra"` (a + tilde aparte; en `tests.html` se escribe **con escapes**: `igual(inicialDelTema("a\u0301lgebra"), "A\u0301")`) | `"A\u0301"` | CA-8.5 (no se parte) |
 | `"📚 Lectura"` | `"📚"` | CA-8.5 (emoji entero) |
 | `"👩‍💻 Programar"` | `"👩‍💻"` | CA-8.5 (emoji compuesto entero) |
 | `"🇪🇸 Español"` | `"🇪🇸"` | CA-8.5 (bandera entera) |
@@ -40,6 +40,12 @@ Archivo: `logica.js` (script clásico, sin `export`). Función pura: no toca el 
 | `"   "` | `""` | CA-8.6 |
 | `"\t \n"` | `""` | CA-8.6 |
 | `undefined`, `null`, `42`, `{}` | `""` | CA-8.6 (datos corruptos) |
+
+## Fuera de alcance
+
+- Los caracteres invisibles que `trimStart()` no quita, como el espacio de ancho cero (U+200B):
+  un tema que empiece por uno daría ese carácter invisible como inicial. No se trata en esta
+  spec.
 
 ## Quién la usa
 

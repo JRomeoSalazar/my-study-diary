@@ -28,6 +28,9 @@ main.contenedor
 
 - La lista `<dl class="racha-datos">` sale de la tarjeta de la racha y pasa a ser su propio
   bloque de tarjetas (`.cifras`), con cada `<div>` como tarjeta (`.cifra`). Se mantienen `dt`/`dd`.
+  Las tarjetas de semana y mes llevan además las clases `cifra-semana` y `cifra-mes` (decisión
+  del usuario), que usa la rejilla del móvil (`grid-area`); la de la mejor racha se identifica
+  por `#mejor-racha`.
 - `#racha-dias` deja la clase `fosforito` (CA-9.1).
 - Imágenes decorativas: `<img src="icono-brote.svg" alt="">` y `<img src="brote-racha.svg" alt="">`.
 - En `app.js`, solo `mostrarLista()` cambia: añade la insignia

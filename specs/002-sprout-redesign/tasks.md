@@ -16,7 +16,9 @@ Reglas para todas las tareas:
   de Chrome DevTools en un contexto aislado (`isolatedContext`) y comprobar que la consola no
   muestra errores de la aplicación (se ignora "Unsafe attempt to load URL file://").
 - Tras cada tarea que toque `logica.js` o `tests.html`, abrir `tests.html`: "N de N pruebas
-  superadas" en verde (las 133 anteriores incluidas).
+  superadas" en verde (las 133 anteriores incluidas). **Salvedad:** T013 termina en rojo a
+  propósito (las pruebas nuevas fallan porque la función aún no existe); T014 lo pone en verde.
+  T013 y T014 van en el mismo commit, para que ningún commit tenga pruebas en rojo.
 - No cambian datos guardados, cálculos ni textos de la interfaz (RNF-1, RNF-2). No se escribe
   código nuevo de fechas.
 - Sin dependencias, sin build, sin `type="module"`, sin `fetch`. Todo en español.
@@ -28,15 +30,19 @@ Reglas para todas las tareas:
 
 - [ ] T001 [P] Crear `icono-brote.svg` en la raíz: brote dibujado con líneas (tallo + dos hojas,
   `fill="none"`, trazo redondeado), `viewBox` cuadrado, trazo `#FFFFFF` (va sobre el cuadrado
-  verde bosque de la cabecera). Sin scripts ni enlaces externos dentro del SVG.
+  verde bosque de la cabecera). La etiqueta raíz lleva `xmlns="http://www.w3.org/2000/svg"`
+  (sin él, `<img>` no lo muestra). Sin scripts ni enlaces externos dentro del SVG.
   **Cubre:** CA-1.4 · `research.md` R-2.
-  **Hecho cuando:** abrir `icono-brote.svg` con doble clic en Chrome muestra el brote (sobre
-  fondo blanco apenas se ve, es normal: es blanco) y el archivo solo contiene `<svg>` con trazos.
+  **Hecho cuando:** el archivo solo contiene `<svg xmlns="http://www.w3.org/2000/svg" ...>` con
+  trazos, y tras T003/T004 el brote se ve **dentro de `index.html`** (cabecera), no solo abierto
+  suelto.
 
 - [ ] T002 [P] Crear `brote-racha.svg` en la raíz: el mismo dibujo de brote, más grande, con trazo
-  `#2C6E4D` (verde algo más claro que `#1E5A3E`). Sin scripts ni enlaces externos.
+  `#2C6E4D` (verde algo más claro que `#1E5A3E`). La etiqueta raíz lleva
+  `xmlns="http://www.w3.org/2000/svg"`. Sin scripts ni enlaces externos.
   **Cubre:** CA-3.3 · `research.md` R-2, R-4.
-  **Hecho cuando:** abrir `brote-racha.svg` con doble clic en Chrome muestra el brote verde.
+  **Hecho cuando:** abrir `brote-racha.svg` en Chrome muestra el brote verde, y tras T007 se ve
+  **dentro de `index.html`**, en la tarjeta de la racha a 1280 px.
 
 ## Fase 2 — Base (bloquea todas las historias)
 
@@ -45,7 +51,8 @@ Reglas para todas las tareas:
   `<header class="cabecera">` con `<span class="logo" aria-hidden="true"><img src="icono-brote.svg" alt=""></span>`
   y el `<h1>`; `<div class="columnas">` con `.columna-principal` (racha, cifras, mapa) y
   `.columna-lateral` (formulario, sesiones); clase `tarjeta` en cada parte; `<dl class="cifras">`
-  fuera de la tarjeta de la racha con cada `<div>` como `tarjeta cifra`; quitar la clase
+  fuera de la tarjeta de la racha con cada `<div>` como `tarjeta cifra` (y además `cifra-semana`
+  en el de `#minutos-semana` y `cifra-mes` en el de `#dias-mes`); quitar la clase
   `fosforito` de `#racha-dias`; `<img class="racha-brote" src="brote-racha.svg" alt="">` dentro de
   la tarjeta de la racha. Mantener **todos** los ids y textos.
   **Cubre:** CA-1.3, CA-1.4, CA-2.2, CA-2.3, CA-3.3, CA-9.1 (HTML).
@@ -60,10 +67,20 @@ Reglas para todas las tareas:
   radio ~16-20 px, relleno ~20-24 px); títulos en `--letra-titulos`; cabecera con `.logo`
   (cuadrado redondeado `--bosque`, imagen centrada); eliminar `.fosforito`, su `@keyframes` y las
   variables del cuaderno. Mantener las variables y reglas del mapa (`--tam-dia`, `.mapa`, `.dia`...).
+  Para no dejar `var()` rotos, sustituir provisionalmente **todas** las referencias a variables
+  antiguas por las nuevas (T005, T006 y T016 las afinan después):
+  `--nivel-4: var(--tinta)` → `var(--bosque)`; `--fosforito` en `.dia:focus-visible`,
+  `input:focus-visible` y `button:focus-visible` → `--foco`; `--margen` en `.error` → `--error`;
+  `--tinta-oscura` en `button:hover` → `--texto` (o un verde más oscuro); `--tinta` → `--bosque`;
+  `--grafito` → `--texto`; `--grafito-suave` → `--texto-suave`. Borrar `--grafito`,
+  `--grafito-suave` y `--tinta-oscura`, y las reglas `.racha-datos`, `.racha-cifra`,
+  `.racha-titulo` y `.seccion` si dejan de usarse en el HTML.
   **Cubre:** CA-1.1, CA-1.2, CA-1.3, CA-1.4, CA-1.5, CA-9.1.
   **Hecho cuando:** a 1280 px se ve fondo salvia liso, sin cuadrícula ni línea roja ni fosforito,
   cada parte en una tarjeta blanca y la cabecera con el icono en su cuadrado verde; `styles.css`
-  no contiene `fosforito`, `--papel`, `--cuadricula`, `--tinta` ni `--margen`; consola limpia.
+  no contiene `fosforito`, `--papel`, `--cuadricula`, `--tinta`, `--tinta-oscura`, `--grafito`,
+  `--grafito-suave` ni `--margen` (buscar con Grep: cada `var(--...)` usado está definido en
+  `:root`); consola limpia.
 
 ## Fase 3 — US1: colores tranquilos (HU-1)
 
@@ -125,6 +142,9 @@ independiente:** escenarios 7, 8 y 9 de `quickstart.md`.
   `grid-auto-flow: column; grid-auto-columns: 1fr`; `.cifra` con etiqueta (`dt`) en
   `--texto-suave` y valor (`dd`) debajo, más grande, `--letra-titulos`, `white-space: nowrap`,
   cifras tabulares; añadir `.cifra[hidden] { display: none; }` (`research.md` R-5).
+  Paso condicional: si entre 481 y ~560 px "12 h 30 min" no cabe en su tarjeta, reducir la letra
+  de los valores solo en ese tramo (`@media (min-width: 481px) and (max-width: 560px)`); si
+  cabe, no añadir nada.
   **Cubre:** RF-4 (CA-4.1, CA-4.2, CA-4.4 en > 480 px), CA-1.2.
   **Hecho cuando:** escenarios 1, 3, 4 y 6: tres tarjetas en fila a 1280, 600 y 481 px sin
   desbordar (probar "12 h 30 min"); sin sesiones, la mejor racha no se ve y Semana y Mes se
@@ -136,21 +156,22 @@ independiente:** escenarios 7, 8 y 9 de `quickstart.md`.
 y 15.
 
 - [ ] T011 [US4] Cifras a ≤ 480 px en `styles.css`: `grid-template-areas: "mejor mes" "semana semana"`
-  (con `grid-area` en cada `.cifra`, usando `#mejor-racha`, y el `div` padre de `#minutos-semana`
-  y de `#dias-mes` mediante clases nuevas en `index.html` si hace falta) y
+  (con `grid-area` en `#mejor-racha`, `.cifra-semana` y `.cifra-mes`, clases añadidas en T003) y
   `.cifras:has(#mejor-racha[hidden])` → `"semana mes"` en dos columnas iguales.
-  **Archivos:** `styles.css` (y `index.html` solo para añadir clases a las tarjetas de cifras).
+  **Archivos:** `styles.css`.
   **Cubre:** CA-4.3, CA-4.4 (≤ 480 px), CA-4.5.
   **Hecho cuando:** a 360 y 390 px: "Mejor racha | Este mes" arriba y "Esta semana" debajo a todo
   el ancho; sin sesiones, Semana y Mes en dos columnas iguales; ningún valor partido en dos
   líneas (probar "3 h 10 min" y "12 h 30 min").
 
 - [ ] T012 [US4] Ajustes de móvil en `styles.css` (`@media (max-width: 480px)`): `.racha-numero`
-  a `5rem`; menos relleno en `.contenedor` y `.tarjeta`; mantener `--tam-dia: 20px` y
-  `--ancho-etiqueta: 20px` del mapa.
+  a `5rem`; relleno lateral de `.contenedor` + `.tarjeta` de **26 px por lado como máximo**
+  (p. ej. 12 + 14), porque el mapa mide 308 px fijos y a 360 px solo quedan 308 px; mantener
+  `--tam-dia: 20px` y `--ancho-etiqueta: 20px` del mapa.
   **Cubre:** CA-3.2, RNF-5, §7 "Racha de 3 o más cifras", "Zoom al 200 %".
   **Hecho cuando:** escenarios 5 y 15: a 360 px sin scroll horizontal, número ≥ 80 px, "365"
-  cabe en la tarjeta, mapa entero con ≥ 24 px entre centros de días; con zoom 200 % a 1280 px
+  cabe en la tarjeta, mapa entero con ≥ 24 px entre centros de días, `.mapa` sin scroll
+  horizontal a 360 px (`scrollWidth` = `clientWidth`, medido en DevTools); con zoom 200 % a 1280 px
   una columna y solo el mapa se desplaza.
 
 ## Fase 7 — US5: mis sesiones, igual que antes y con insignia (HU-5)
@@ -162,10 +183,11 @@ y 15.
   `inicialDelTema` con **todos** los ejemplos de `contracts/inicial-del-tema.md`, con nombres que
   empiecen por "CA-8.5:" o "CA-8.6:" (p. ej. `igual(inicialDelTema("  álgebra"), "Á")`,
   `igual(inicialDelTema("👩‍💻 Programar"), "👩‍💻")`, `igual(inicialDelTema("   "), "")`,
-  `igual(inicialDelTema(null), "")`).
+  `igual(inicialDelTema(null), "")`). El acento combinado se escribe **con escapes**, para que se
+  vea qué se prueba: `igual(inicialDelTema("a\u0301lgebra"), "A\u0301")`.
   **Cubre:** CA-8.5, CA-8.6 (pruebas).
   **Hecho cuando:** `tests.html` muestra las 133 pruebas anteriores en "OK" y las nuevas en
-  "FALLO" (la función aún no existe), con el resumen en rojo.
+  "FALLO" (la función aún no existe), con el resumen en rojo. No se hace commit hasta T014.
 
 - [ ] T014 [US5] Añadir `inicialDelTema(tema)` a `logica.js` (sección "Sesiones: insignia")
   siguiendo `contracts/inicial-del-tema.md`: `""` si no es texto; `trimStart()`; `""` si queda
@@ -174,6 +196,7 @@ y 15.
   Depende de T013.
   **Cubre:** CA-8.5, CA-8.6.
   **Hecho cuando:** `tests.html` muestra "N de N pruebas superadas" en verde (133 + las nuevas).
+  T013 y T014 entran en el mismo commit.
 
 - [ ] T015 [US5] En `app.js`, modificar solo `mostrarLista()` (`plan.md` D-4): calcular
   `inicialDelTema(sesion.tema)` y, si no es `""`, crear `<span class="sesion-insignia"
@@ -188,12 +211,14 @@ y 15.
   minutos) con línea fina entre sesiones; `.sesion-insignia` cuadrado redondeado ~36-40 px,
   fondo `--insignia` (`#DCEFE2`), texto `--bosque`, centrado, `flex-shrink: 0`; bloque de texto
   `flex: 1; min-width: 0`; `.sesion-tema` partible; `.sesion-fecha` en `--texto-suave`;
-  `.sesion-minutos` como píldora (`--fondo`, radio 999px, `max-width: 100%`,
-  `overflow-wrap: anywhere`); `.vacio` dentro de la tarjeta. Sin altura fija ni scroll interno.
+  `.sesion-minutos` como píldora (`--fondo`, texto `--bosque`, `font-variant-numeric:
+  lining-nums tabular-nums`, radio 999px, `max-width: 100%`, `overflow-wrap: anywhere`);
+  `.vacio` dentro de la tarjeta y `.vacio[hidden] { display: none; }` (o una regla general
+  `[hidden] { display: none; }`). Sin altura fija ni scroll interno.
   **Cubre:** RF-8 (CA-8.1–8.3), §7 (tema largo, minutos enormes, muchas sesiones).
   **Hecho cuando:** escenario 10 de `quickstart.md` a 1280 y 360 px: tema largo partido sin
-  ensanchar la página, "1000000 min" dentro de la tarjeta, mensaje vacío en la tarjeta sin
-  sesiones.
+  ensanchar la página, "1000000 min" dentro de la tarjeta, minutos en verde bosque con cifras
+  de ancho fijo; sin sesiones se ve el mensaje vacío en la tarjeta y **con sesiones no se ve**.
 
 ## Fase 8 — Cierre
 
