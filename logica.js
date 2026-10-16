@@ -278,3 +278,28 @@ function formatearMinutos(totalMinutos) {
   }
   return horas + " h " + minutos + " min";
 }
+
+// ---------- Sesiones: insignia ----------
+
+// Devuelve la inicial del tema en mayúscula para la insignia de la lista, o "" si no hay.
+// Se toma el primer grafema (lo que se ve como un carácter): así un emoji como "👩‍💻"
+// o una letra con la tilde aparte no se parten. Si el tema no es texto, devuelve "".
+function inicialDelTema(tema) {
+  if (typeof tema !== "string") {
+    return "";
+  }
+  const texto = tema.trimStart();
+  if (texto === "") {
+    return "";
+  }
+
+  let primero;
+  if (typeof Intl !== "undefined" && Intl.Segmenter) {
+    const segmentador = new Intl.Segmenter("es", { granularity: "grapheme" });
+    primero = segmentador.segment(texto)[Symbol.iterator]().next().value.segment;
+  } else {
+    // Navegadores sin Intl.Segmenter: primer carácter completo (un emoji compuesto se partiría)
+    primero = Array.from(texto)[0];
+  }
+  return primero.toLocaleUpperCase("es-ES");
+}

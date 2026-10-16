@@ -179,7 +179,7 @@ y 15.
 **Objetivo:** la lista en tarjeta con insignia de la inicial. **Prueba independiente:**
 `tests.html` en verde y escenarios 10, 11 y 18.
 
-- [ ] T013 [P] [US5] Escribir en `tests.html` (antes de `mostrarResultados()`) las pruebas de
+- [X] T013 [P] [US5] Escribir en `tests.html` (antes de `mostrarResultados()`) las pruebas de
   `inicialDelTema` con **todos** los ejemplos de `contracts/inicial-del-tema.md`, con nombres que
   empiecen por "CA-8.5:" o "CA-8.6:" (p. ej. `igual(inicialDelTema("  álgebra"), "Á")`,
   `igual(inicialDelTema("👩‍💻 Programar"), "👩‍💻")`, `igual(inicialDelTema("   "), "")`,
@@ -189,7 +189,7 @@ y 15.
   **Hecho cuando:** `tests.html` muestra las 133 pruebas anteriores en "OK" y las nuevas en
   "FALLO" (la función aún no existe), con el resumen en rojo. No se hace commit hasta T014.
 
-- [ ] T014 [US5] Añadir `inicialDelTema(tema)` a `logica.js` (sección "Sesiones: insignia")
+- [X] T014 [US5] Añadir `inicialDelTema(tema)` a `logica.js` (sección "Sesiones: insignia")
   siguiendo `contracts/inicial-del-tema.md`: `""` si no es texto; `trimStart()`; `""` si queda
   vacío; primer grafema con `Intl.Segmenter("es", { granularity: "grapheme" })` (si no existe,
   `Array.from(texto)[0]`); `toLocaleUpperCase("es-ES")`. Función pura con comentario breve.
