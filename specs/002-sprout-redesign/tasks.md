@@ -230,7 +230,7 @@ y 15.
   **Hecho cuando:** los 19 escenarios se cumplen, `tests.html` en verde y la consola sin errores
   de la aplicación.
 
-- [ ] T018 [P] Actualizar `README.md`: nuevo aspecto (Brote, dos columnas, insignia), archivos
+- [X] T018 [P] Actualizar `README.md`: nuevo aspecto (Brote, dos columnas, insignia), archivos
   nuevos `icono-brote.svg` y `brote-racha.svg` en la estructura del proyecto, fuentes nuevas, y la
   función `inicialDelTema` en la parte de pruebas/funcionamiento si se listan las funciones.
   **Hecho cuando:** el README no menciona el estilo cuaderno, el fosforito ni las fuentes
