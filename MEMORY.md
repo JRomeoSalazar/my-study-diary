@@ -19,6 +19,9 @@ puras con "hoy" como parámetro, scripts clásicos), `tests.html` (133 de 133 OK
 - SDD con GitHub Spec Kit (CLI 1.2.1, integración Claude, scripts sh): `.specify/` y skills
 `.claude/skills/speckit-*`. Constitución vigente: `.specify/memory/constitution.md` v1.0.0 (los 6
 principios migrados literalmente). README y `AGENTS.md` (Reglas) al día.
+- Agentes SDD en `.claude/agents/` (rama `chore/sdd-agents`, pendiente de probar): `coordinator`
+(se usa con `claude --agent coordinator`), `planner`, `implementer`, `reviewer`; llaman a las skills
+`speckit-*`. Dos aprobaciones del usuario (spec; plan+tareas). Los commits los hace el usuario.
 
 ## Decisiones (y por qué)
 - Manda Spec Kit (decisión del usuario): `docs/constitution.md` y la skill `sdd` quedan solo como

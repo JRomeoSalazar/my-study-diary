@@ -175,11 +175,25 @@ Cada prueba empieza por el criterio de la spec que comprueba (`CA-5.1`…). Lo q
 ├── app.js       # Racha, semana, mes, formulario, localStorage y dibujo del mapa
 ├── tests.html   # Pruebas de la lógica: ábrelo con doble clic
 ├── .specify/    # GitHub Spec Kit: constitución (principios innegociables), plantillas y scripts
+├── .claude/     # Skills de Spec Kit (speckit-*) y agentes del flujo SDD (agents/)
 ├── docs/        # Constitución del flujo SDD anterior (solo como referencia)
 ├── specs/       # Especificaciones de cada funcionalidad (spec, plan y tareas)
 ├── AGENTS.md    # Normas del proyecto (convenciones, reglas de fechas y racha)
 └── MEMORY.md    # Estado actual y decisiones tomadas
 ```
+
+## Flujo SDD con agentes (Claude Code)
+
+Además de ejecutar a mano las skills de Spec Kit (`/speckit-specify`, `/speckit-plan`…), el flujo puede llevarlo un coordinador con tres subagentes, definidos en `.claude/agents/`:
+
+| Agente | Qué hace | Puede escribir |
+| --- | --- | --- |
+| `coordinator` | Dirige las fases y pasa el contexto; habla con el usuario | Nada |
+| `planner` | Crea la spec, el plan y las tareas con las skills `speckit-*` | Solo `specs/` |
+| `implementer` | Implementa una tarea cada vez, con las pruebas en `tests.html` primero | Código y pruebas |
+| `reviewer` | Revisa la spec, analiza plan y tareas y valida la implementación | Nada |
+
+Para usarlo, arranca Claude Code en la carpeta del proyecto con `claude --agent coordinator` y pide, por ejemplo: "Quiero añadir X. Sigue el flujo SDD completo." El coordinador se detiene para que apruebes la spec y, después, el plan con las tareas. Los commits los haces tú.
 
 ## Cómo funciona por dentro
 
