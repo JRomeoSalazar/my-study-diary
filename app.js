@@ -207,6 +207,18 @@ function mostrarLista() {
 
     info.appendChild(tema);
     info.appendChild(fecha);
+
+    // Insignia con la inicial del tema (solo decorativa: el tema ya se lee al lado).
+    // textContent y no innerHTML, porque el tema lo escribe el usuario.
+    const inicial = inicialDelTema(sesion.tema);
+    if (inicial !== "") {
+      const insignia = document.createElement("span");
+      insignia.className = "sesion-insignia";
+      insignia.setAttribute("aria-hidden", "true");
+      insignia.textContent = inicial;
+      elemento.appendChild(insignia);
+    }
+
     elemento.appendChild(info);
     elemento.appendChild(minutos);
     lista.appendChild(elemento);

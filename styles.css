@@ -315,7 +315,7 @@ button:focus-visible {
   display: none;
 }
 
-/* Lista de sesiones: como apuntes en el cuaderno */
+/* Lista de sesiones: insignia, texto y minutos en una fila, con una línea fina entre sesiones */
 .lista {
   list-style: none;
   margin: 0;
@@ -324,21 +324,43 @@ button:focus-visible {
 
 .sesion {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
   padding: 12px 0;
-  border-bottom: 1px solid #c5d3e6;
+  border-bottom: 1px solid var(--fondo);
 }
 
-.sesion:first-child {
-  border-top: 1px solid #c5d3e6;
+.sesion:last-child {
+  border-bottom: none;
+}
+
+/* Cuadrado con la inicial del tema */
+.sesion-insignia {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--insignia);
+  color: var(--bosque);
+  font-family: var(--letra-titulos);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* Bloque de tema y fecha: ocupa el hueco y puede encogerse para que el tema se parta */
+.sesion > div {
+  flex: 1;
+  min-width: 0;
 }
 
 .sesion-tema {
   margin: 0;
   font-weight: 600;
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .sesion-fecha {
@@ -349,18 +371,28 @@ button:focus-visible {
   overflow-wrap: anywhere;
 }
 
+/* Minutos en una píldora; con cifras enormes se parten antes que desbordar */
 .sesion-minutos {
   flex-shrink: 0;
-  font-family: var(--letra-titulos);
-  font-size: 1.15rem;
-  font-weight: 700;
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--fondo);
   color: var(--bosque);
+  font-weight: 600;
+  font-size: 0.9rem;
   font-variant-numeric: lining-nums tabular-nums;
+  overflow-wrap: anywhere;
 }
 
 .vacio {
   margin: 0;
   color: var(--texto-suave);
+}
+
+/* Una regla con display anula el atributo hidden: con sesiones el mensaje no debe verse */
+.vacio[hidden] {
+  display: none;
 }
 
 /* Móvil: menos relleno */

@@ -198,7 +198,7 @@ y 15.
   **Hecho cuando:** `tests.html` muestra "N de N pruebas superadas" en verde (133 + las nuevas).
   T013 y T014 entran en el mismo commit.
 
-- [ ] T015 [US5] En `app.js`, modificar solo `mostrarLista()` (`plan.md` D-4): calcular
+- [X] T015 [US5] En `app.js`, modificar solo `mostrarLista()` (`plan.md` D-4): calcular
   `inicialDelTema(sesion.tema)` y, si no es `""`, crear `<span class="sesion-insignia"
   aria-hidden="true">` con `textContent` (nunca `innerHTML`) y añadirlo al `<li>` antes del
   bloque del tema. Depende de T014.
@@ -207,7 +207,7 @@ y 15.
   tiene su insignia ("M", "Á", "3", "📚", "👩‍💻") y la de tema `"   "` no tiene; en el árbol de
   accesibilidad la insignia no aparece; el resto de `app.js` sin cambios (revisar el diff).
 
-- [ ] T016 [US5] Estilos de la lista en `styles.css`: `.sesion` en fila flex (insignia, texto,
+- [X] T016 [US5] Estilos de la lista en `styles.css`: `.sesion` en fila flex (insignia, texto,
   minutos) con línea fina entre sesiones; `.sesion-insignia` cuadrado redondeado ~36-40 px,
   fondo `--insignia` (`#DCEFE2`), texto `--bosque`, centrado, `flex-shrink: 0`; bloque de texto
   `flex: 1; min-width: 0`; `.sesion-tema` partible; `.sesion-fecha` en `--texto-suave` y con `overflow-wrap: anywhere` (evita desbordar con zoom al 200 %);

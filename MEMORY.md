@@ -7,7 +7,7 @@ aporte.
 - Diseño actual (hasta aplicar la spec 002): "cuaderno de cuadros" (cuadrícula, margen rojo, tinta
 azul, fosforito animado una vez), Literata + Atkinson Hyperlegible. Colores en `:root`.
 - Mapa de calor (spec 001) cerrado: `logica.js` (funciones puras, "hoy" como parámetro, scripts
-clásicos), `tests.html` (133 de 133 OK; pruebas nuevas antes de `mostrarResultados()`), `app.js` pinta.
+clásicos), `tests.html` (140 de 140 OK; pruebas nuevas antes de `mostrarResultados()`), `app.js` pinta.
 - Pendientes (tareas aparte, preguntar antes):
   - Pasar racha, semana y mes a funciones puras (principios III y IV); hoy usan `sesiones` y `new Date()`.
   - Con lo guardado corrupto racha/semana/mes/lista dan errores de consola; el mapa sí se dibuja.
@@ -48,6 +48,6 @@ se recortaría en los días del borde, porque `.mapa` tiene `overflow-x: auto`.
 - Rediseño Brote (spec 002, `specs/002-sprout-redesign/`): spec APROBADA (GATE 1, 2026-10-16) con
 Clarificaciones; plan, research, data-model, contracts, quickstart y tasks (T001–T019) listos.
 `/speckit-analyze` hecho y sus correcciones aplicadas (2026-10-16). GATE 2 aprobado (2026-10-16);
-hechas T001-T012 (HTML en tarjetas, base de `styles.css`, mapa, formulario, racha, aparición
+hechas T001-T016 (HTML en tarjetas, base de `styles.css`, mapa, formulario, racha, aparición
 suave, dos columnas desde 1024 px, cifras en fila y en rejilla ≤ 480 px, móvil: número 80 px y
-mapa sin scroll a 360 px). Faltan: insignia (T013-T016) y cierre (T017-T019). Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).
+mapa sin scroll a 360 px, `inicialDelTema` con 140 de 140 pruebas e insignia en la lista). Faltan: cierre (T017-T019). Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).
