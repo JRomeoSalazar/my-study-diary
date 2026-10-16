@@ -376,7 +376,6 @@ button:focus-visible {
 
 /* Minutos en una píldora; con cifras enormes se parten antes que desbordar */
 .sesion-minutos {
-  flex-shrink: 0;
   max-width: 100%;
   padding: 4px 10px;
   border-radius: 999px;
@@ -405,8 +404,8 @@ button:focus-visible {
     --ancho-etiqueta: 20px;
   }
 
-  /* El mapa mide 308 px fijos y a 360 px solo quedan 308 px: el relleno lateral
-     de .contenedor + .tarjeta no puede pasar de 26 px por lado (12 + 14) */
+  /* El mapa mide 308 px fijos. Con 26 px de relleno por lado (.contenedor 12 +
+     .tarjeta 14), a 360 px quedan 360 - 2 × 26 = 308 px: justo lo que mide el mapa */
   .contenedor {
     padding: 24px 12px 48px;
   }

@@ -218,7 +218,7 @@ Las sesiones se guardan en `localStorage` bajo la clave `diario-estudio-sesiones
 
 La racha, la mejor racha, el total semanal, los días del mes y el mapa de calor **no se guardan**: se calculan siempre a partir de las sesiones.
 
-Los cálculos del mapa y la inicial de la insignia (`inicialDelTema`) viven en `logica.js` como funciones puras (reciben las sesiones y la fecha de hoy, y devuelven un valor sin tocar la página ni `localStorage`); `app.js` solo las llama y dibuja el resultado. Por eso se pueden probar en `tests.html`.
+Los cálculos del mapa y la inicial de la insignia (`inicialDelTema`) viven en `logica.js` como funciones puras (reciben datos, como las sesiones y la fecha de hoy o el tema de una sesión, y devuelven un valor sin tocar la página ni `localStorage`); `app.js` solo las llama y dibuja el resultado. Por eso se pueden probar en `tests.html`.
 
 Las fechas se manejan siempre en hora local con funciones propias (`fechaATexto` y `textoAFecha` en `logica.js`). Se evitan a propósito `toISOString()` y `new Date("AAAA-MM-DD")`, porque trabajan en UTC y pueden desplazar el día.
 

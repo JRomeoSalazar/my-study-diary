@@ -6,16 +6,12 @@ aporte.
 - v1: registrar sesiones, racha actual, lista y fila Mejor racha / Esta semana / Este mes.
 - Mapa de calor (spec 001) cerrado: `logica.js` (funciones puras, "hoy" como parámetro, scripts
 clásicos), `tests.html` (140 de 140 OK; pruebas nuevas antes de `mostrarResultados()`), `app.js` pinta.
-- Rediseño "Brote" (spec 002, `specs/002-sprout-redesign/`): T001-T019 hechas y §9 marcada
-(2026-10-16). Verde salvia, tarjetas blancas, racha en tarjeta verde bosque con aparición suave,
-dos columnas desde 1024 px, insignia con `inicialDelTema`. Bricolage Grotesque + Figtree. Iconos
-`icono-brote.svg` y `brote-racha.svg`. Colores en `:root`. PENDIENTE: validación final del reviewer
-y aprobación del usuario. Maquetas: https://claude.ai/artifact/ASECBHQh4dta4rmvLmTuVr (C · Brote).
+- Rediseño "Brote" (spec 002) cerrado y validado por el reviewer (2026-10-16): paleta salvia,
+tarjetas, dos columnas desde 1024 px, insignia `inicialDelTema`, iconos SVG; PR a main abierto.
 - Pendientes (tareas aparte, preguntar antes):
   - Pasar racha, semana y mes a funciones puras (principios III y IV); hoy usan `sesiones` y `new Date()`.
   - Con lo guardado corrupto racha/semana/mes/lista dan errores de consola; el mapa sí se dibuja.
-  - Con zoom 200 % en 360 px (180 px CSS) la píldora "1000000 min" saca scroll horizontal; a
-  320 px CSS no (fuera de los escenarios de la spec 002).
+  - A 180 px CSS (zoom 200 % en móvil) las cifras con `nowrap` y valores enormes desbordan (fuera de la spec 002).
 - SDD con GitHub Spec Kit (CLI 1.2.1, scripts sh): `.specify/`, skills `.claude/skills/speckit-*`,
 constitución `.specify/memory/constitution.md` v1.0.0. Agentes en `.claude/agents/` (`coordinator`,
 `planner`, `implementer`, `reviewer`). Dos aprobaciones del usuario (spec; plan+tareas).
@@ -41,7 +37,7 @@ que escribe el usuario (p. ej. la inicial de la insignia) se muestra tal cual (s
 - No usar `node --test`: pruebas solo en `tests.html`. Para verificar la interfaz: sembrar sesiones
 relativas a hoy en `localStorage` (contexto aislado) y comparar el DOM con la versión anterior.
 - En `mostrarTodo()`, `mostrarMapa()` va primero: el mapa se dibuja aunque otro panel falle.
-- Escribir con escapes (`́`) los caracteres combinados en specs y pruebas: el editor los fusiona.
+- Escribir con escapes (`\u0301`) los caracteres combinados en specs y pruebas: el editor los fusiona.
 - `.mapa` lleva 5 px de relleno (y margen -5 px) para que no se recorte el anillo de foco.
 - `input type=date` en Chrome: el Tab pasa al botón del calendario y el campo pierde
 `:focus-visible`; por eso el anillo usa también `input[type="date"]:focus-within` (CA-7.3).
@@ -49,4 +45,4 @@ relativas a hoy en `localStorage` (contexto aislado) y comparar el DOM con la ve
 - Playwright global (`/opt/pw-browsers/chromium`) con scripts en el scratchpad, nunca en el repo.
 
 ## Próximos pasos
-- Reviewer: validar la implementación de la spec 002; después, aprobación del usuario y PR.
+- Revisar y fusionar el PR de la spec 002; luego, los pendientes de arriba (preguntar antes).
