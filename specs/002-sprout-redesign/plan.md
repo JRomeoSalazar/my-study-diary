@@ -140,7 +140,7 @@ Orden y ids en `contracts/estructura-html.md`. Puntos clave:
 - **Columnas** (`research.md` R-5): una columna por defecto; `@media (min-width: 1024px)` →
   `grid-template-columns: minmax(0, 1fr) 390px`. `.contenedor` con `max-width: 1180px` centrado.
   `min-width: 0` en las columnas para que el mapa y los temas largos no ensanchen la página.
-- **Relleno en el móvil (≤ 480 px)**: el relleno lateral de `.contenedor` + `.tarjeta` suma
+- **Relleno en el móvil (≤ 480 px)**: el relleno + borde lateral de `.contenedor` + `.tarjeta` suma
   como máximo 26 px por lado (p. ej. 12 + 14), porque el mapa mide 308 px fijos y a 360 px
   quedan 360 − 2 × 26 = 308 px. Así el mapa no necesita scroll horizontal a 360 px.
 - **Racha** (RF-3): fondo `--bosque`; etiqueta y "días seguidos" en `--bosque-claro`; número en

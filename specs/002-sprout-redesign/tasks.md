@@ -165,7 +165,7 @@ y 15.
   líneas (probar "3 h 10 min" y "12 h 30 min").
 
 - [ ] T012 [US4] Ajustes de móvil en `styles.css` (`@media (max-width: 480px)`): `.racha-numero`
-  a `5rem`; relleno lateral de `.contenedor` + `.tarjeta` de **26 px por lado como máximo**
+  a `5rem`; relleno + borde lateral de `.contenedor` + `.tarjeta` de **26 px por lado como máximo**
   (p. ej. 12 + 14), porque el mapa mide 308 px fijos y a 360 px solo quedan 308 px; mantener
   `--tam-dia: 20px` y `--ancho-etiqueta: 20px` del mapa.
   **Cubre:** CA-3.2, RNF-5, §7 "Racha de 3 o más cifras", "Zoom al 200 %".
@@ -210,7 +210,7 @@ y 15.
 - [ ] T016 [US5] Estilos de la lista en `styles.css`: `.sesion` en fila flex (insignia, texto,
   minutos) con línea fina entre sesiones; `.sesion-insignia` cuadrado redondeado ~36-40 px,
   fondo `--insignia` (`#DCEFE2`), texto `--bosque`, centrado, `flex-shrink: 0`; bloque de texto
-  `flex: 1; min-width: 0`; `.sesion-tema` partible; `.sesion-fecha` en `--texto-suave`;
+  `flex: 1; min-width: 0`; `.sesion-tema` partible; `.sesion-fecha` en `--texto-suave` y con `overflow-wrap: anywhere` (evita desbordar con zoom al 200 %);
   `.sesion-minutos` como píldora (`--fondo`, texto `--bosque`, `font-variant-numeric:
   lining-nums tabular-nums`, radio 999px, `max-width: 100%`, `overflow-wrap: anywhere`);
   `.vacio` dentro de la tarjeta y `.vacio[hidden] { display: none; }` (o una regla general
